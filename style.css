@@ -387,7 +387,6 @@ button:focus-visible {
   align-items: baseline;
   margin-bottom: var(--space-xl);
   padding-bottom: var(--space-md);
-  border-bottom: 1px solid var(--border);
 }
 
 .articles-section__title {
