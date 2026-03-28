@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=11">
+  <link rel="stylesheet" href="style.css?v=12">
   <meta name="google-adsense-account" content="ca-pub-8468080886390821">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8468080886390821" crossorigin="anonymous"></script>
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -459,31 +459,6 @@
     }
     slideshow('.hero__slide', '.hero__dot', 'hero__slide--active', 'hero__dot--active', 6000);
 
-    // EQ bar animation — setInterval for Safari (rAF gets paused on iOS)
-    (function() {
-      var bars = document.querySelectorAll('.hero-eq__bar');
-      if (!bars.length) return;
-      var data = [];
-      for (var i = 0; i < bars.length; i++) {
-        data.push({
-          s1: 0.0012 + (i * 0.00017) % 0.002,
-          s2: 0.0019 + (i * 0.00023) % 0.0015,
-          p1: (i * 2.3) % (Math.PI * 2),
-          p2: (i * 1.7) % (Math.PI * 2),
-          lo: 4 + (i % 5) * 2,
-          hi: 20 + (i % 4) * 8
-        });
-      }
-      var t0 = Date.now();
-      setInterval(function() {
-        var elapsed = Date.now() - t0;
-        for (var i = 0; i < bars.length; i++) {
-          var d = data[i];
-          var w = (Math.sin(elapsed * d.s1 + d.p1) + Math.sin(elapsed * d.s2 + d.p2) * 0.5) / 1.5;
-          bars[i].style.height = (d.lo + (d.hi - d.lo) * (w * 0.5 + 0.5)) + 'px';
-        }
-      }, 33);
-    })();
   })();
   </script>
 
