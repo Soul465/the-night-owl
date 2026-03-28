@@ -1400,41 +1400,13 @@ button:focus-visible {
 
 .hero-eq__bar {
   width: 3px;
+  height: 15px;
   border-radius: 2px 2px 0 0;
   margin-top: auto;
 }
 
 .hero-eq__bar:nth-child(odd)  { background: var(--amber); }
 .hero-eq__bar:nth-child(even) { background: var(--amber-dim); }
-
-/* EQ bars — CSS height keyframes for universal Safari compatibility */
-.hero-eq__bar:nth-child(1)  { animation: eqA 0.72s ease-in-out infinite alternate; }
-.hero-eq__bar:nth-child(2)  { animation: eqB 0.58s ease-in-out 0.07s infinite alternate; }
-.hero-eq__bar:nth-child(3)  { animation: eqC 0.83s ease-in-out 0.14s infinite alternate; }
-.hero-eq__bar:nth-child(4)  { animation: eqD 0.65s ease-in-out 0.03s infinite alternate; }
-.hero-eq__bar:nth-child(5)  { animation: eqA 0.91s ease-in-out 0.19s infinite alternate; }
-.hero-eq__bar:nth-child(6)  { animation: eqC 0.54s ease-in-out 0.11s infinite alternate; }
-.hero-eq__bar:nth-child(7)  { animation: eqB 0.76s ease-in-out 0.22s infinite alternate; }
-.hero-eq__bar:nth-child(8)  { animation: eqD 0.62s ease-in-out 0.05s infinite alternate; }
-.hero-eq__bar:nth-child(9)  { animation: eqA 0.88s ease-in-out 0.17s infinite alternate; }
-.hero-eq__bar:nth-child(10) { animation: eqC 0.51s ease-in-out 0.09s infinite alternate; }
-.hero-eq__bar:nth-child(11) { animation: eqB 0.79s ease-in-out 0.25s infinite alternate; }
-.hero-eq__bar:nth-child(12) { animation: eqD 0.66s ease-in-out 0.13s infinite alternate; }
-.hero-eq__bar:nth-child(13) { animation: eqA 0.57s ease-in-out 0.20s infinite alternate; }
-.hero-eq__bar:nth-child(14) { animation: eqC 0.93s ease-in-out 0.04s infinite alternate; }
-.hero-eq__bar:nth-child(15) { animation: eqB 0.70s ease-in-out 0.16s infinite alternate; }
-.hero-eq__bar:nth-child(16) { animation: eqD 0.84s ease-in-out 0.08s infinite alternate; }
-.hero-eq__bar:nth-child(17) { animation: eqA 0.60s ease-in-out 0.21s infinite alternate; }
-.hero-eq__bar:nth-child(18) { animation: eqC 0.75s ease-in-out 0.12s infinite alternate; }
-.hero-eq__bar:nth-child(19) { animation: eqB 0.89s ease-in-out 0.06s infinite alternate; }
-.hero-eq__bar:nth-child(20) { animation: eqD 0.64s ease-in-out 0.18s infinite alternate; }
-.hero-eq__bar:nth-child(21) { animation: eqA 0.53s ease-in-out 0.24s infinite alternate; }
-.hero-eq__bar:nth-child(22) { animation: eqC 0.78s ease-in-out 0.10s infinite alternate; }
-
-@keyframes eqA { from { height: 5px; } to { height: 22px; } }
-@keyframes eqB { from { height: 8px; } to { height: 40px; } }
-@keyframes eqC { from { height: 3px; } to { height: 30px; } }
-@keyframes eqD { from { height: 12px; } to { height: 44px; } }
 
 /* ---- Scroll Reveal Animation ---- */
 .article-item,
