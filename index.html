@@ -462,35 +462,40 @@
   })();
   </script>
 
-  <!-- EQ Bar Animation (Web Animations API — works on Safari mobile) -->
+  <!-- EQ Bar Animation (Web Animations API — infinite, no callbacks) -->
   <script>
   (function() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var bars = document.querySelectorAll('.hero-eq__bar');
     if (!bars.length || !bars[0].animate) return;
 
-    function animateBar(bar) {
-      var from = parseFloat(bar.style.transform ? bar.style.transform.replace(/[^0-9.]/g, '') : '0.2') || 0.2;
-      var to = 0.15 + Math.random() * 0.85;
-      var dur = 300 + Math.random() * 500;
-
-      var anim = bar.animate(
-        [
-          { transform: 'scaleY(' + from + ')' },
-          { transform: 'scaleY(' + to + ')' }
-        ],
-        { duration: dur, easing: 'ease-in-out', fill: 'forwards' }
-      );
-
-      anim.onfinish = function() {
-        bar.style.transform = 'scaleY(' + to + ')';
-        animateBar(bar);
-      };
-    }
+    var presets = [
+      [0.50, 0.18], [0.90, 0.30], [0.35, 0.15], [0.80, 0.25], [0.20, 0.60],
+      [0.70, 0.20], [0.40, 0.75], [1.00, 0.30], [0.25, 0.55], [0.75, 0.18],
+      [0.45, 0.80], [0.95, 0.25], [0.15, 0.50], [0.65, 0.20], [0.85, 0.35],
+      [0.30, 0.70], [0.72, 0.22], [0.38, 0.65], [1.00, 0.28], [0.55, 0.18],
+      [0.82, 0.32], [0.22, 0.58]
+    ];
+    var durations = [
+      800, 650, 920, 580, 1050, 700, 870, 620, 950, 550,
+      830, 680, 1000, 600, 760, 900, 640, 850, 720, 970,
+      560, 880
+    ];
 
     for (var i = 0; i < bars.length; i++) {
-      bars[i].style.transform = 'scaleY(' + (0.15 + Math.random() * 0.85) + ')';
-      animateBar(bars[i]);
+      var p = presets[i] || [0.5, 0.2];
+      bars[i].animate(
+        [
+          { transform: 'scaleY(' + p[0] + ') translateZ(0)' },
+          { transform: 'scaleY(' + p[1] + ') translateZ(0)' }
+        ],
+        {
+          duration: durations[i] || 750,
+          easing: 'ease-in-out',
+          iterations: Infinity,
+          direction: 'alternate'
+        }
+      );
     }
   })();
   </script>
