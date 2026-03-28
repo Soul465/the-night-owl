@@ -1,0 +1,40 @@
+name: Beat Spotlight Submission
+description: Submit your beat for a weekly featured breakdown on The Night Owl
+title: "[Beat Spotlight] "
+labels: ["beat-spotlight"]
+body:
+  - type: input
+    id: producer-name
+    attributes:
+      label: Producer Name
+      placeholder: "Your producer tag"
+    validations:
+      required: true
+  - type: input
+    id: beat-link
+    attributes:
+      label: Beat Link
+      description: SoundCloud, YouTube, or Google Drive link
+      placeholder: "https://"
+    validations:
+      required: true
+  - type: dropdown
+    id: genre
+    attributes:
+      label: Genre / Subgenre
+      options:
+        - Trap
+        - Boom Bap
+        - Drill
+        - R&B
+        - Bounce
+        - Rage
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Tell us about the beat
+      description: BPM, key, what inspired it, what plugins you used
+      placeholder: "140 BPM, Cm, used Vital for the lead..."

@@ -1,0 +1,27 @@
+name: Article Request
+description: Suggest a topic for The Night Owl to cover
+title: "[Article Request] "
+labels: ["article-request"]
+body:
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+      placeholder: "What should we write about?"
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Production
+        - Business
+        - Culture
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: Why this topic?
+      placeholder: "What would make this useful for producers?"
