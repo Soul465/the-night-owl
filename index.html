@@ -459,10 +459,15 @@
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var c = document.querySelector('canvas.hero-eq');
     if (!c) return;
+    var dpr = window.devicePixelRatio || 1;
+    c.width = 132 * dpr;
+    c.height = 44 * dpr;
+    c.style.width = '132px';
+    c.style.height = '44px';
     var ctx = c.getContext('2d');
-    var W = c.width, H = c.height;
+    ctx.scale(dpr, dpr);
+    var W = 132, H = 44;
     var N = 22, barW = 3, gap = 3;
-    var amber = '#d97706', amberDim = '#92400e';
 
     var bars = [];
     for (var i = 0; i < N; i++) {
@@ -481,14 +486,8 @@
         var sin = (Math.sin(t * 0.001 * b.speed + b.phase) + 1) / 2;
         var h = (b.min + sin * (b.max - b.min)) * H;
         var x = i * (barW + gap);
-        ctx.fillStyle = i % 2 === 0 ? amber : amberDim;
-        if (ctx.roundRect) {
-          ctx.beginPath();
-          ctx.roundRect(x, H - h, barW, h, [2, 2, 0, 0]);
-          ctx.fill();
-        } else {
-          ctx.fillRect(x, H - h, barW, h);
-        }
+        ctx.fillStyle = i % 2 === 0 ? '#d97706' : '#92400e';
+        ctx.fillRect(x, H - h, barW, h);
       }
       requestAnimationFrame(draw);
     }
