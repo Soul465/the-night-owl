@@ -1391,24 +1391,10 @@ button:focus-visible {
 
 /* ---- Hero Equalizer ---- */
 .hero-eq {
-  display: flex;
-  align-items: flex-end;
-  gap: 3px;
+  display: block;
   height: 44px;
   margin: var(--space-xl) 0 var(--space-lg);
 }
-
-.hero-eq__bar {
-  width: 3px;
-  height: 44px;
-  border-radius: 2px 2px 0 0;
-  transform-origin: center bottom;
-  transform: scaleY(0.2);
-  will-change: transform;
-}
-
-.hero-eq__bar:nth-child(odd)  { background: #d97706; }
-.hero-eq__bar:nth-child(even) { background: #92400e; }
 
 /* ---- Scroll Reveal Animation ---- */
 .article-item,
@@ -1711,7 +1697,7 @@ button:focus-visible {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; transition-duration: 0.01ms !important; }
   .article-item, .hero__title, .hero__excerpt, .newsletter__inner { opacity: 1; transform: none; }
-  .hero-eq__bar { transform: scaleY(0.3) !important; opacity: 0.4; animation: none !important; }
+  .hero-eq { opacity: 0.4; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .shooting-star { display: none; }
   .nebula { animation: none; opacity: 0.7; }

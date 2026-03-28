@@ -109,16 +109,7 @@
       <button class="hero__dot" aria-label="Slide 2"></button>
       <button class="hero__dot" aria-label="Slide 3"></button>
     </div>
-    <div class="hero-eq" aria-hidden="true">
-      <div class="hero-eq__bar"></div><div class="hero-eq__bar"></div><div class="hero-eq__bar"></div>
-      <div class="hero-eq__bar"></div><div class="hero-eq__bar"></div><div class="hero-eq__bar"></div>
-      <div class="hero-eq__bar"></div><div class="hero-eq__bar"></div><div class="hero-eq__bar"></div>
-      <div class="hero-eq__bar"></div><div class="hero-eq__bar"></div><div class="hero-eq__bar"></div>
-      <div class="hero-eq__bar"></div><div class="hero-eq__bar"></div><div class="hero-eq__bar"></div>
-      <div class="hero-eq__bar"></div><div class="hero-eq__bar"></div><div class="hero-eq__bar"></div>
-      <div class="hero-eq__bar"></div><div class="hero-eq__bar"></div><div class="hero-eq__bar"></div>
-      <div class="hero-eq__bar"></div>
-    </div>
+    <canvas class="hero-eq" aria-hidden="true" width="132" height="44"></canvas>
     <hr class="hero__rule">
   </section>
 
@@ -462,41 +453,46 @@
   })();
   </script>
 
-  <!-- EQ Bar Animation (Web Animations API — infinite, no callbacks) -->
+  <!-- EQ Bar Animation (Canvas — works everywhere including Safari mobile) -->
   <script>
   (function() {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var bars = document.querySelectorAll('.hero-eq__bar');
-    if (!bars.length || !bars[0].animate) return;
+    var c = document.querySelector('canvas.hero-eq');
+    if (!c) return;
+    var ctx = c.getContext('2d');
+    var W = c.width, H = c.height;
+    var N = 22, barW = 3, gap = 3;
+    var amber = '#d97706', amberDim = '#92400e';
 
-    var presets = [
-      [0.50, 0.18], [0.90, 0.30], [0.35, 0.15], [0.80, 0.25], [0.20, 0.60],
-      [0.70, 0.20], [0.40, 0.75], [1.00, 0.30], [0.25, 0.55], [0.75, 0.18],
-      [0.45, 0.80], [0.95, 0.25], [0.15, 0.50], [0.65, 0.20], [0.85, 0.35],
-      [0.30, 0.70], [0.72, 0.22], [0.38, 0.65], [1.00, 0.28], [0.55, 0.18],
-      [0.82, 0.32], [0.22, 0.58]
-    ];
-    var durations = [
-      800, 650, 920, 580, 1050, 700, 870, 620, 950, 550,
-      830, 680, 1000, 600, 760, 900, 640, 850, 720, 970,
-      560, 880
-    ];
-
-    for (var i = 0; i < bars.length; i++) {
-      var p = presets[i] || [0.5, 0.2];
-      bars[i].animate(
-        [
-          { transform: 'scaleY(' + p[0] + ') translateZ(0)' },
-          { transform: 'scaleY(' + p[1] + ') translateZ(0)' }
-        ],
-        {
-          duration: durations[i] || 750,
-          easing: 'ease-in-out',
-          iterations: Infinity,
-          direction: 'alternate'
-        }
-      );
+    var bars = [];
+    for (var i = 0; i < N; i++) {
+      bars.push({
+        speed: 0.8 + Math.random() * 1.4,
+        phase: Math.random() * Math.PI * 2,
+        min: 0.15 + Math.random() * 0.15,
+        max: 0.55 + Math.random() * 0.45
+      });
     }
+
+    function draw(t) {
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < N; i++) {
+        var b = bars[i];
+        var sin = (Math.sin(t * 0.001 * b.speed + b.phase) + 1) / 2;
+        var h = (b.min + sin * (b.max - b.min)) * H;
+        var x = i * (barW + gap);
+        ctx.fillStyle = i % 2 === 0 ? amber : amberDim;
+        if (ctx.roundRect) {
+          ctx.beginPath();
+          ctx.roundRect(x, H - h, barW, h, [2, 2, 0, 0]);
+          ctx.fill();
+        } else {
+          ctx.fillRect(x, H - h, barW, h);
+        }
+      }
+      requestAnimationFrame(draw);
+    }
+    requestAnimationFrame(draw);
   })();
   </script>
 
