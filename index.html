@@ -68,11 +68,42 @@
     </div>
   </header>
 
-  <!-- Featured Article -->
+  <!-- Latest Articles Slideshow -->
   <section class="hero">
-    <p class="hero__label">Latest</p>
-    <h1 class="hero__title">How to Sell Beats Online — The Real Talk Nobody Gives You</h1>
-    <p class="hero__excerpt">BeatStars vs Airbit vs your own store. Pricing that actually works. Why your catalog matters more than any single track. A no-fluff breakdown of the beat-selling game from someone who's been in the trenches.</p>
+    <div class="hero__slideshow">
+      <a href="articles/jack-harlow-i-got-blacker.html" class="hero__slide hero__slide--active">
+        <img src="https://images.pexels.com/photos/20539864/pexels-photo-20539864.jpeg?auto=compress&cs=tinysrgb&w=1200&h=500&dpr=1" alt="Stage microphone under spotlights" loading="eager">
+        <div class="hero__slide-overlay">
+          <p class="hero__label">Latest</p>
+          <h2 class="hero__slide-title">Jack Harlow Said "I Got Blacker" — And the Problem Isn't the Album</h2>
+          <p class="hero__slide-excerpt">Harlow called his R&B pivot "getting Blacker." The backlash is valid — Blackness isn't a genre, a vibe, or something you acquire.</p>
+          <span class="hero__slide-meta">Culture &middot; March 2026 &middot; Read article &rarr;</span>
+        </div>
+      </a>
+      <a href="articles/sell-beats-online.html" class="hero__slide">
+        <img src="https://images.pexels.com/photos/919734/pexels-photo-919734.jpeg?auto=compress&cs=tinysrgb&w=1200&h=500&dpr=1" alt="Laptop beside audio mixer in studio" loading="lazy">
+        <div class="hero__slide-overlay">
+          <p class="hero__label">Featured</p>
+          <h2 class="hero__slide-title">How to Sell Beats Online — The Real Talk Nobody Gives You</h2>
+          <p class="hero__slide-excerpt">BeatStars vs Airbit vs your own store. Pricing that actually works. Why your catalog matters more than any single track.</p>
+          <span class="hero__slide-meta">Business &middot; March 2026 &middot; Read article &rarr;</span>
+        </div>
+      </a>
+      <a href="articles/louisiana-trap-history.html" class="hero__slide">
+        <img src="https://images.pexels.com/photos/3807278/pexels-photo-3807278.jpeg?auto=compress&cs=tinysrgb&w=1200&h=500&dpr=1" alt="Crowd at a rap concert" loading="lazy">
+        <div class="hero__slide-overlay">
+          <p class="hero__label">Featured</p>
+          <h2 class="hero__slide-title">How Louisiana Shaped Modern Trap Music</h2>
+          <p class="hero__slide-excerpt">From Cash Money to bounce to YoungBoy. The full lineage of how Louisiana's sound became the foundation of trap.</p>
+          <span class="hero__slide-meta">Culture &middot; March 2026 &middot; Read article &rarr;</span>
+        </div>
+      </a>
+    </div>
+    <div class="hero__dots">
+      <button class="hero__dot hero__dot--active" aria-label="Slide 1"></button>
+      <button class="hero__dot" aria-label="Slide 2"></button>
+      <button class="hero__dot" aria-label="Slide 3"></button>
+    </div>
     <div class="hero-eq" aria-hidden="true">
       <div class="hero-eq__bar"></div><div class="hero-eq__bar"></div><div class="hero-eq__bar"></div>
       <div class="hero-eq__bar"></div><div class="hero-eq__bar"></div><div class="hero-eq__bar"></div>
@@ -82,9 +113,6 @@
       <div class="hero-eq__bar"></div><div class="hero-eq__bar"></div><div class="hero-eq__bar"></div>
       <div class="hero-eq__bar"></div><div class="hero-eq__bar"></div><div class="hero-eq__bar"></div>
       <div class="hero-eq__bar"></div>
-    </div>
-    <div class="hero__meta">
-      <span>By Cam / Gramercy</span> &middot; <span>March 2026</span> &middot; <a href="articles/sell-beats-online.html">Read article &rarr;</a>
     </div>
     <hr class="hero__rule">
   </section>
@@ -383,32 +411,32 @@
     </div>
   </footer>
 
-  <!-- Business Spotlight Slideshow -->
+  <!-- Slideshow Scripts -->
   <script>
   (function() {
-    var slides = document.querySelectorAll('.biz-spotlight__slide');
-    var dots = document.querySelectorAll('.biz-spotlight__dot');
-    if (slides.length < 2) return;
-    var current = 0;
-    var interval = 5000;
-
-    function show(idx) {
-      slides[current].classList.remove('biz-spotlight__slide--active');
-      dots[current].classList.remove('biz-spotlight__dot--active');
-      current = idx;
-      slides[current].classList.add('biz-spotlight__slide--active');
-      dots[current].classList.add('biz-spotlight__dot--active');
-    }
-
-    var timer = setInterval(function() { show((current + 1) % slides.length); }, interval);
-
-    dots.forEach(function(dot, i) {
-      dot.addEventListener('click', function() {
-        clearInterval(timer);
-        show(i);
-        timer = setInterval(function() { show((current + 1) % slides.length); }, interval);
+    function slideshow(slideSel, dotSel, activeSlide, activeDot, ms) {
+      var slides = document.querySelectorAll(slideSel);
+      var dots = document.querySelectorAll(dotSel);
+      if (slides.length < 2) return;
+      var cur = 0;
+      function go(i) {
+        slides[cur].classList.remove(activeSlide);
+        dots[cur].classList.remove(activeDot);
+        cur = i;
+        slides[cur].classList.add(activeSlide);
+        dots[cur].classList.add(activeDot);
+      }
+      var t = setInterval(function() { go((cur + 1) % slides.length); }, ms);
+      dots.forEach(function(d, i) {
+        d.addEventListener('click', function() {
+          clearInterval(t);
+          go(i);
+          t = setInterval(function() { go((cur + 1) % slides.length); }, ms);
+        });
       });
-    });
+    }
+    slideshow('.hero__slide', '.hero__dot', 'hero__slide--active', 'hero__dot--active', 6000);
+    slideshow('.biz-spotlight__slide', '.biz-spotlight__dot', 'biz-spotlight__slide--active', 'biz-spotlight__dot--active', 5000);
   })();
   </script>
 
