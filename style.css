@@ -1395,6 +1395,7 @@ button:focus-visible {
   align-items: flex-end;
   gap: 3px;
   height: 44px;
+  overflow: hidden;
   margin: var(--space-xl) 0 var(--space-lg);
 }
 
@@ -1402,14 +1403,12 @@ button:focus-visible {
   width: 3px;
   height: 44px;
   border-radius: 2px 2px 0 0;
-  -webkit-clip-path: inset(50% 0 0 0);
-  clip-path: inset(50% 0 0 0);
 }
 
 .hero-eq__bar:nth-child(odd)  { background: var(--amber); }
 .hero-eq__bar:nth-child(even) { background: var(--amber-dim); }
 
-/* clip-path EQ animation — Safari-compatible, GPU-accelerated */
+/* EQ animation — translateY pushes bars up out of clipped container */
 .hero-eq__bar:nth-child(1)  { animation: eqA 0.72s ease-in-out infinite alternate; }
 .hero-eq__bar:nth-child(2)  { animation: eqB 0.58s ease-in-out 0.07s infinite alternate; }
 .hero-eq__bar:nth-child(3)  { animation: eqC 0.83s ease-in-out 0.14s infinite alternate; }
@@ -1434,20 +1433,20 @@ button:focus-visible {
 .hero-eq__bar:nth-child(22) { animation: eqC 0.78s ease-in-out 0.10s infinite alternate; }
 
 @keyframes eqA {
-  from { -webkit-clip-path: inset(88% 0 0 0); clip-path: inset(88% 0 0 0); }
-  to   { -webkit-clip-path: inset(50% 0 0 0); clip-path: inset(50% 0 0 0); }
+  from { -webkit-transform: translateY(-39px); transform: translateY(-39px); }
+  to   { -webkit-transform: translateY(-22px); transform: translateY(-22px); }
 }
 @keyframes eqB {
-  from { -webkit-clip-path: inset(82% 0 0 0); clip-path: inset(82% 0 0 0); }
-  to   { -webkit-clip-path: inset(9% 0 0 0); clip-path: inset(9% 0 0 0); }
+  from { -webkit-transform: translateY(-36px); transform: translateY(-36px); }
+  to   { -webkit-transform: translateY(-4px); transform: translateY(-4px); }
 }
 @keyframes eqC {
-  from { -webkit-clip-path: inset(93% 0 0 0); clip-path: inset(93% 0 0 0); }
-  to   { -webkit-clip-path: inset(32% 0 0 0); clip-path: inset(32% 0 0 0); }
+  from { -webkit-transform: translateY(-41px); transform: translateY(-41px); }
+  to   { -webkit-transform: translateY(-14px); transform: translateY(-14px); }
 }
 @keyframes eqD {
-  from { -webkit-clip-path: inset(73% 0 0 0); clip-path: inset(73% 0 0 0); }
-  to   { -webkit-clip-path: inset(0% 0 0 0); clip-path: inset(0% 0 0 0); }
+  from { -webkit-transform: translateY(-32px); transform: translateY(-32px); }
+  to   { -webkit-transform: translateY(0px); transform: translateY(0px); }
 }
 
 /* ---- Scroll Reveal Animation ---- */
