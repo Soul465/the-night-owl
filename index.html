@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=10">
+  <link rel="stylesheet" href="style.css?v=11">
   <meta name="google-adsense-account" content="ca-pub-8468080886390821">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8468080886390821" crossorigin="anonymous"></script>
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -472,19 +472,20 @@
         {min:0.20,max:1.00,dur:890},{min:0.07,max:0.45,dur:640},{min:0.14,max:0.73,dur:530},
         {min:0.11,max:0.61,dur:780}
       ];
+      var maxH = 44;
       bars.forEach(function(bar, i) {
         var c = configs[i] || configs[0];
         var up = true, val = c.min;
         var step = (c.max - c.min) / (c.dur / 16);
+        bar.style.height = Math.round(maxH * c.min) + 'px';
         function tick() {
           val += up ? step : -step;
           if (val >= c.max) { val = c.max; up = false; }
           if (val <= c.min) { val = c.min; up = true; }
-          bar.style.transform = 'scaleY(' + val.toFixed(3) + ')';
+          bar.style.height = Math.round(maxH * val) + 'px';
           bar.style.opacity = (0.5 + 0.5 * ((val - c.min) / (c.max - c.min))).toFixed(2);
           requestAnimationFrame(tick);
         }
-        // Stagger start
         setTimeout(function() { requestAnimationFrame(tick); }, i * 30);
       });
     }

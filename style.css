@@ -1400,11 +1400,8 @@ button:focus-visible {
 
 .hero-eq__bar {
   width: 3px;
-  height: 44px;
+  height: 13px;
   border-radius: 2px 2px 0 0;
-  transform-origin: bottom;
-  will-change: transform;
-  transform: scaleY(0.3);
 }
 
 .hero-eq__bar:nth-child(odd)  { background: var(--amber); }
