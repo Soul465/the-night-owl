@@ -544,6 +544,10 @@ button:focus-visible {
   transition: filter 0.4s ease, transform 8s ease;
 }
 
+.hero__slide img[src*="header.png"] {
+  object-position: right center;
+}
+
 .hero__slide--active img {
   transform: scale(1.04);
 }
@@ -711,6 +715,10 @@ button:focus-visible {
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
 }
 
+.article-item__img-wrap img[src*="header.png"] {
+  object-position: right center;
+}
+
 .article-item:hover .article-item__img-wrap img {
   transform: scale(1.05);
   filter: brightness(1.1);
@@ -873,7 +881,7 @@ button:focus-visible {
 .newsletter__btn:hover { background: linear-gradient(135deg, var(--amber-light), var(--amber)); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(217, 119, 6, 0.4); }
 .newsletter__btn:active { transform: translateY(0); background: var(--amber-dim); }
 
-/* ---- Beat Spotlight ---- */
+/* ---- Song Spotlight ---- */
 .spotlight {
   max-width: 72rem;
   margin: 0 auto;
@@ -1383,40 +1391,57 @@ button:focus-visible {
   border-radius: 2px 2px 0 0;
   transform-origin: bottom;
   will-change: transform;
-  animation: eqPulse var(--eq-dur, 0.9s) ease-in-out var(--eq-delay, 0s) infinite alternate;
 }
 
 .hero-eq__bar:nth-child(odd)  { background: var(--amber); }
 .hero-eq__bar:nth-child(even) { background: var(--amber-dim); }
 
-/* 22 bars with varied timing/scale via scaleY (GPU-composited, no layout thrashing) */
-.hero-eq__bar:nth-child(1)  { --eq-dur:0.72s; --eq-delay:0.00s; --eq-scale-min:0.11; --eq-scale-max:0.50; }
-.hero-eq__bar:nth-child(2)  { --eq-dur:0.58s; --eq-delay:0.07s; --eq-scale-min:0.18; --eq-scale-max:0.91; }
-.hero-eq__bar:nth-child(3)  { --eq-dur:0.83s; --eq-delay:0.14s; --eq-scale-min:0.09; --eq-scale-max:0.68; }
-.hero-eq__bar:nth-child(4)  { --eq-dur:0.65s; --eq-delay:0.03s; --eq-scale-min:0.27; --eq-scale-max:1.00; }
-.hero-eq__bar:nth-child(5)  { --eq-dur:0.91s; --eq-delay:0.19s; --eq-scale-min:0.14; --eq-scale-max:0.80; }
-.hero-eq__bar:nth-child(6)  { --eq-dur:0.54s; --eq-delay:0.11s; --eq-scale-min:0.07; --eq-scale-max:0.59; }
-.hero-eq__bar:nth-child(7)  { --eq-dur:0.76s; --eq-delay:0.22s; --eq-scale-min:0.20; --eq-scale-max:0.95; }
-.hero-eq__bar:nth-child(8)  { --eq-dur:0.62s; --eq-delay:0.05s; --eq-scale-min:0.11; --eq-scale-max:0.86; }
-.hero-eq__bar:nth-child(9)  { --eq-dur:0.88s; --eq-delay:0.17s; --eq-scale-min:0.16; --eq-scale-max:0.64; }
-.hero-eq__bar:nth-child(10) { --eq-dur:0.51s; --eq-delay:0.09s; --eq-scale-min:0.25; --eq-scale-max:1.00; }
-.hero-eq__bar:nth-child(11) { --eq-dur:0.79s; --eq-delay:0.25s; --eq-scale-min:0.09; --eq-scale-max:0.75; }
-.hero-eq__bar:nth-child(12) { --eq-dur:0.66s; --eq-delay:0.13s; --eq-scale-min:0.18; --eq-scale-max:0.93; }
-.hero-eq__bar:nth-child(13) { --eq-dur:0.57s; --eq-delay:0.20s; --eq-scale-min:0.14; --eq-scale-max:0.55; }
-.hero-eq__bar:nth-child(14) { --eq-dur:0.93s; --eq-delay:0.04s; --eq-scale-min:0.07; --eq-scale-max:0.84; }
-.hero-eq__bar:nth-child(15) { --eq-dur:0.70s; --eq-delay:0.16s; --eq-scale-min:0.23; --eq-scale-max:1.00; }
-.hero-eq__bar:nth-child(16) { --eq-dur:0.84s; --eq-delay:0.08s; --eq-scale-min:0.11; --eq-scale-max:0.66; }
-.hero-eq__bar:nth-child(17) { --eq-dur:0.60s; --eq-delay:0.21s; --eq-scale-min:0.16; --eq-scale-max:0.91; }
-.hero-eq__bar:nth-child(18) { --eq-dur:0.75s; --eq-delay:0.12s; --eq-scale-min:0.09; --eq-scale-max:0.80; }
-.hero-eq__bar:nth-child(19) { --eq-dur:0.89s; --eq-delay:0.06s; --eq-scale-min:0.20; --eq-scale-max:1.00; }
-.hero-eq__bar:nth-child(20) { --eq-dur:0.64s; --eq-delay:0.18s; --eq-scale-min:0.07; --eq-scale-max:0.45; }
-.hero-eq__bar:nth-child(21) { --eq-dur:0.53s; --eq-delay:0.24s; --eq-scale-min:0.14; --eq-scale-max:0.73; }
-.hero-eq__bar:nth-child(22) { --eq-dur:0.78s; --eq-delay:0.10s; --eq-scale-min:0.11; --eq-scale-max:0.61; }
+/* Each bar gets its own keyframes — Safari doesn't support var() inside @keyframes */
+.hero-eq__bar:nth-child(1)  { animation: eq1  0.72s ease-in-out 0.00s infinite alternate; }
+.hero-eq__bar:nth-child(2)  { animation: eq2  0.58s ease-in-out 0.07s infinite alternate; }
+.hero-eq__bar:nth-child(3)  { animation: eq3  0.83s ease-in-out 0.14s infinite alternate; }
+.hero-eq__bar:nth-child(4)  { animation: eq4  0.65s ease-in-out 0.03s infinite alternate; }
+.hero-eq__bar:nth-child(5)  { animation: eq5  0.91s ease-in-out 0.19s infinite alternate; }
+.hero-eq__bar:nth-child(6)  { animation: eq6  0.54s ease-in-out 0.11s infinite alternate; }
+.hero-eq__bar:nth-child(7)  { animation: eq7  0.76s ease-in-out 0.22s infinite alternate; }
+.hero-eq__bar:nth-child(8)  { animation: eq8  0.62s ease-in-out 0.05s infinite alternate; }
+.hero-eq__bar:nth-child(9)  { animation: eq9  0.88s ease-in-out 0.17s infinite alternate; }
+.hero-eq__bar:nth-child(10) { animation: eq10 0.51s ease-in-out 0.09s infinite alternate; }
+.hero-eq__bar:nth-child(11) { animation: eq11 0.79s ease-in-out 0.25s infinite alternate; }
+.hero-eq__bar:nth-child(12) { animation: eq12 0.66s ease-in-out 0.13s infinite alternate; }
+.hero-eq__bar:nth-child(13) { animation: eq13 0.57s ease-in-out 0.20s infinite alternate; }
+.hero-eq__bar:nth-child(14) { animation: eq14 0.93s ease-in-out 0.04s infinite alternate; }
+.hero-eq__bar:nth-child(15) { animation: eq15 0.70s ease-in-out 0.16s infinite alternate; }
+.hero-eq__bar:nth-child(16) { animation: eq16 0.84s ease-in-out 0.08s infinite alternate; }
+.hero-eq__bar:nth-child(17) { animation: eq17 0.60s ease-in-out 0.21s infinite alternate; }
+.hero-eq__bar:nth-child(18) { animation: eq18 0.75s ease-in-out 0.12s infinite alternate; }
+.hero-eq__bar:nth-child(19) { animation: eq19 0.89s ease-in-out 0.06s infinite alternate; }
+.hero-eq__bar:nth-child(20) { animation: eq20 0.64s ease-in-out 0.18s infinite alternate; }
+.hero-eq__bar:nth-child(21) { animation: eq21 0.53s ease-in-out 0.24s infinite alternate; }
+.hero-eq__bar:nth-child(22) { animation: eq22 0.78s ease-in-out 0.10s infinite alternate; }
 
-@keyframes eqPulse {
-  from { transform: scaleY(var(--eq-scale-min, 0.1)); opacity: 0.5; }
-  to   { transform: scaleY(var(--eq-scale-max, 1)); opacity: 1; }
-}
+@keyframes eq1  { from { transform: scaleY(0.11); opacity:0.5; } to { transform: scaleY(0.50); opacity:1; } }
+@keyframes eq2  { from { transform: scaleY(0.18); opacity:0.5; } to { transform: scaleY(0.91); opacity:1; } }
+@keyframes eq3  { from { transform: scaleY(0.09); opacity:0.5; } to { transform: scaleY(0.68); opacity:1; } }
+@keyframes eq4  { from { transform: scaleY(0.27); opacity:0.5; } to { transform: scaleY(1.00); opacity:1; } }
+@keyframes eq5  { from { transform: scaleY(0.14); opacity:0.5; } to { transform: scaleY(0.80); opacity:1; } }
+@keyframes eq6  { from { transform: scaleY(0.07); opacity:0.5; } to { transform: scaleY(0.59); opacity:1; } }
+@keyframes eq7  { from { transform: scaleY(0.20); opacity:0.5; } to { transform: scaleY(0.95); opacity:1; } }
+@keyframes eq8  { from { transform: scaleY(0.11); opacity:0.5; } to { transform: scaleY(0.86); opacity:1; } }
+@keyframes eq9  { from { transform: scaleY(0.16); opacity:0.5; } to { transform: scaleY(0.64); opacity:1; } }
+@keyframes eq10 { from { transform: scaleY(0.25); opacity:0.5; } to { transform: scaleY(1.00); opacity:1; } }
+@keyframes eq11 { from { transform: scaleY(0.09); opacity:0.5; } to { transform: scaleY(0.75); opacity:1; } }
+@keyframes eq12 { from { transform: scaleY(0.18); opacity:0.5; } to { transform: scaleY(0.93); opacity:1; } }
+@keyframes eq13 { from { transform: scaleY(0.14); opacity:0.5; } to { transform: scaleY(0.55); opacity:1; } }
+@keyframes eq14 { from { transform: scaleY(0.07); opacity:0.5; } to { transform: scaleY(0.84); opacity:1; } }
+@keyframes eq15 { from { transform: scaleY(0.23); opacity:0.5; } to { transform: scaleY(1.00); opacity:1; } }
+@keyframes eq16 { from { transform: scaleY(0.11); opacity:0.5; } to { transform: scaleY(0.66); opacity:1; } }
+@keyframes eq17 { from { transform: scaleY(0.16); opacity:0.5; } to { transform: scaleY(0.91); opacity:1; } }
+@keyframes eq18 { from { transform: scaleY(0.09); opacity:0.5; } to { transform: scaleY(0.80); opacity:1; } }
+@keyframes eq19 { from { transform: scaleY(0.20); opacity:0.5; } to { transform: scaleY(1.00); opacity:1; } }
+@keyframes eq20 { from { transform: scaleY(0.07); opacity:0.5; } to { transform: scaleY(0.45); opacity:1; } }
+@keyframes eq21 { from { transform: scaleY(0.14); opacity:0.5; } to { transform: scaleY(0.73); opacity:1; } }
+@keyframes eq22 { from { transform: scaleY(0.11); opacity:0.5; } to { transform: scaleY(0.61); opacity:1; } }
 
 /* ---- Scroll Reveal Animation ---- */
 .article-item,
@@ -1599,16 +1624,13 @@ button:focus-visible {
   .article-content { padding: 0 var(--space-md) var(--space-xl); }
   .featured-picks { padding: 0 var(--space-md) var(--space-xl); }
   .featured-picks__grid { grid-template-columns: 1fr; }
-  .moon { width: 90px; height: 90px; top: 3%; right: 5%; animation: none !important; }
+  .moon { width: 90px; height: 90px; top: 3%; right: 5%; }
   .moon__crater--1 { width: 14px; height: 14px; top: 22px; left: 18px; }
   .moon__crater--2 { width: 9px; height: 9px; top: 44px; left: 46px; }
   .moon__crater--3 { width: 11px; height: 11px; top: 19px; left: 50px; }
+  /* Clouds & shooting stars hidden on mobile — translateX causes Safari scroll jitter */
   .shooting-star, .shooting-star--1, .shooting-star--2, .shooting-star--3 { display: none !important; }
   .cloud, .cloud--1, .cloud--2, .cloud--3, .cloud--4 { display: none !important; }
-  .nebula { animation: none !important; opacity: 0.5; }
-  .stars, .stars--sm, .stars--bright { animation: none !important; }
-  .site-title__owl { animation: none !important; }
-  .hero-eq__bar { animation: none !important; transform: scaleY(0.4); opacity: 0.6; }
 }
 
 /* ---- Print ---- */

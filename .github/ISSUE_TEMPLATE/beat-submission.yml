@@ -1,20 +1,20 @@
-name: Beat Spotlight Submission
-description: Submit your beat for a weekly featured breakdown on The Night Owl
-title: "[Beat Spotlight] "
-labels: ["beat-spotlight"]
+name: Song Spotlight Submission
+description: Submit your song for a weekly featured write-up on The Night Owl
+title: "[Song Spotlight] "
+labels: ["song-spotlight"]
 body:
   - type: input
     id: producer-name
     attributes:
-      label: Producer Name
-      placeholder: "Your producer tag"
+      label: Artist / Producer Name
+      placeholder: "Your name or artist name"
     validations:
       required: true
   - type: input
     id: beat-link
     attributes:
-      label: Beat Link
-      description: SoundCloud, YouTube, or Google Drive link
+      label: Song Link
+      description: SoundCloud, YouTube, Spotify, or Google Drive link
       placeholder: "https://"
     validations:
       required: true
@@ -35,6 +35,6 @@ body:
   - type: textarea
     id: description
     attributes:
-      label: Tell us about the beat
-      description: BPM, key, what inspired it, what plugins you used
-      placeholder: "140 BPM, Cm, used Vital for the lead..."
+      label: Tell us about the track
+      description: BPM, key, what inspired it, the story behind it
+      placeholder: "140 BPM, Cm, inspired by..."

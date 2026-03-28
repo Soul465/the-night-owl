@@ -31,14 +31,14 @@
 
 ---
 
-## Beat Spotlight
+## Song Spotlight
 
-Producers can submit beats weekly for a featured breakdown on the blog. [Submit a beat](https://soul465.github.io/the-night-owl/#spotlight) or open a [Beat Submission issue](../../issues/new?template=beat-submission.yml).
+Submit your song weekly for a featured write-up on the blog. [Submit a song](https://soul465.github.io/the-night-owl/#spotlight) or open a [Song Submission issue](../../issues/new?template=beat-submission.yml).
 
 ---
 
 ## About
 
-The Night Owl covers the craft, business, and culture of hip-hop production. Written from real studio experience for producers who want to level up. No fluff, no filler — just what works.
+The Night Owl covers hip-hop music, culture, production, and business. Written from real experience for people who live and breathe the sound. No fluff, no filler — just what's real.
 
 Built in Louisiana.
