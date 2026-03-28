@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=13">
+  <link rel="stylesheet" href="style.css?v=14">
   <meta name="google-adsense-account" content="ca-pub-8468080886390821">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8468080886390821" crossorigin="anonymous"></script>
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -459,6 +459,39 @@
     }
     slideshow('.hero__slide', '.hero__dot', 'hero__slide--active', 'hero__dot--active', 6000);
 
+  })();
+  </script>
+
+  <!-- EQ Bar Animation (Web Animations API — works on Safari mobile) -->
+  <script>
+  (function() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var bars = document.querySelectorAll('.hero-eq__bar');
+    if (!bars.length || !bars[0].animate) return;
+
+    function animateBar(bar) {
+      var from = parseFloat(bar.style.transform ? bar.style.transform.replace(/[^0-9.]/g, '') : '0.2') || 0.2;
+      var to = 0.15 + Math.random() * 0.85;
+      var dur = 300 + Math.random() * 500;
+
+      var anim = bar.animate(
+        [
+          { transform: 'scaleY(' + from + ')' },
+          { transform: 'scaleY(' + to + ')' }
+        ],
+        { duration: dur, easing: 'ease-in-out', fill: 'forwards' }
+      );
+
+      anim.onfinish = function() {
+        bar.style.transform = 'scaleY(' + to + ')';
+        animateBar(bar);
+      };
+    }
+
+    for (var i = 0; i < bars.length; i++) {
+      bars[i].style.transform = 'scaleY(' + (0.15 + Math.random() * 0.85) + ')';
+      animateBar(bars[i]);
+    }
   })();
   </script>
 
