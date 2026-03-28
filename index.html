@@ -459,37 +459,30 @@
     }
     slideshow('.hero__slide', '.hero__dot', 'hero__slide--active', 'hero__dot--active', 6000);
 
-    // EQ bar animation — JS for Safari compatibility (CSS height/scaleY won't animate on Safari)
+    // EQ bar animation — setInterval for Safari (rAF gets paused on iOS)
     (function() {
       var bars = document.querySelectorAll('.hero-eq__bar');
       if (!bars.length) return;
-      var H = 44;
-      // Pre-compute each bar's unique sine parameters
       var data = [];
       for (var i = 0; i < bars.length; i++) {
         data.push({
-          speed1: 0.0012 + (i * 0.00017) % 0.002,
-          speed2: 0.0019 + (i * 0.00023) % 0.0015,
-          phase1: (i * 2.3) % (Math.PI * 2),
-          phase2: (i * 1.7) % (Math.PI * 2),
+          s1: 0.0012 + (i * 0.00017) % 0.002,
+          s2: 0.0019 + (i * 0.00023) % 0.0015,
+          p1: (i * 2.3) % (Math.PI * 2),
+          p2: (i * 1.7) % (Math.PI * 2),
           lo: 4 + (i % 5) * 2,
           hi: 20 + (i % 4) * 8
         });
       }
-      var t0 = performance.now();
-      function frame(now) {
-        var elapsed = now - t0;
+      var t0 = Date.now();
+      setInterval(function() {
+        var elapsed = Date.now() - t0;
         for (var i = 0; i < bars.length; i++) {
           var d = data[i];
-          var w1 = Math.sin(elapsed * d.speed1 + d.phase1);
-          var w2 = Math.sin(elapsed * d.speed2 + d.phase2);
-          var mix = (w1 + w2 * 0.5) / 1.5;
-          var h = d.lo + (d.hi - d.lo) * (mix * 0.5 + 0.5);
-          bars[i].style.height = h + 'px';
+          var w = (Math.sin(elapsed * d.s1 + d.p1) + Math.sin(elapsed * d.s2 + d.p2) * 0.5) / 1.5;
+          bars[i].style.height = (d.lo + (d.hi - d.lo) * (w * 0.5 + 0.5)) + 'px';
         }
-        requestAnimationFrame(frame);
-      }
-      requestAnimationFrame(frame);
+      }, 33);
     })();
   })();
   </script>
