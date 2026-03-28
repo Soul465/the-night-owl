@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=9">
+  <link rel="stylesheet" href="style.css?v=10">
   <meta name="google-adsense-account" content="ca-pub-8468080886390821">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8468080886390821" crossorigin="anonymous"></script>
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -429,16 +429,65 @@
         slides[cur].classList.add(activeSlide);
         dots[cur].classList.add(activeDot);
       }
+      function resetTimer() {
+        clearInterval(t);
+        t = setInterval(function() { go((cur + 1) % slides.length); }, ms);
+      }
       var t = setInterval(function() { go((cur + 1) % slides.length); }, ms);
       dots.forEach(function(d, i) {
-        d.addEventListener('click', function() {
-          clearInterval(t);
-          go(i);
-          t = setInterval(function() { go((cur + 1) % slides.length); }, ms);
-        });
+        d.addEventListener('click', function() { go(i); resetTimer(); });
       });
+
+      // Touch swipe support
+      var container = document.querySelector('.hero__slideshow');
+      var startX = 0, startY = 0, tracking = false;
+      container.addEventListener('touchstart', function(e) {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        tracking = true;
+      }, { passive: true });
+      container.addEventListener('touchend', function(e) {
+        if (!tracking) return;
+        tracking = false;
+        var dx = e.changedTouches[0].clientX - startX;
+        var dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) < 50 || Math.abs(dy) > Math.abs(dx)) return;
+        if (dx < 0) { go((cur + 1) % slides.length); }
+        else { go((cur - 1 + slides.length) % slides.length); }
+        resetTimer();
+      }, { passive: true });
     }
     slideshow('.hero__slide', '.hero__dot', 'hero__slide--active', 'hero__dot--active', 6000);
+
+    // EQ bar animation via JS — Safari doesn't animate CSS keyframes with scaleY reliably
+    var bars = document.querySelectorAll('.hero-eq__bar');
+    if (bars.length) {
+      var configs = [
+        {min:0.11,max:0.50,dur:720},{min:0.18,max:0.91,dur:580},{min:0.09,max:0.68,dur:830},
+        {min:0.27,max:1.00,dur:650},{min:0.14,max:0.80,dur:910},{min:0.07,max:0.59,dur:540},
+        {min:0.20,max:0.95,dur:760},{min:0.11,max:0.86,dur:620},{min:0.16,max:0.64,dur:880},
+        {min:0.25,max:1.00,dur:510},{min:0.09,max:0.75,dur:790},{min:0.18,max:0.93,dur:660},
+        {min:0.14,max:0.55,dur:570},{min:0.07,max:0.84,dur:930},{min:0.23,max:1.00,dur:700},
+        {min:0.11,max:0.66,dur:840},{min:0.16,max:0.91,dur:600},{min:0.09,max:0.80,dur:750},
+        {min:0.20,max:1.00,dur:890},{min:0.07,max:0.45,dur:640},{min:0.14,max:0.73,dur:530},
+        {min:0.11,max:0.61,dur:780}
+      ];
+      bars.forEach(function(bar, i) {
+        var c = configs[i] || configs[0];
+        var up = true, val = c.min;
+        var step = (c.max - c.min) / (c.dur / 16);
+        function tick() {
+          val += up ? step : -step;
+          if (val >= c.max) { val = c.max; up = false; }
+          if (val <= c.min) { val = c.min; up = true; }
+          bar.style.transform = 'scaleY(' + val.toFixed(3) + ')';
+          bar.style.opacity = (0.5 + 0.5 * ((val - c.min) / (c.max - c.min))).toFixed(2);
+          requestAnimationFrame(tick);
+        }
+        // Stagger start
+        setTimeout(function() { requestAnimationFrame(tick); }, i * 30);
+      });
+    }
   })();
   </script>
 

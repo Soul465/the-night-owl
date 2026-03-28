@@ -1404,57 +1404,13 @@ button:focus-visible {
   border-radius: 2px 2px 0 0;
   transform-origin: bottom;
   will-change: transform;
+  transform: scaleY(0.3);
 }
 
 .hero-eq__bar:nth-child(odd)  { background: var(--amber); }
 .hero-eq__bar:nth-child(even) { background: var(--amber-dim); }
 
-/* Each bar gets its own keyframes — Safari doesn't support var() inside @keyframes */
-.hero-eq__bar:nth-child(1)  { animation: eq1  0.72s ease-in-out 0.00s infinite alternate; }
-.hero-eq__bar:nth-child(2)  { animation: eq2  0.58s ease-in-out 0.07s infinite alternate; }
-.hero-eq__bar:nth-child(3)  { animation: eq3  0.83s ease-in-out 0.14s infinite alternate; }
-.hero-eq__bar:nth-child(4)  { animation: eq4  0.65s ease-in-out 0.03s infinite alternate; }
-.hero-eq__bar:nth-child(5)  { animation: eq5  0.91s ease-in-out 0.19s infinite alternate; }
-.hero-eq__bar:nth-child(6)  { animation: eq6  0.54s ease-in-out 0.11s infinite alternate; }
-.hero-eq__bar:nth-child(7)  { animation: eq7  0.76s ease-in-out 0.22s infinite alternate; }
-.hero-eq__bar:nth-child(8)  { animation: eq8  0.62s ease-in-out 0.05s infinite alternate; }
-.hero-eq__bar:nth-child(9)  { animation: eq9  0.88s ease-in-out 0.17s infinite alternate; }
-.hero-eq__bar:nth-child(10) { animation: eq10 0.51s ease-in-out 0.09s infinite alternate; }
-.hero-eq__bar:nth-child(11) { animation: eq11 0.79s ease-in-out 0.25s infinite alternate; }
-.hero-eq__bar:nth-child(12) { animation: eq12 0.66s ease-in-out 0.13s infinite alternate; }
-.hero-eq__bar:nth-child(13) { animation: eq13 0.57s ease-in-out 0.20s infinite alternate; }
-.hero-eq__bar:nth-child(14) { animation: eq14 0.93s ease-in-out 0.04s infinite alternate; }
-.hero-eq__bar:nth-child(15) { animation: eq15 0.70s ease-in-out 0.16s infinite alternate; }
-.hero-eq__bar:nth-child(16) { animation: eq16 0.84s ease-in-out 0.08s infinite alternate; }
-.hero-eq__bar:nth-child(17) { animation: eq17 0.60s ease-in-out 0.21s infinite alternate; }
-.hero-eq__bar:nth-child(18) { animation: eq18 0.75s ease-in-out 0.12s infinite alternate; }
-.hero-eq__bar:nth-child(19) { animation: eq19 0.89s ease-in-out 0.06s infinite alternate; }
-.hero-eq__bar:nth-child(20) { animation: eq20 0.64s ease-in-out 0.18s infinite alternate; }
-.hero-eq__bar:nth-child(21) { animation: eq21 0.53s ease-in-out 0.24s infinite alternate; }
-.hero-eq__bar:nth-child(22) { animation: eq22 0.78s ease-in-out 0.10s infinite alternate; }
-
-@keyframes eq1  { from { transform: scaleY(0.11); opacity:0.5; } to { transform: scaleY(0.50); opacity:1; } }
-@keyframes eq2  { from { transform: scaleY(0.18); opacity:0.5; } to { transform: scaleY(0.91); opacity:1; } }
-@keyframes eq3  { from { transform: scaleY(0.09); opacity:0.5; } to { transform: scaleY(0.68); opacity:1; } }
-@keyframes eq4  { from { transform: scaleY(0.27); opacity:0.5; } to { transform: scaleY(1.00); opacity:1; } }
-@keyframes eq5  { from { transform: scaleY(0.14); opacity:0.5; } to { transform: scaleY(0.80); opacity:1; } }
-@keyframes eq6  { from { transform: scaleY(0.07); opacity:0.5; } to { transform: scaleY(0.59); opacity:1; } }
-@keyframes eq7  { from { transform: scaleY(0.20); opacity:0.5; } to { transform: scaleY(0.95); opacity:1; } }
-@keyframes eq8  { from { transform: scaleY(0.11); opacity:0.5; } to { transform: scaleY(0.86); opacity:1; } }
-@keyframes eq9  { from { transform: scaleY(0.16); opacity:0.5; } to { transform: scaleY(0.64); opacity:1; } }
-@keyframes eq10 { from { transform: scaleY(0.25); opacity:0.5; } to { transform: scaleY(1.00); opacity:1; } }
-@keyframes eq11 { from { transform: scaleY(0.09); opacity:0.5; } to { transform: scaleY(0.75); opacity:1; } }
-@keyframes eq12 { from { transform: scaleY(0.18); opacity:0.5; } to { transform: scaleY(0.93); opacity:1; } }
-@keyframes eq13 { from { transform: scaleY(0.14); opacity:0.5; } to { transform: scaleY(0.55); opacity:1; } }
-@keyframes eq14 { from { transform: scaleY(0.07); opacity:0.5; } to { transform: scaleY(0.84); opacity:1; } }
-@keyframes eq15 { from { transform: scaleY(0.23); opacity:0.5; } to { transform: scaleY(1.00); opacity:1; } }
-@keyframes eq16 { from { transform: scaleY(0.11); opacity:0.5; } to { transform: scaleY(0.66); opacity:1; } }
-@keyframes eq17 { from { transform: scaleY(0.16); opacity:0.5; } to { transform: scaleY(0.91); opacity:1; } }
-@keyframes eq18 { from { transform: scaleY(0.09); opacity:0.5; } to { transform: scaleY(0.80); opacity:1; } }
-@keyframes eq19 { from { transform: scaleY(0.20); opacity:0.5; } to { transform: scaleY(1.00); opacity:1; } }
-@keyframes eq20 { from { transform: scaleY(0.07); opacity:0.5; } to { transform: scaleY(0.45); opacity:1; } }
-@keyframes eq21 { from { transform: scaleY(0.14); opacity:0.5; } to { transform: scaleY(0.73); opacity:1; } }
-@keyframes eq22 { from { transform: scaleY(0.11); opacity:0.5; } to { transform: scaleY(0.61); opacity:1; } }
+/* EQ bar animation handled by JS for Safari compatibility */
 
 /* ---- Scroll Reveal Animation ---- */
 .article-item,
