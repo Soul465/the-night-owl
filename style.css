@@ -190,6 +190,19 @@ button:focus-visible {
   50% { transform: translateY(-8px) rotate(2deg); }
 }
 
+/* Mobile-safe moon glow — opacity only, no transform to avoid Safari jitter */
+@keyframes moonGlow {
+  0% { opacity: 0.85; filter: brightness(0.95); }
+  100% { opacity: 1; filter: brightness(1.15); }
+}
+
+/* More visible star twinkle for mobile */
+@keyframes twinkleMobile {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.9; }
+  100% { opacity: 0.5; }
+}
+
 /* Clouds */
 .cloud {
   position: absolute;
@@ -1624,13 +1637,17 @@ button:focus-visible {
   .article-content { padding: 0 var(--space-md) var(--space-xl); }
   .featured-picks { padding: 0 var(--space-md) var(--space-xl); }
   .featured-picks__grid { grid-template-columns: 1fr; }
-  .moon { width: 90px; height: 90px; top: 3%; right: 5%; }
+  .moon { width: 90px; height: 90px; top: 3%; right: 5%; animation: moonGlow 4s ease-in-out infinite alternate !important; }
   .moon__crater--1 { width: 14px; height: 14px; top: 22px; left: 18px; }
   .moon__crater--2 { width: 9px; height: 9px; top: 44px; left: 46px; }
   .moon__crater--3 { width: 11px; height: 11px; top: 19px; left: 50px; }
   /* Clouds & shooting stars hidden on mobile — translateX causes Safari scroll jitter */
   .shooting-star, .shooting-star--1, .shooting-star--2, .shooting-star--3 { display: none !important; }
   .cloud, .cloud--1, .cloud--2, .cloud--3, .cloud--4 { display: none !important; }
+  /* More visible star twinkle on mobile */
+  .stars { animation: twinkleMobile 3s ease-in-out infinite alternate !important; }
+  .stars--sm { animation: twinkleMobile 4s ease-in-out 1s infinite alternate !important; }
+  .stars--bright { animation: twinkleBright 2.5s ease-in-out infinite alternate !important; }
 }
 
 /* ---- Print ---- */
