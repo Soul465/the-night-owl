@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
   <meta name="google-adsense-account" content="ca-pub-8468080886390821">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8468080886390821" crossorigin="anonymous"></script>
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
@@ -63,6 +63,7 @@
         <a href="#business">Business</a>
         <a href="#culture">Culture</a>
         <a href="#spotlight">Beat Spotlight</a>
+        <a href="#support">Support</a>
         <a href="#about">About</a>
       </nav>
     </div>
@@ -326,7 +327,7 @@
   <section class="newsletter" id="subscribe">
     <div class="newsletter__inner">
       <h2 class="newsletter__title">The Midnight Drop</h2>
-      <p class="newsletter__desc">Production tips, free presets, and beat game strategy. One email a week, sent after midnight.</p>
+      <p class="newsletter__desc">A weekly email with production tips, free presets, and the stuff I'm learning in the studio. Think of it like a group chat for producers — just one message a week, no spam, and you can dip anytime.</p>
       <form class="newsletter__form" action="#" method="post">
         <input class="newsletter__input" type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
         <button class="newsletter__btn" type="submit" aria-label="Subscribe to The Midnight Drop newsletter">Subscribe</button>
@@ -340,7 +341,7 @@
       <div class="spotlight__header">
         <p class="spotlight__label">Community</p>
         <h2 class="spotlight__title">Beat Spotlight</h2>
-        <p class="spotlight__desc">Every week, one producer gets their beat featured on The Night Owl. I listen to every submission. If your beat has something — a flip, a bounce, a sound I haven't heard — it gets the spotlight with a full breakdown and shoutout.</p>
+        <p class="spotlight__desc">Every week I feature one producer's beat right here on the site. I listen to everything that comes in. If your beat has something — a flip, a bounce, a sound that makes me turn my head — you get a full write-up and shoutout. This is your stage.</p>
       </div>
       <div class="spotlight__submit">
         <h3 class="spotlight__submit-title">Submit your beat</h3>
@@ -368,8 +369,8 @@
   <section class="about" id="about">
     <div class="about__label">About the producer</div>
     <div class="about__text">
-      <p>The Night Owl is written by Cam, a hip-hop producer from Louisiana recording under the name Gramercy. This blog exists because too much production advice online is either too surface-level to be useful or too academic to be practical.</p>
-      <p>Everything here comes from real studio hours — the techniques that actually work, the business moves that actually pay, and the culture that shaped the sound.</p>
+      <p>I'm Cam — a hip-hop producer from Louisiana recording under the name Gramercy. I started The Night Owl because when I was coming up, I couldn't find production advice that was real. Everything was either too basic or too academic.</p>
+      <p>So this is what I wish somebody had handed me. The techniques I actually use, the business stuff I had to learn the hard way, and the culture that made me want to make beats in the first place. If you're in the studio late working on something — you're already one of us.</p>
       <div class="about__links">
         <a href="#spotlight">Submit a Beat</a>
         <a href="#">YouTube</a>
@@ -378,6 +379,27 @@
     </div>
   </section>
 
+
+  <!-- Bitcoin Donation -->
+  <section class="btc-donate" id="support">
+    <div class="btc-donate__inner">
+      <div class="btc-donate__text">
+        <p class="btc-donate__label">Support</p>
+        <h2 class="btc-donate__title">If This Helped You, That's the Point</h2>
+        <p class="btc-donate__desc">I built The Night Owl because I wanted the resource I couldn't find when I was starting out. If something here made a beat click or a business move make sense, that's all I need. But if you want to throw some Bitcoin my way to keep it going — I appreciate you.</p>
+      </div>
+      <div class="btc-donate__wallet">
+        <img class="btc-donate__qr" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=bitcoin%3Abc1q69dexwwnch4qysrkjsadtre08rwr0fkkmpc66e&bgcolor=10121c&color=d97706" alt="Bitcoin QR code" width="180" height="180" loading="lazy">
+        <div class="btc-donate__address-wrap">
+          <label class="btc-donate__address-label">BTC Address</label>
+          <div class="btc-donate__copy-row">
+            <code class="btc-donate__address" id="btc-address">bc1q69dexwwnch4qysrkjsadtre08rwr0fkkmpc66e</code>
+            <button class="btc-donate__copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('btc-address').textContent).then(function(){var b=document.querySelector('.btc-donate__copy-btn');b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},2000)})" aria-label="Copy Bitcoin address">Copy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="site-footer">
