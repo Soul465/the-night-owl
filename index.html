@@ -453,10 +453,9 @@
   })();
   </script>
 
-  <!-- EQ Bar Animation (Canvas — works everywhere including Safari mobile) -->
+  <!-- EQ Bar Animation (Canvas) -->
   <script>
   (function() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     var c = document.querySelector('canvas.hero-eq');
     if (!c) return;
     var dpr = window.devicePixelRatio || 1;
@@ -465,10 +464,13 @@
     c.style.width = '132px';
     c.style.height = '44px';
     var ctx = c.getContext('2d');
+    if (!ctx) return;
     ctx.scale(dpr, dpr);
     var W = 132, H = 44;
     var N = 22, barW = 3, gap = 3;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    var heights = [22,40,14,36,8,30,18,44,10,34,20,42,6,28,38,12,32,16,44,24,36,10];
     var bars = [];
     for (var i = 0; i < N; i++) {
       bars.push({
@@ -477,6 +479,16 @@
         min: 0.15 + Math.random() * 0.15,
         max: 0.55 + Math.random() * 0.45
       });
+    }
+
+    function drawStatic() {
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < N; i++) {
+        var h = heights[i];
+        var x = i * (barW + gap);
+        ctx.fillStyle = i % 2 === 0 ? '#d97706' : '#92400e';
+        ctx.fillRect(x, H - h, barW, h);
+      }
     }
 
     function draw(t) {
@@ -491,7 +503,13 @@
       }
       requestAnimationFrame(draw);
     }
-    requestAnimationFrame(draw);
+
+    if (reduceMotion) {
+      drawStatic();
+    } else {
+      drawStatic();
+      requestAnimationFrame(draw);
+    }
   })();
   </script>
 
