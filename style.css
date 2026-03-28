@@ -115,9 +115,10 @@ button:focus-visible {
     #131729 100%
   );
   overflow: hidden;
+  contain: layout style paint;
 }
 
-/* Stars — three layers for depth */
+/* Stars — two layers for depth (reduced gradient count for performance) */
 .stars {
   position: absolute;
   inset: 0;
@@ -125,41 +126,30 @@ button:focus-visible {
     radial-gradient(1.5px 1.5px at 47px 83px, rgba(255,255,255,0.8), transparent),
     radial-gradient(1px 1px at 131px 29px, rgba(255,255,255,0.6), transparent),
     radial-gradient(1.5px 1.5px at 207px 147px, rgba(255,255,255,0.75), transparent),
-    radial-gradient(1px 1px at 301px 63px, rgba(255,255,255,0.5), transparent),
     radial-gradient(2px 2px at 389px 211px, rgba(255,255,255,0.9), transparent),
-    radial-gradient(1px 1px at 467px 107px, rgba(255,255,255,0.55), transparent),
     radial-gradient(1.5px 1.5px at 521px 253px, rgba(255,255,255,0.7), transparent),
     radial-gradient(1px 1px at 609px 43px, rgba(255,255,255,0.6), transparent),
     radial-gradient(1.5px 1.5px at 697px 189px, rgba(255,255,255,0.65), transparent),
-    radial-gradient(1px 1px at 773px 131px, rgba(255,255,255,0.5), transparent),
     radial-gradient(2px 2px at 151px 307px, rgba(255,255,255,0.85), transparent),
     radial-gradient(1px 1px at 263px 371px, rgba(255,255,255,0.55), transparent),
-    radial-gradient(1.5px 1.5px at 359px 419px, rgba(255,255,255,0.7), transparent),
-    radial-gradient(1px 1px at 443px 347px, rgba(255,255,255,0.5), transparent),
     radial-gradient(2px 2px at 567px 401px, rgba(255,255,255,0.8), transparent),
-    radial-gradient(1px 1px at 641px 311px, rgba(255,255,255,0.6), transparent),
     radial-gradient(1.5px 1.5px at 83px 467px, rgba(255,255,255,0.65), transparent),
-    radial-gradient(1px 1px at 179px 521px, rgba(255,255,255,0.5), transparent),
-    radial-gradient(1.5px 1.5px at 347px 557px, rgba(255,255,255,0.7), transparent),
-    radial-gradient(1px 1px at 503px 503px, rgba(255,255,255,0.55), transparent);
+    radial-gradient(1.5px 1.5px at 347px 557px, rgba(255,255,255,0.7), transparent);
   background-size: 800px 600px;
   animation: twinkle 5s ease-in-out infinite alternate;
+  will-change: opacity;
 }
 
 .stars--sm {
   background-image:
     radial-gradient(1px 1px at 91px 167px, rgba(255,255,255,0.35), transparent),
-    radial-gradient(1px 1px at 197px 83px, rgba(255,255,255,0.3), transparent),
     radial-gradient(1px 1px at 347px 241px, rgba(255,255,255,0.25), transparent),
-    radial-gradient(1px 1px at 461px 139px, rgba(255,255,255,0.3), transparent),
     radial-gradient(1px 1px at 557px 307px, rgba(255,255,255,0.35), transparent),
-    radial-gradient(1px 1px at 653px 197px, rgba(255,255,255,0.25), transparent),
     radial-gradient(1px 1px at 127px 419px, rgba(255,255,255,0.3), transparent),
-    radial-gradient(1px 1px at 283px 487px, rgba(255,255,255,0.28), transparent),
-    radial-gradient(1px 1px at 421px 383px, rgba(255,255,255,0.32), transparent),
     radial-gradient(1px 1px at 587px 461px, rgba(255,255,255,0.25), transparent);
   background-size: 700px 550px;
   animation: twinkle 8s ease-in-out 2s infinite alternate-reverse;
+  will-change: opacity;
 }
 
 @keyframes twinkle {
@@ -182,6 +172,7 @@ button:focus-visible {
     0 0 140px 60px rgba(253, 249, 239, 0.10),
     0 0 300px 120px rgba(253, 249, 239, 0.04);
   animation: moonFloat 20s ease-in-out infinite;
+  will-change: transform;
 }
 
 .moon__crater {
@@ -204,7 +195,7 @@ button:focus-visible {
   position: absolute;
   background: linear-gradient(90deg, transparent 0%, rgba(180, 175, 200, 0.08) 15%, rgba(200, 195, 215, 0.15) 35%, rgba(210, 205, 220, 0.18) 50%, rgba(200, 195, 215, 0.15) 65%, rgba(180, 175, 200, 0.08) 85%, transparent 100%);
   border-radius: 100px;
-  filter: blur(1px);
+  will-change: transform;
 }
 
 .cloud--1 {
@@ -244,12 +235,10 @@ button:focus-visible {
     radial-gradient(3px 3px at 120px 60px, rgba(255,255,255,1), rgba(255,255,255,0.3) 50%, transparent),
     radial-gradient(2.5px 2.5px at 480px 180px, rgba(255,248,220,1), rgba(255,248,220,0.2) 50%, transparent),
     radial-gradient(3px 3px at 750px 320px, rgba(200,220,255,1), rgba(200,220,255,0.3) 50%, transparent),
-    radial-gradient(2px 2px at 300px 420px, rgba(255,255,255,0.9), rgba(255,255,255,0.2) 50%, transparent),
-    radial-gradient(3px 3px at 620px 80px, rgba(255,240,200,1), rgba(255,240,200,0.3) 50%, transparent),
-    radial-gradient(2.5px 2.5px at 180px 520px, rgba(220,230,255,0.9), rgba(220,230,255,0.2) 50%, transparent),
-    radial-gradient(2px 2px at 550px 480px, rgba(255,255,255,0.85), transparent);
+    radial-gradient(3px 3px at 620px 80px, rgba(255,240,200,1), rgba(255,240,200,0.3) 50%, transparent);
   background-size: 900px 650px;
   animation: twinkleBright 4s ease-in-out infinite alternate;
+  will-change: opacity;
 }
 
 @keyframes twinkleBright {
@@ -269,25 +258,14 @@ button:focus-visible {
     radial-gradient(ellipse 500px 350px at 75% 60%, rgba(30, 58, 138, 0.06), transparent),
     radial-gradient(ellipse 400px 300px at 50% 80%, rgba(127, 29, 29, 0.04), transparent);
   animation: nebulaShift 30s ease-in-out infinite alternate;
+  will-change: opacity;
 }
 
 @keyframes nebulaShift {
-  0% {
-    opacity: 0.6;
-    transform: scale(1) rotate(0deg);
-  }
-  33% {
-    opacity: 1;
-    transform: scale(1.05) rotate(0.5deg);
-  }
-  66% {
-    opacity: 0.7;
-    transform: scale(0.98) rotate(-0.3deg);
-  }
-  100% {
-    opacity: 0.9;
-    transform: scale(1.03) rotate(0.2deg);
-  }
+  0% { opacity: 0.6; }
+  33% { opacity: 1; }
+  66% { opacity: 0.7; }
+  100% { opacity: 0.9; }
 }
 
 /* Shooting stars */
@@ -299,6 +277,7 @@ button:focus-visible {
   border-radius: 100px;
   opacity: 0;
   transform: rotate(-35deg);
+  will-change: transform, opacity;
 }
 
 .shooting-star--1 {
@@ -344,7 +323,7 @@ button:focus-visible {
   position: absolute;
   background: linear-gradient(90deg, transparent 0%, rgba(180, 175, 200, 0.08) 15%, rgba(200, 195, 215, 0.15) 35%, rgba(210, 205, 220, 0.18) 50%, rgba(200, 195, 215, 0.15) 65%, rgba(180, 175, 200, 0.08) 85%, transparent 100%);
   border-radius: 100px;
-  filter: blur(1px);
+  will-change: transform;
   width: 400px;
   height: 7px;
   top: 20%;
@@ -357,6 +336,7 @@ button:focus-visible {
   position: absolute;
   bottom: 0;
   pointer-events: none;
+  contain: layout style;
 }
 
 .forest--left {
@@ -484,8 +464,8 @@ button:focus-visible {
 
 .site-title__owl {
   font-size: 1.2em;
-  filter: drop-shadow(0 0 6px rgba(217, 119, 6, 0.3));
   animation: owlBob 4s ease-in-out infinite;
+  will-change: transform;
 }
 
 @keyframes owlBob {
@@ -700,8 +680,8 @@ button:focus-visible {
 /* ---- Article Items ---- */
 .article-item {
   background: rgba(31, 35, 55, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 12px;
   overflow: hidden;
@@ -823,8 +803,8 @@ button:focus-visible {
     radial-gradient(ellipse 600px 300px at 50% 100%, rgba(217, 119, 6, 0.08), transparent),
     radial-gradient(ellipse 400px 200px at 30% 0%, rgba(167, 139, 250, 0.05), transparent),
     rgba(31, 35, 55, 0.5);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   border-top: 1px solid rgba(217, 119, 6, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   padding: var(--space-3xl) var(--space-lg);
@@ -1221,40 +1201,43 @@ button:focus-visible {
 
 .hero-eq__bar {
   width: 3px;
+  height: 44px;
   border-radius: 2px 2px 0 0;
+  transform-origin: bottom;
+  will-change: transform;
   animation: eqPulse var(--eq-dur, 0.9s) ease-in-out var(--eq-delay, 0s) infinite alternate;
 }
 
 .hero-eq__bar:nth-child(odd)  { background: var(--amber); }
 .hero-eq__bar:nth-child(even) { background: var(--amber-dim); }
 
-/* 22 bars with varied timing/height via inline style variables */
-.hero-eq__bar:nth-child(1)  { --eq-dur:0.72s; --eq-delay:0.00s; --eq-min:5px;  --eq-max:22px; }
-.hero-eq__bar:nth-child(2)  { --eq-dur:0.58s; --eq-delay:0.07s; --eq-min:8px;  --eq-max:40px; }
-.hero-eq__bar:nth-child(3)  { --eq-dur:0.83s; --eq-delay:0.14s; --eq-min:4px;  --eq-max:30px; }
-.hero-eq__bar:nth-child(4)  { --eq-dur:0.65s; --eq-delay:0.03s; --eq-min:12px; --eq-max:44px; }
-.hero-eq__bar:nth-child(5)  { --eq-dur:0.91s; --eq-delay:0.19s; --eq-min:6px;  --eq-max:35px; }
-.hero-eq__bar:nth-child(6)  { --eq-dur:0.54s; --eq-delay:0.11s; --eq-min:3px;  --eq-max:26px; }
-.hero-eq__bar:nth-child(7)  { --eq-dur:0.76s; --eq-delay:0.22s; --eq-min:9px;  --eq-max:42px; }
-.hero-eq__bar:nth-child(8)  { --eq-dur:0.62s; --eq-delay:0.05s; --eq-min:5px;  --eq-max:38px; }
-.hero-eq__bar:nth-child(9)  { --eq-dur:0.88s; --eq-delay:0.17s; --eq-min:7px;  --eq-max:28px; }
-.hero-eq__bar:nth-child(10) { --eq-dur:0.51s; --eq-delay:0.09s; --eq-min:11px; --eq-max:44px; }
-.hero-eq__bar:nth-child(11) { --eq-dur:0.79s; --eq-delay:0.25s; --eq-min:4px;  --eq-max:33px; }
-.hero-eq__bar:nth-child(12) { --eq-dur:0.66s; --eq-delay:0.13s; --eq-min:8px;  --eq-max:41px; }
-.hero-eq__bar:nth-child(13) { --eq-dur:0.57s; --eq-delay:0.20s; --eq-min:6px;  --eq-max:24px; }
-.hero-eq__bar:nth-child(14) { --eq-dur:0.93s; --eq-delay:0.04s; --eq-min:3px;  --eq-max:37px; }
-.hero-eq__bar:nth-child(15) { --eq-dur:0.70s; --eq-delay:0.16s; --eq-min:10px; --eq-max:44px; }
-.hero-eq__bar:nth-child(16) { --eq-dur:0.84s; --eq-delay:0.08s; --eq-min:5px;  --eq-max:29px; }
-.hero-eq__bar:nth-child(17) { --eq-dur:0.60s; --eq-delay:0.21s; --eq-min:7px;  --eq-max:40px; }
-.hero-eq__bar:nth-child(18) { --eq-dur:0.75s; --eq-delay:0.12s; --eq-min:4px;  --eq-max:35px; }
-.hero-eq__bar:nth-child(19) { --eq-dur:0.89s; --eq-delay:0.06s; --eq-min:9px;  --eq-max:44px; }
-.hero-eq__bar:nth-child(20) { --eq-dur:0.64s; --eq-delay:0.18s; --eq-min:3px;  --eq-max:20px; }
-.hero-eq__bar:nth-child(21) { --eq-dur:0.53s; --eq-delay:0.24s; --eq-min:6px;  --eq-max:32px; }
-.hero-eq__bar:nth-child(22) { --eq-dur:0.78s; --eq-delay:0.10s; --eq-min:5px;  --eq-max:27px; }
+/* 22 bars with varied timing/scale via scaleY (GPU-composited, no layout thrashing) */
+.hero-eq__bar:nth-child(1)  { --eq-dur:0.72s; --eq-delay:0.00s; --eq-scale-min:0.11; --eq-scale-max:0.50; }
+.hero-eq__bar:nth-child(2)  { --eq-dur:0.58s; --eq-delay:0.07s; --eq-scale-min:0.18; --eq-scale-max:0.91; }
+.hero-eq__bar:nth-child(3)  { --eq-dur:0.83s; --eq-delay:0.14s; --eq-scale-min:0.09; --eq-scale-max:0.68; }
+.hero-eq__bar:nth-child(4)  { --eq-dur:0.65s; --eq-delay:0.03s; --eq-scale-min:0.27; --eq-scale-max:1.00; }
+.hero-eq__bar:nth-child(5)  { --eq-dur:0.91s; --eq-delay:0.19s; --eq-scale-min:0.14; --eq-scale-max:0.80; }
+.hero-eq__bar:nth-child(6)  { --eq-dur:0.54s; --eq-delay:0.11s; --eq-scale-min:0.07; --eq-scale-max:0.59; }
+.hero-eq__bar:nth-child(7)  { --eq-dur:0.76s; --eq-delay:0.22s; --eq-scale-min:0.20; --eq-scale-max:0.95; }
+.hero-eq__bar:nth-child(8)  { --eq-dur:0.62s; --eq-delay:0.05s; --eq-scale-min:0.11; --eq-scale-max:0.86; }
+.hero-eq__bar:nth-child(9)  { --eq-dur:0.88s; --eq-delay:0.17s; --eq-scale-min:0.16; --eq-scale-max:0.64; }
+.hero-eq__bar:nth-child(10) { --eq-dur:0.51s; --eq-delay:0.09s; --eq-scale-min:0.25; --eq-scale-max:1.00; }
+.hero-eq__bar:nth-child(11) { --eq-dur:0.79s; --eq-delay:0.25s; --eq-scale-min:0.09; --eq-scale-max:0.75; }
+.hero-eq__bar:nth-child(12) { --eq-dur:0.66s; --eq-delay:0.13s; --eq-scale-min:0.18; --eq-scale-max:0.93; }
+.hero-eq__bar:nth-child(13) { --eq-dur:0.57s; --eq-delay:0.20s; --eq-scale-min:0.14; --eq-scale-max:0.55; }
+.hero-eq__bar:nth-child(14) { --eq-dur:0.93s; --eq-delay:0.04s; --eq-scale-min:0.07; --eq-scale-max:0.84; }
+.hero-eq__bar:nth-child(15) { --eq-dur:0.70s; --eq-delay:0.16s; --eq-scale-min:0.23; --eq-scale-max:1.00; }
+.hero-eq__bar:nth-child(16) { --eq-dur:0.84s; --eq-delay:0.08s; --eq-scale-min:0.11; --eq-scale-max:0.66; }
+.hero-eq__bar:nth-child(17) { --eq-dur:0.60s; --eq-delay:0.21s; --eq-scale-min:0.16; --eq-scale-max:0.91; }
+.hero-eq__bar:nth-child(18) { --eq-dur:0.75s; --eq-delay:0.12s; --eq-scale-min:0.09; --eq-scale-max:0.80; }
+.hero-eq__bar:nth-child(19) { --eq-dur:0.89s; --eq-delay:0.06s; --eq-scale-min:0.20; --eq-scale-max:1.00; }
+.hero-eq__bar:nth-child(20) { --eq-dur:0.64s; --eq-delay:0.18s; --eq-scale-min:0.07; --eq-scale-max:0.45; }
+.hero-eq__bar:nth-child(21) { --eq-dur:0.53s; --eq-delay:0.24s; --eq-scale-min:0.14; --eq-scale-max:0.73; }
+.hero-eq__bar:nth-child(22) { --eq-dur:0.78s; --eq-delay:0.10s; --eq-scale-min:0.11; --eq-scale-max:0.61; }
 
 @keyframes eqPulse {
-  from { height: var(--eq-min, 4px); opacity: 0.5; }
-  to   { height: var(--eq-max, 40px); opacity: 1; }
+  from { transform: scaleY(var(--eq-scale-min, 0.1)); opacity: 0.5; }
+  to   { transform: scaleY(var(--eq-scale-max, 1)); opacity: 1; }
 }
 
 /* ---- Scroll Reveal Animation ---- */
@@ -1551,7 +1534,7 @@ button:focus-visible {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; transition-duration: 0.01ms !important; }
   .article-item, .hero__title, .hero__excerpt, .newsletter__inner { opacity: 1; transform: none; }
-  .hero-eq__bar { height: 12px !important; opacity: 0.4; }
+  .hero-eq__bar { transform: scaleY(0.3) !important; opacity: 0.4; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .shooting-star { display: none; }
   .nebula { animation: none; opacity: 0.7; }
