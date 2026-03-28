@@ -459,34 +459,27 @@
     }
     slideshow('.hero__slide', '.hero__dot', 'hero__slide--active', 'hero__dot--active', 6000);
 
-    // EQ bar animation via JS — Safari doesn't animate CSS keyframes with scaleY reliably
+    // EQ bar animation — smooth sine wave movement
     var bars = document.querySelectorAll('.hero-eq__bar');
     if (bars.length) {
-      var configs = [
-        {min:0.11,max:0.50,dur:720},{min:0.18,max:0.91,dur:580},{min:0.09,max:0.68,dur:830},
-        {min:0.27,max:1.00,dur:650},{min:0.14,max:0.80,dur:910},{min:0.07,max:0.59,dur:540},
-        {min:0.20,max:0.95,dur:760},{min:0.11,max:0.86,dur:620},{min:0.16,max:0.64,dur:880},
-        {min:0.25,max:1.00,dur:510},{min:0.09,max:0.75,dur:790},{min:0.18,max:0.93,dur:660},
-        {min:0.14,max:0.55,dur:570},{min:0.07,max:0.84,dur:930},{min:0.23,max:1.00,dur:700},
-        {min:0.11,max:0.66,dur:840},{min:0.16,max:0.91,dur:600},{min:0.09,max:0.80,dur:750},
-        {min:0.20,max:1.00,dur:890},{min:0.07,max:0.45,dur:640},{min:0.14,max:0.73,dur:530},
-        {min:0.11,max:0.61,dur:780}
-      ];
       var maxH = 44;
       bars.forEach(function(bar, i) {
-        var c = configs[i] || configs[0];
-        var up = true, val = c.min;
-        var step = (c.max - c.min) / (c.dur / 16);
-        bar.style.height = Math.round(maxH * c.min) + 'px';
-        function tick() {
-          val += up ? step : -step;
-          if (val >= c.max) { val = c.max; up = false; }
-          if (val <= c.min) { val = c.min; up = true; }
+        // Each bar gets unique speed and phase offset for organic feel
+        var speed = 0.002 + Math.random() * 0.003;
+        var phase = Math.random() * Math.PI * 2;
+        var minScale = 0.08 + Math.random() * 0.15;
+        var maxScale = 0.55 + Math.random() * 0.45;
+        var start = performance.now();
+        function tick(now) {
+          var t = (now - start) * speed + phase;
+          // Layer two sine waves for less predictable movement
+          var wave = (Math.sin(t) + Math.sin(t * 1.7 + 0.5)) / 2;
+          var val = minScale + (maxScale - minScale) * (wave * 0.5 + 0.5);
           bar.style.height = Math.round(maxH * val) + 'px';
-          bar.style.opacity = (0.5 + 0.5 * ((val - c.min) / (c.max - c.min))).toFixed(2);
+          bar.style.opacity = (0.4 + 0.6 * val).toFixed(2);
           requestAnimationFrame(tick);
         }
-        setTimeout(function() { requestAnimationFrame(tick); }, i * 30);
+        requestAnimationFrame(tick);
       });
     }
   })();
