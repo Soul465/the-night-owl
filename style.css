@@ -171,28 +171,28 @@ button:focus-visible {
 /* Moon */
 .moon {
   position: absolute;
-  top: 6%;
-  right: 12%;
-  width: 80px;
-  height: 80px;
+  top: 4%;
+  right: 10%;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 40%, #fef9ef, #e8dfc8);
+  background: radial-gradient(circle at 35% 38%, #fefcf4, #f0e8d0 50%, #d8ccb0);
   box-shadow:
-    0 0 40px 12px rgba(253, 249, 239, 0.18),
-    0 0 100px 40px rgba(253, 249, 239, 0.08),
-    0 0 200px 80px rgba(253, 249, 239, 0.03);
+    0 0 60px 20px rgba(253, 249, 239, 0.22),
+    0 0 140px 60px rgba(253, 249, 239, 0.10),
+    0 0 300px 120px rgba(253, 249, 239, 0.04);
   animation: moonFloat 20s ease-in-out infinite;
 }
 
 .moon__crater {
   position: absolute;
   border-radius: 50%;
-  background: rgba(180, 170, 150, 0.3);
+  background: rgba(180, 170, 150, 0.28);
 }
 
-.moon__crater--1 { width: 14px; height: 14px; top: 22px; left: 18px; }
-.moon__crater--2 { width: 9px; height: 9px; top: 42px; left: 44px; }
-.moon__crater--3 { width: 11px; height: 11px; top: 18px; left: 48px; opacity: 0.7; }
+.moon__crater--1 { width: 26px; height: 26px; top: 40px; left: 32px; }
+.moon__crater--2 { width: 16px; height: 16px; top: 82px; left: 84px; }
+.moon__crater--3 { width: 20px; height: 20px; top: 34px; left: 90px; opacity: 0.65; }
 
 @keyframes moonFloat {
   0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -398,10 +398,36 @@ button:focus-visible {
   background-position: top;
 }
 
+/* Background tree line — full width mid-ground depth layer */
+.forest--bg {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 900' preserveAspectRatio='xMidYMax meet'%3E%3Cpolygon points='120,680 100,900 140,900' fill='%230a0d1a' opacity='0.55'/%3E%3Cpolygon points='120,730 105,820 135,820' fill='%230a0d1a' opacity='0.5'/%3E%3Cpolygon points='200,700 178,900 222,900' fill='%230c0f1c' opacity='0.5'/%3E%3Cpolygon points='200,748 182,840 218,840' fill='%230c0f1c' opacity='0.45'/%3E%3Cpolygon points='310,660 285,900 335,900' fill='%230a0d1a' opacity='0.5'/%3E%3Cpolygon points='310,715 290,820 330,820' fill='%230a0d1a' opacity='0.45'/%3E%3Cpolygon points='420,690 398,900 442,900' fill='%230c0f1c' opacity='0.45'/%3E%3Cpolygon points='420,740 402,840 438,840' fill='%230c0f1c' opacity='0.4'/%3E%3Cpolygon points='530,670 508,900 552,900' fill='%230a0d1a' opacity='0.45'/%3E%3Cpolygon points='530,725 512,825 548,825' fill='%230a0d1a' opacity='0.4'/%3E%3Cpolygon points='650,700 628,900 672,900' fill='%230c0f1c' opacity='0.4'/%3E%3Cpolygon points='650,748 632,845 668,845' fill='%230c0f1c' opacity='0.35'/%3E%3Cpolygon points='760,675 738,900 782,900' fill='%230a0d1a' opacity='0.42'/%3E%3Cpolygon points='760,728 742,830 778,830' fill='%230a0d1a' opacity='0.37'/%3E%3Cpolygon points='870,695 848,900 892,900' fill='%230c0f1c' opacity='0.42'/%3E%3Cpolygon points='870,742 852,840 888,840' fill='%230c0f1c' opacity='0.37'/%3E%3Cpolygon points='980,665 958,900 1002,900' fill='%230a0d1a' opacity='0.45'/%3E%3Cpolygon points='980,718 962,820 998,820' fill='%230a0d1a' opacity='0.4'/%3E%3Cpolygon points='1090,685 1068,900 1112,900' fill='%230c0f1c' opacity='0.45'/%3E%3Cpolygon points='1090,735 1072,838 1108,838' fill='%230c0f1c' opacity='0.4'/%3E%3Cpolygon points='1200,675 1178,900 1222,900' fill='%230a0d1a' opacity='0.42'/%3E%3Cpolygon points='1200,728 1182,828 1218,828' fill='%230a0d1a' opacity='0.37'/%3E%3Cpolygon points='1310,695 1288,900 1332,900' fill='%230c0f1c' opacity='0.4'/%3E%3Cpolygon points='1310,742 1292,842 1328,842' fill='%230c0f1c' opacity='0.35'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  pointer-events: none;
+}
+
+/* Owl silhouettes — spooky watchers perched in left trees */
+.forest--owls {
+  left: 0;
+  width: 400px;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 900'%3E%3C!-- Owl 1 — big, perched on tall pine, glowing eyes --%3E%3Cg transform='translate(52,318)'%3E%3Cellipse cx='0' cy='0' rx='10' ry='13' fill='%23060810'/%3E%3Ccircle cx='0' cy='-15' r='9' fill='%23060810'/%3E%3Cpolygon points='-4,-23 -7,-31 -1,-24' fill='%23060810'/%3E%3Cpolygon points='4,-23 7,-31 1,-24' fill='%23060810'/%3E%3Ccircle cx='-3.5' cy='-15' r='3' fill='%23fbbf24' opacity='0.9'/%3E%3Ccircle cx='3.5' cy='-15' r='3' fill='%23fbbf24' opacity='0.9'/%3E%3Ccircle cx='-3.5' cy='-15' r='1.4' fill='%23030408'/%3E%3Ccircle cx='3.5' cy='-15' r='1.4' fill='%23030408'/%3E%3Cline x1='-5' y1='12' x2='-9' y2='17' stroke='%23060810' stroke-width='2'/%3E%3Cline x1='-5' y1='12' x2='-5' y2='18' stroke='%23060810' stroke-width='2'/%3E%3Cline x1='5' y1='12' x2='9' y2='17' stroke='%23060810' stroke-width='2'/%3E%3Cline x1='5' y1='12' x2='5' y2='18' stroke='%23060810' stroke-width='2'/%3E%3C/g%3E%3C!-- Owl 2 — medium, on second pine, slightly turned --%3E%3Cg transform='translate(108,408)' opacity='0.8'%3E%3Cellipse cx='0' cy='0' rx='8' ry='10' fill='%23070912'/%3E%3Ccircle cx='0' cy='-12' r='7' fill='%23070912'/%3E%3Cpolygon points='-3,-18 -5,-25 -1,-19' fill='%23070912'/%3E%3Cpolygon points='3,-18 5,-25 1,-19' fill='%23070912'/%3E%3Ccircle cx='-2.8' cy='-12' r='2.4' fill='%23fbbf24' opacity='0.8'/%3E%3Ccircle cx='2.8' cy='-12' r='2.4' fill='%23fbbf24' opacity='0.8'/%3E%3Ccircle cx='-2.8' cy='-12' r='1.1' fill='%23030408'/%3E%3Ccircle cx='2.8' cy='-12' r='1.1' fill='%23030408'/%3E%3Cline x1='-4' y1='9' x2='-7' y2='13' stroke='%23070912' stroke-width='1.5'/%3E%3Cline x1='4' y1='9' x2='7' y2='13' stroke='%23070912' stroke-width='1.5'/%3E%3C/g%3E%3C!-- Owl 3 — small, far back, barely visible --%3E%3Cg transform='translate(238,490)' opacity='0.4'%3E%3Cellipse cx='0' cy='0' rx='5' ry='7' fill='%230a0d1a'/%3E%3Ccircle cx='0' cy='-9' r='5' fill='%230a0d1a'/%3E%3Cpolygon points='-2,-13 -3,-18 -1,-14' fill='%230a0d1a'/%3E%3Cpolygon points='2,-13 3,-18 1,-14' fill='%230a0d1a'/%3E%3Ccircle cx='-1.8' cy='-9' r='1.8' fill='%23fbbf24' opacity='0.5'/%3E%3Ccircle cx='1.8' cy='-9' r='1.8' fill='%23fbbf24' opacity='0.5'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 400px 100%;
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  pointer-events: none;
+}
+
 @media (max-width: 48rem) {
   .forest--left { width: 120px; opacity: 0.6; }
   .forest--right { width: 100px; opacity: 0.6; }
   .forest--canopy { opacity: 0.5; }
+  .forest--owls { width: 160px; }
 }
 
 /* ============================================
@@ -1338,10 +1364,10 @@ button:focus-visible {
   .article-content { padding: 0 var(--space-md) var(--space-xl); }
   .featured-picks { padding: 0 var(--space-md) var(--space-xl); }
   .featured-picks__grid { grid-template-columns: 1fr; }
-  .moon { width: 50px; height: 50px; top: 4%; right: 8%; }
-  .moon__crater--1 { width: 9px; height: 9px; top: 14px; left: 11px; }
-  .moon__crater--2 { width: 6px; height: 6px; top: 26px; left: 28px; }
-  .moon__crater--3 { width: 7px; height: 7px; top: 11px; left: 30px; }
+  .moon { width: 90px; height: 90px; top: 3%; right: 5%; }
+  .moon__crater--1 { width: 14px; height: 14px; top: 22px; left: 18px; }
+  .moon__crater--2 { width: 9px; height: 9px; top: 44px; left: 46px; }
+  .moon__crater--3 { width: 11px; height: 11px; top: 19px; left: 50px; }
 }
 
 /* ---- Print ---- */
