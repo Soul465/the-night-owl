@@ -1603,6 +1603,10 @@ button:focus-visible {
   .moon__crater--1 { width: 14px; height: 14px; top: 22px; left: 18px; }
   .moon__crater--2 { width: 9px; height: 9px; top: 44px; left: 46px; }
   .moon__crater--3 { width: 11px; height: 11px; top: 19px; left: 50px; }
+  .shooting-star { display: none; }
+  .cloud { display: none; }
+  .nebula { animation: none !important; opacity: 0.5; }
+  .stars, .stars--sm, .stars--bright { animation: none !important; }
 }
 
 /* ---- Print ---- */
