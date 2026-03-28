@@ -341,7 +341,7 @@
       </div>
       <div class="spotlight__submit">
         <h3 class="spotlight__submit-title">Submit your song</h3>
-        <form class="spotlight__form" action="#" method="post">
+        <form class="spotlight__form" id="spotlight-form" action="#" method="post">
           <div class="spotlight__field">
             <label class="spotlight__field-label" for="producer-name">Artist / producer name</label>
             <input class="spotlight__input" type="text" id="producer-name" name="producer_name" placeholder="Your name or artist name" required>
@@ -351,11 +351,25 @@
             <input class="spotlight__input" type="url" id="beat-link" name="beat_link" placeholder="SoundCloud, YouTube, Spotify, or Google Drive link" required>
           </div>
           <div class="spotlight__field">
+            <label class="spotlight__field-label" for="beat-genre">Genre</label>
+            <select class="spotlight__input" id="beat-genre" name="genre" required>
+              <option value="" disabled selected>Select genre</option>
+              <option value="Trap">Trap</option>
+              <option value="Boom Bap">Boom Bap</option>
+              <option value="Drill">Drill</option>
+              <option value="R&B">R&B</option>
+              <option value="Bounce">Bounce</option>
+              <option value="Rage">Rage</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="spotlight__field">
             <label class="spotlight__field-label" for="beat-note">What should I know about this track?</label>
-            <textarea class="spotlight__textarea" id="beat-note" name="note" rows="3" placeholder="Tell me about the vibe, the story behind it, whatever you want"></textarea>
+            <textarea class="spotlight__textarea" id="beat-note" name="note" rows="3" placeholder="BPM, key, the story behind it, whatever you want me to know"></textarea>
           </div>
           <button class="spotlight__btn" type="submit">Submit for Spotlight</button>
         </form>
+        <p id="spotlight-status" class="spotlight__note" style="display:none;"></p>
         <p class="spotlight__note">Submissions are reviewed weekly. If selected, your song gets a dedicated write-up and feature on the site.</p>
       </div>
     </div>
@@ -543,6 +557,52 @@
     } else {
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
     }
+  </script>
+
+  <!-- Song Spotlight Submission Handler -->
+  <script>
+  (function() {
+    var form = document.getElementById('spotlight-form');
+    var status = document.getElementById('spotlight-status');
+    if (!form) return;
+    var ENDPOINT = 'https://script.google.com/macros/s/AKfycbx2Aqyyx2AZcnI-guUH0jQyfh1GbcN5SkJoCfS2F4z5UbOsHO_6cuJDMeZBkpV59OnEJw/exec';
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = form.querySelector('button');
+      btn.textContent = 'Submitting...';
+      btn.disabled = true;
+      status.style.display = 'none';
+
+      var data = {
+        type: 'spotlight',
+        name: form.querySelector('[name="producer_name"]').value,
+        link: form.querySelector('[name="beat_link"]').value,
+        genre: form.querySelector('[name="genre"]').value,
+        note: form.querySelector('[name="note"]').value
+      };
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function() {
+        status.textContent = "Got it. I'll give it a listen. If your track makes the cut, you'll see it featured here.";
+        status.style.color = 'var(--amber)';
+        status.style.display = 'block';
+        btn.textContent = 'Submitted';
+        form.reset();
+        setTimeout(function() { btn.textContent = 'Submit for Spotlight'; btn.disabled = false; }, 5000);
+      }).catch(function() {
+        status.textContent = "Something went wrong. Try again?";
+        status.style.color = 'var(--ember)';
+        status.style.display = 'block';
+        btn.textContent = 'Submit for Spotlight';
+        btn.disabled = false;
+      });
+    });
+  })();
   </script>
 
   <!-- Newsletter Signup Handler -->

@@ -994,6 +994,16 @@ button:focus-visible {
   min-height: 5rem;
 }
 
+select.spotlight__input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239e9589' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
 .spotlight__btn {
   padding: 0.75rem 1.5rem;
   background: linear-gradient(135deg, var(--amber), var(--amber-light));
