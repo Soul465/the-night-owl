@@ -62,7 +62,7 @@
 
 /* ---- Reset ---- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; }
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; overflow-x: hidden; }
 
 /* ---- Base ---- */
 body {
@@ -1589,7 +1589,7 @@ button:focus-visible {
 /* ---- Responsive ---- */
 @media (max-width: 48rem) {
   .site-header__inner { flex-direction: column; gap: var(--space-sm); }
-  .site-nav { gap: var(--space-md); }
+  .site-nav { gap: var(--space-sm); font-size: 0.8125rem; flex-wrap: wrap; justify-content: center; }
   .hero { padding: var(--space-2xl) var(--space-md) var(--space-xl); }
   .articles-grid { grid-template-columns: 1fr; gap: var(--space-xl); }
   .articles-section { padding: var(--space-xl) var(--space-md); }
