@@ -107,41 +107,43 @@ button:focus-visible {
   pointer-events: none;
   background: linear-gradient(
     175deg,
-    #0c0e18 0%,
-    #131729 30%,
-    #1a1537 55%,
-    #231940 75%,
-    #1a1537 100%
+    #080a14 0%,
+    #0d1025 20%,
+    #131729 40%,
+    #1a1537 60%,
+    #1e1340 80%,
+    #131729 100%
   );
+  overflow: hidden;
 }
 
-/* Stars — two layers, different sizes + speeds */
+/* Stars — three layers for depth */
 .stars {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(1.5px 1.5px at 47px 83px, rgba(255,255,255,0.7), transparent),
-    radial-gradient(1px 1px at 131px 29px, rgba(255,255,255,0.5), transparent),
-    radial-gradient(1.5px 1.5px at 207px 147px, rgba(255,255,255,0.65), transparent),
-    radial-gradient(1px 1px at 301px 63px, rgba(255,255,255,0.4), transparent),
-    radial-gradient(2px 2px at 389px 211px, rgba(255,255,255,0.8), transparent),
-    radial-gradient(1px 1px at 467px 107px, rgba(255,255,255,0.45), transparent),
-    radial-gradient(1.5px 1.5px at 521px 253px, rgba(255,255,255,0.6), transparent),
-    radial-gradient(1px 1px at 609px 43px, rgba(255,255,255,0.5), transparent),
-    radial-gradient(1.5px 1.5px at 697px 189px, rgba(255,255,255,0.55), transparent),
-    radial-gradient(1px 1px at 773px 131px, rgba(255,255,255,0.4), transparent),
-    radial-gradient(2px 2px at 151px 307px, rgba(255,255,255,0.75), transparent),
-    radial-gradient(1px 1px at 263px 371px, rgba(255,255,255,0.45), transparent),
-    radial-gradient(1.5px 1.5px at 359px 419px, rgba(255,255,255,0.6), transparent),
-    radial-gradient(1px 1px at 443px 347px, rgba(255,255,255,0.4), transparent),
-    radial-gradient(2px 2px at 567px 401px, rgba(255,255,255,0.7), transparent),
-    radial-gradient(1px 1px at 641px 311px, rgba(255,255,255,0.5), transparent),
-    radial-gradient(1.5px 1.5px at 83px 467px, rgba(255,255,255,0.55), transparent),
-    radial-gradient(1px 1px at 179px 521px, rgba(255,255,255,0.4), transparent),
-    radial-gradient(1.5px 1.5px at 347px 557px, rgba(255,255,255,0.6), transparent),
-    radial-gradient(1px 1px at 503px 503px, rgba(255,255,255,0.45), transparent);
+    radial-gradient(1.5px 1.5px at 47px 83px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 131px 29px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 207px 147px, rgba(255,255,255,0.75), transparent),
+    radial-gradient(1px 1px at 301px 63px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(2px 2px at 389px 211px, rgba(255,255,255,0.9), transparent),
+    radial-gradient(1px 1px at 467px 107px, rgba(255,255,255,0.55), transparent),
+    radial-gradient(1.5px 1.5px at 521px 253px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 609px 43px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 697px 189px, rgba(255,255,255,0.65), transparent),
+    radial-gradient(1px 1px at 773px 131px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(2px 2px at 151px 307px, rgba(255,255,255,0.85), transparent),
+    radial-gradient(1px 1px at 263px 371px, rgba(255,255,255,0.55), transparent),
+    radial-gradient(1.5px 1.5px at 359px 419px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 443px 347px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(2px 2px at 567px 401px, rgba(255,255,255,0.8), transparent),
+    radial-gradient(1px 1px at 641px 311px, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 83px 467px, rgba(255,255,255,0.65), transparent),
+    radial-gradient(1px 1px at 179px 521px, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 347px 557px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 503px 503px, rgba(255,255,255,0.55), transparent);
   background-size: 800px 600px;
-  animation: twinkle 6s ease-in-out infinite alternate;
+  animation: twinkle 5s ease-in-out infinite alternate;
 }
 
 .stars--sm {
@@ -176,8 +178,9 @@ button:focus-visible {
   border-radius: 50%;
   background: radial-gradient(circle at 35% 40%, #fef9ef, #e8dfc8);
   box-shadow:
-    0 0 30px 10px rgba(253, 249, 239, 0.12),
-    0 0 80px 30px rgba(253, 249, 239, 0.06);
+    0 0 40px 12px rgba(253, 249, 239, 0.18),
+    0 0 100px 40px rgba(253, 249, 239, 0.08),
+    0 0 200px 80px rgba(253, 249, 239, 0.03);
   animation: moonFloat 20s ease-in-out infinite;
 }
 
@@ -199,8 +202,8 @@ button:focus-visible {
 /* Clouds */
 .cloud {
   position: absolute;
-  background: linear-gradient(90deg, transparent, rgba(200, 195, 210, 0.04), rgba(200, 195, 210, 0.07), rgba(200, 195, 210, 0.04), transparent);
-  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(200, 195, 210, 0.06), rgba(200, 195, 210, 0.1), rgba(200, 195, 210, 0.06), transparent);
+  height: 4px;
   border-radius: 100px;
 }
 
@@ -229,6 +232,121 @@ button:focus-visible {
 @keyframes drift {
   from { transform: translateX(0); }
   to { transform: translateX(calc(100vw + 300px)); }
+}
+
+/* Bright feature stars — larger, with glow */
+.stars--bright {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(3px 3px at 120px 60px, rgba(255,255,255,1), rgba(255,255,255,0.3) 50%, transparent),
+    radial-gradient(2.5px 2.5px at 480px 180px, rgba(255,248,220,1), rgba(255,248,220,0.2) 50%, transparent),
+    radial-gradient(3px 3px at 750px 320px, rgba(200,220,255,1), rgba(200,220,255,0.3) 50%, transparent),
+    radial-gradient(2px 2px at 300px 420px, rgba(255,255,255,0.9), rgba(255,255,255,0.2) 50%, transparent),
+    radial-gradient(3px 3px at 620px 80px, rgba(255,240,200,1), rgba(255,240,200,0.3) 50%, transparent),
+    radial-gradient(2.5px 2.5px at 180px 520px, rgba(220,230,255,0.9), rgba(220,230,255,0.2) 50%, transparent),
+    radial-gradient(2px 2px at 550px 480px, rgba(255,255,255,0.85), transparent);
+  background-size: 900px 650px;
+  animation: twinkleBright 4s ease-in-out infinite alternate;
+}
+
+@keyframes twinkleBright {
+  0% { opacity: 0.5; }
+  25% { opacity: 0.9; }
+  50% { opacity: 0.6; }
+  75% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+/* Nebula — subtle color shifting glow */
+.nebula {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 20% 30%, rgba(88, 28, 135, 0.08), transparent),
+    radial-gradient(ellipse 500px 350px at 75% 60%, rgba(30, 58, 138, 0.06), transparent),
+    radial-gradient(ellipse 400px 300px at 50% 80%, rgba(127, 29, 29, 0.04), transparent);
+  animation: nebulaShift 30s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaShift {
+  0% {
+    opacity: 0.6;
+    transform: scale(1) rotate(0deg);
+  }
+  33% {
+    opacity: 1;
+    transform: scale(1.05) rotate(0.5deg);
+  }
+  66% {
+    opacity: 0.7;
+    transform: scale(0.98) rotate(-0.3deg);
+  }
+  100% {
+    opacity: 0.9;
+    transform: scale(1.03) rotate(0.2deg);
+  }
+}
+
+/* Shooting stars */
+.shooting-star {
+  position: absolute;
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,0.3) 40%, transparent);
+  border-radius: 100px;
+  opacity: 0;
+  transform: rotate(-35deg);
+}
+
+.shooting-star--1 {
+  top: 12%;
+  left: 30%;
+  animation: shoot 8s ease-in 2s infinite;
+}
+
+.shooting-star--2 {
+  top: 25%;
+  left: 60%;
+  width: 80px;
+  animation: shoot 12s ease-in 6s infinite;
+}
+
+.shooting-star--3 {
+  top: 8%;
+  left: 75%;
+  width: 120px;
+  animation: shoot 15s ease-in 10s infinite;
+}
+
+@keyframes shoot {
+  0% {
+    opacity: 0;
+    transform: rotate(-35deg) translateX(0);
+  }
+  2% {
+    opacity: 1;
+  }
+  6% {
+    opacity: 0;
+    transform: rotate(-35deg) translateX(300px);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(-35deg) translateX(300px);
+  }
+}
+
+/* Enhanced clouds — more visible, wispy */
+.cloud--4 {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, rgba(200, 195, 210, 0.06), rgba(200, 195, 210, 0.1), rgba(200, 195, 210, 0.06), transparent);
+  height: 4px;
+  border-radius: 100px;
+  width: 320px;
+  top: 20%;
+  left: -320px;
+  animation: drift 55s linear 15s infinite;
 }
 
 /* ============================================
@@ -1107,4 +1225,6 @@ button:focus-visible {
   .article-item, .hero__title, .hero__excerpt, .newsletter__inner { opacity: 1; transform: none; }
   .hero-eq__bar { height: 12px !important; opacity: 0.4; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .shooting-star { display: none; }
+  .nebula { animation: none; opacity: 0.7; }
 }
