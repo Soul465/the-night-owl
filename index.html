@@ -328,10 +328,11 @@
     <div class="newsletter__inner">
       <h2 class="newsletter__title">The Midnight Drop</h2>
       <p class="newsletter__desc">A weekly email with production tips, free presets, and the stuff I'm learning in the studio. Think of it like a group chat for producers — just one message a week, no spam, and you can dip anytime.</p>
-      <form class="newsletter__form" action="#" method="post">
+      <form class="newsletter__form" id="midnight-drop-form">
         <input class="newsletter__input" type="email" name="email" placeholder="your@email.com" required aria-label="Email address">
         <button class="newsletter__btn" type="submit" aria-label="Subscribe to The Midnight Drop newsletter">Subscribe</button>
       </form>
+      <p class="newsletter__status" id="newsletter-status" style="margin-top:0.75rem;font-size:0.875rem;color:var(--text-muted);display:none;"></p>
     </div>
   </section>
 
@@ -467,6 +468,44 @@
     } else {
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
     }
+  </script>
+
+  <!-- Newsletter Signup Handler -->
+  <script>
+  (function() {
+    var form = document.getElementById('midnight-drop-form');
+    var status = document.getElementById('newsletter-status');
+    var ENDPOINT = 'https://script.google.com/macros/s/AKfycbyjZfILvX2dcQ9r-CXR6155UN5KZYwImCHZCOHhGvtENXNmov38RbiKerY56VrfM3gLiA/exec';
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var email = form.querySelector('input[name="email"]').value;
+      var btn = form.querySelector('button');
+      btn.textContent = 'Joining...';
+      btn.disabled = true;
+      status.style.display = 'none';
+
+      fetch(ENDPOINT, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      }).then(function() {
+        status.textContent = "You're in. Welcome to The Midnight Drop.";
+        status.style.color = 'var(--amber)';
+        status.style.display = 'block';
+        btn.textContent = 'Subscribed';
+        form.querySelector('input[name="email"]').value = '';
+        setTimeout(function() { btn.textContent = 'Subscribe'; btn.disabled = false; }, 4000);
+      }).catch(function() {
+        status.textContent = "Something went wrong. Try again?";
+        status.style.color = 'var(--ember)';
+        status.style.display = 'block';
+        btn.textContent = 'Subscribe';
+        btn.disabled = false;
+      });
+    });
+  })();
   </script>
 
 </body>
