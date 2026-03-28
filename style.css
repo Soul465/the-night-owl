@@ -387,9 +387,21 @@ button:focus-visible {
   background-position: bottom;
 }
 
+.forest--canopy {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1400 900' preserveAspectRatio='xMidYMin meet'%3E%3C!-- Left canopy branches reaching across top --%3E%3Cpath d='M0,0 Q80,20 160,15 Q200,18 240,8 Q280,15 320,5 L320,0 Z' fill='%23060810'/%3E%3Cpath d='M0,0 L0,80 Q30,70 60,50 Q90,65 120,45 Q140,55 160,35 Q180,25 200,15 Q160,20 120,12 Q80,18 40,8 Z' fill='%23060810'/%3E%3C!-- Left branch 1 — sweeps right --%3E%3Cpath d='M0,40 Q60,35 100,55 Q140,42 180,60 Q210,50 250,68 Q270,58 300,72 Q290,65 260,55 Q230,62 200,48 Q170,58 130,40 Q100,50 60,30 Q30,38 0,30 Z' fill='%23070911' opacity='0.9'/%3E%3C!-- Left branch 2 — higher, thinner --%3E%3Cpath d='M0,15 Q40,22 80,18 Q120,28 170,20 Q200,30 240,22 Q220,25 190,18 Q150,24 110,16 Q70,20 30,12 Z' fill='%23080a14' opacity='0.8'/%3E%3C!-- Left leaf clusters --%3E%3Cellipse cx='100' cy='48' rx='25' ry='12' fill='%23060810' opacity='0.85'/%3E%3Cellipse cx='160' cy='38' rx='20' ry='10' fill='%23070911' opacity='0.75'/%3E%3Cellipse cx='220' cy='55' rx='22' ry='11' fill='%23080a14' opacity='0.65'/%3E%3Cellipse cx='280' cy='62' rx='18' ry='9' fill='%23090b15' opacity='0.5'/%3E%3Cellipse cx='50' cy='60' rx='30' ry='14' fill='%23060810' opacity='0.9'/%3E%3C!-- Right canopy branches reaching across top --%3E%3Cpath d='M1400,0 Q1320,20 1240,15 Q1200,18 1160,8 Q1120,15 1080,5 L1080,0 Z' fill='%23060810'/%3E%3Cpath d='M1400,0 L1400,80 Q1370,70 1340,50 Q1310,65 1280,45 Q1260,55 1240,35 Q1220,25 1200,15 Q1240,20 1280,12 Q1320,18 1360,8 Z' fill='%23060810'/%3E%3C!-- Right branch 1 --%3E%3Cpath d='M1400,40 Q1340,35 1300,55 Q1260,42 1220,60 Q1190,50 1150,68 Q1130,58 1100,72 Q1110,65 1140,55 Q1170,62 1200,48 Q1230,58 1270,40 Q1300,50 1340,30 Q1370,38 1400,30 Z' fill='%23070911' opacity='0.9'/%3E%3C!-- Right branch 2 --%3E%3Cpath d='M1400,15 Q1360,22 1320,18 Q1280,28 1230,20 Q1200,30 1160,22 Q1180,25 1210,18 Q1250,24 1290,16 Q1330,20 1370,12 Z' fill='%23080a14' opacity='0.8'/%3E%3C!-- Right leaf clusters --%3E%3Cellipse cx='1300' cy='48' rx='25' ry='12' fill='%23060810' opacity='0.85'/%3E%3Cellipse cx='1240' cy='38' rx='20' ry='10' fill='%23070911' opacity='0.75'/%3E%3Cellipse cx='1180' cy='55' rx='22' ry='11' fill='%23080a14' opacity='0.65'/%3E%3Cellipse cx='1120' cy='62' rx='18' ry='9' fill='%23090b15' opacity='0.5'/%3E%3Cellipse cx='1350' cy='60' rx='30' ry='14' fill='%23060810' opacity='0.9'/%3E%3C!-- Thin wispy branches across the center top — sparse, not blocking moon --%3E%3Cpath d='M350,5 Q400,12 450,6 Q500,10 550,4' stroke='%23080a14' stroke-width='2' fill='none' opacity='0.4'/%3E%3Cpath d='M850,5 Q900,12 950,6 Q1000,10 1050,4' stroke='%23080a14' stroke-width='2' fill='none' opacity='0.4'/%3E%3C!-- Scattered leaves drifting across top --%3E%3Cellipse cx='400' cy='12' rx='10' ry='5' fill='%23080a14' opacity='0.35' transform='rotate(15,400,12)'/%3E%3Cellipse cx='600' cy='8' rx='8' ry='4' fill='%23090b15' opacity='0.25' transform='rotate(-10,600,8)'/%3E%3Cellipse cx='900' cy='10' rx='9' ry='4' fill='%23080a14' opacity='0.3' transform='rotate(20,900,10)'/%3E%3Cellipse cx='1050' cy='14' rx='7' ry='3' fill='%23090b15' opacity='0.2' transform='rotate(-15,1050,14)'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
 @media (max-width: 48rem) {
   .forest--left { width: 120px; opacity: 0.6; }
   .forest--right { width: 100px; opacity: 0.6; }
+  .forest--canopy { opacity: 0.5; }
 }
 
 /* ============================================
