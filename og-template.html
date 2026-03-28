@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px;
+    height: 630px;
+    background: linear-gradient(175deg, #080a14 0%, #0d1025 20%, #131729 40%, #1a1537 60%, #1e1340 80%, #131729 100%);
+    font-family: Georgia, serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+  .stars {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 30% 15%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 50% 40%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1.5px 1.5px at 70% 10%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 85% 30%, rgba(255,255,255,0.6), transparent),
+      radial-gradient(1px 1px at 20% 60%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 60% 70%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1px 1px at 90% 55%, rgba(255,255,255,0.5), transparent),
+      radial-gradient(1px 1px at 40% 85%, rgba(255,255,255,0.3), transparent),
+      radial-gradient(1.5px 1.5px at 75% 80%, rgba(255,255,255,0.4), transparent);
+  }
+  .moon {
+    position: absolute;
+    top: 40px;
+    right: 80px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fdf4dc, #f5e6b8, #e8d5a0);
+    box-shadow: 0 0 40px rgba(253, 244, 220, 0.3), 0 0 80px rgba(253, 244, 220, 0.1);
+  }
+  .content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 80px;
+  }
+  .owl {
+    font-size: 64px;
+    margin-bottom: 16px;
+  }
+  .title {
+    font-size: 72px;
+    font-weight: 900;
+    color: #e8e4dc;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+  .tagline {
+    font-family: -apple-system, sans-serif;
+    font-size: 26px;
+    color: #d97706;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .line {
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #d97706, transparent);
+    margin: 24px auto;
+  }
+  .sub {
+    font-family: -apple-system, sans-serif;
+    font-size: 18px;
+    color: #9e9589;
+    margin-top: 12px;
+    letter-spacing: 0.3px;
+  }
+  .bottom-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #d97706, #f59e0b, #d97706, transparent);
+  }
+</style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="moon"></div>
+  <div class="content">
+    <div class="owl">&#x1F989;</div>
+    <div class="title">The Night Owl</div>
+    <div class="line"></div>
+    <div class="tagline">The Culture. The Business. The Sound.</div>
+    <div class="sub">Hip-Hop From the Inside Out &mdash; By Cam / Gramercy</div>
+  </div>
+  <div class="bottom-bar"></div>
+</body>
+</html>
