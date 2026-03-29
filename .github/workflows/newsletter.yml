@@ -26,7 +26,8 @@ jobs:
             exit 0
           fi
 
-          for ARTICLE_FILE in $NEW_ARTICLES; do
+          echo "$NEW_ARTICLES" | while IFS= read -r ARTICLE_FILE; do
+            [ -z "$ARTICLE_FILE" ] && continue
             echo "New article found: $ARTICLE_FILE"
 
             # Extract title from <h1> tag
@@ -53,6 +54,7 @@ jobs:
               -H "Content-Type: application/json" \
               -d "{
                 \"type\": \"send_newsletter\",
+                \"secret\": $(echo "${{ secrets.NEWSLETTER_SECRET }}" | jq -Rs .),
                 \"title\": $(echo "$TITLE" | jq -Rs .),
                 \"excerpt\": $(echo "$EXCERPT" | jq -Rs .),
                 \"category\": $(echo "$CATEGORY" | jq -Rs .),

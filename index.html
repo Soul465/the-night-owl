@@ -27,6 +27,7 @@
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 </head>
 <body>
+  <script>if(window.top!==window.self){window.top.location=window.self.location;}</script>
   <a href="#production" class="skip-link">Skip to content</a>
 
   <!-- Night Sky Background -->
@@ -693,8 +694,18 @@
       });
     }
 
+    // ---- Like rate limiting (1 action per 2 seconds per slug) ----
+    var likeCooldowns = {};
+    function isLikeCooling(slug) {
+      var now = Date.now();
+      if (likeCooldowns[slug] && now - likeCooldowns[slug] < 2000) return true;
+      likeCooldowns[slug] = now;
+      return false;
+    }
+
     // ---- Like an article ----
     function likeArticle(slug, btn) {
+      if (isLikeCooling(slug)) return;
       var count = btn.querySelector('.article-item__like-count');
       var current = parseInt(count.textContent) || 0;
 
