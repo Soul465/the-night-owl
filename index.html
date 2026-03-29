@@ -176,7 +176,7 @@
   </section>
 
   <!-- Ad: Top (after filters, above grid) -->
-  <div style="text-align:center;margin:24px auto;max-width:728px;min-height:0;overflow:hidden;">
+  <div class="ad-container" style="text-align:center;margin:0 auto;max-width:728px;max-height:0;overflow:hidden;transition:max-height .3s;">
     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8468080886390821" data-ad-slot="8479912438" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
@@ -456,7 +456,7 @@
   </section>
 
   <!-- Ad: Bottom (after spotlight, before about) -->
-  <div style="text-align:center;margin:24px auto;max-width:728px;min-height:0;overflow:hidden;">
+  <div class="ad-container" style="text-align:center;margin:0 auto;max-width:728px;max-height:0;overflow:hidden;transition:max-height .3s;">
     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8468080886390821" data-ad-slot="2768624013" data-ad-format="horizontal" data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
@@ -929,6 +929,20 @@
       });
     });
   })();
+  </script>
+
+  <script>
+  // Reveal ad containers only when AdSense fills them
+  setTimeout(function(){
+    var ads = document.querySelectorAll('.ad-container');
+    ads.forEach(function(c){
+      var ins = c.querySelector('ins.adsbygoogle');
+      if(ins && ins.offsetHeight > 0 && ins.getAttribute('data-ad-status') === 'filled'){
+        c.style.maxHeight = '400px';
+        c.style.margin = '24px auto';
+      }
+    });
+  }, 3000);
   </script>
 
 </body>

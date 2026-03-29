@@ -76,7 +76,7 @@
       <p>For more control, use <strong>Slicex</strong>. It auto-detects transients and lets you map each chop to a different key. This is better for drum breaks where you want to isolate individual hits.</p>
 
     <!-- Ad: Mid-Article -->
-    <div style="text-align:center;margin:32px auto;">
+    <div class="ad-container" style="text-align:center;margin:0 auto;max-height:0;overflow:hidden;transition:max-height .3s;">
       <ins class="adsbygoogle" style="display:block;text-align:center" data-ad-layout="in-article" data-ad-format="fluid" data-ad-client="ca-pub-8468080886390821" data-ad-slot="3227585757"></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
@@ -154,5 +154,17 @@
   }
 }
 </script>
+  <script>
+  setTimeout(function(){
+    var ads = document.querySelectorAll('.ad-container');
+    ads.forEach(function(c){
+      var ins = c.querySelector('ins.adsbygoogle');
+      if(ins && ins.offsetHeight > 0 && ins.getAttribute('data-ad-status') === 'filled'){
+        c.style.maxHeight = '400px';
+        c.style.margin = '32px auto';
+      }
+    });
+  }, 3000);
+  </script>
 </body>
 </html>
