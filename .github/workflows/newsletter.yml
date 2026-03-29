@@ -1,0 +1,63 @@
+name: Send Newsletter on New Article
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'articles/*.html'
+
+jobs:
+  notify-subscribers:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect new article and send newsletter
+        run: |
+          # Find newly added article files in this push
+          NEW_ARTICLES=$(git diff --name-only --diff-filter=A HEAD~1 HEAD -- 'articles/*.html' | grep -v 'song-spotlight-template.html' || true)
+
+          if [ -z "$NEW_ARTICLES" ]; then
+            echo "No new articles detected — skipping newsletter"
+            exit 0
+          fi
+
+          for ARTICLE_FILE in $NEW_ARTICLES; do
+            echo "New article found: $ARTICLE_FILE"
+
+            # Extract title from <h1> tag
+            TITLE=$(grep -oP '<h1[^>]*>\K[^<]+' "$ARTICLE_FILE" | head -1 | sed 's/&amp;/\&/g; s/&mdash;/—/g; s/&ldquo;/"/g; s/&rdquo;/"/g; s/&#x201C;/"/g; s/&#x201D;/"/g')
+
+            # Extract meta description for excerpt
+            EXCERPT=$(grep -oP 'name="description" content="\K[^"]+' "$ARTICLE_FILE" | head -1)
+
+            # Extract category from article-header__label
+            CATEGORY=$(grep -oP 'article-header__label">\K[^<]+' "$ARTICLE_FILE" | head -1 | sed 's/ &middot; / · /g')
+
+            # Build the article URL
+            SLUG=$(basename "$ARTICLE_FILE")
+            URL="https://soul465.github.io/the-night-owl/articles/${SLUG}"
+
+            echo "Title: $TITLE"
+            echo "Excerpt: $EXCERPT"
+            echo "Category: $CATEGORY"
+            echo "URL: $URL"
+
+            # Call the Apps Script endpoint to send the newsletter
+            RESPONSE=$(curl -s -L -o /dev/null -w "%{http_code}" \
+              -X POST "${{ secrets.APPS_SCRIPT_URL }}" \
+              -H "Content-Type: application/json" \
+              -d "{
+                \"type\": \"send_newsletter\",
+                \"title\": $(echo "$TITLE" | jq -Rs .),
+                \"excerpt\": $(echo "$EXCERPT" | jq -Rs .),
+                \"category\": $(echo "$CATEGORY" | jq -Rs .),
+                \"url\": $(echo "$URL" | jq -Rs .)
+              }")
+
+            echo "Apps Script response code: $RESPONSE"
+          done
