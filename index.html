@@ -1023,23 +1023,18 @@
       return;
     }
     document.body.classList.add('intro-active');
-    // Phase 1: Eyes open via clip-path (instant trigger)
+    // Single trigger — eyes open then zoom is one fluid motion
     requestAnimationFrame(function() {
-      intro.classList.add('intro--opening');
+      intro.classList.add('intro--go');
     });
-    // Phase 2: Zoom through right eye (after eyes fully open)
-    setTimeout(function() {
-      intro.classList.add('intro--zooming');
-    }, 900);
-    // Phase 3: Fade out overlay
+    // Fade out after zoom (eyes open 0.5s + zoom 1.4s)
     setTimeout(function() {
       intro.classList.add('intro--done');
       document.body.classList.remove('intro-active');
-    }, 1600);
-    // Cleanup: remove from DOM
+    }, 1800);
     setTimeout(function() {
       intro.remove();
-    }, 2100);
+    }, 2300);
   })();
   </script>
 
