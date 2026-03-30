@@ -30,6 +30,25 @@
 </head>
 <body>
   <script>if(window.top!==window.self){window.top.location=window.self.location;}</script>
+
+  <!-- Intro: Owl Eye Opening -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro__eyes">
+      <div class="intro__eye intro__eye--left">
+        <div class="intro__iris"></div>
+        <div class="intro__pupil"></div>
+        <div class="intro__lid intro__lid--top"></div>
+        <div class="intro__lid intro__lid--bottom"></div>
+      </div>
+      <div class="intro__eye intro__eye--right">
+        <div class="intro__iris"></div>
+        <div class="intro__pupil"></div>
+        <div class="intro__lid intro__lid--top"></div>
+        <div class="intro__lid intro__lid--bottom"></div>
+      </div>
+    </div>
+  </div>
+
   <a href="#production" class="skip-link">Skip to content</a>
 
   <!-- Night Sky Background -->
@@ -997,6 +1016,34 @@
       }
     });
   }, 3000);
+  </script>
+
+  <!-- Intro Animation Controller -->
+  <script>
+  (function() {
+    var intro = document.getElementById('intro');
+    if (!intro || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      if (intro) intro.remove();
+      return;
+    }
+    document.body.classList.add('intro-active');
+    // Phase 1: Eyes open (immediate)
+    requestAnimationFrame(function() {
+      intro.classList.add('intro--opening');
+    });
+    // Phase 2: Zoom into pupil after eyes open
+    setTimeout(function() {
+      intro.classList.add('intro--zooming');
+    }, 1800);
+    // Phase 3: Fade out and cleanup
+    setTimeout(function() {
+      intro.classList.add('intro--done');
+      document.body.classList.remove('intro-active');
+    }, 2800);
+    setTimeout(function() {
+      intro.remove();
+    }, 3500);
+  })();
   </script>
 
 </body>
