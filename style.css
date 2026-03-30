@@ -7,24 +7,25 @@
 
 /* ---- Custom Properties ---- */
 :root {
-  --night-deep: #10121c;
-  --night-mid: #181b2e;
-  --night-surface: #1f2337;
-  --night-elevated: #272b42;
-  --dusk-purple: #2d2549;
-  --text-bright: #e8e4dc;
-  --text-body: #bfb9ad;
-  --text-muted: #9e9589;
-  --text-faint: #7a746b;
-  --amber: #d97706;
-  --amber-light: #f59e0b;
-  --amber-dim: #92400e;
-  --ember: #dc2626;
-  --sage: #65a30d;
-  --lavender: #a78bfa;
-  --moon-glow: rgba(253, 244, 220, 0.08);
-  --border: rgba(255, 255, 255, 0.06);
-  --border-strong: rgba(255, 255, 255, 0.1);
+  /* Nighttime palette — nothing is bright at night */
+  --night-deep: #0b0d15;
+  --night-mid: #131624;
+  --night-surface: #191c2e;
+  --night-elevated: #20243a;
+  --dusk-purple: #241e3d;
+  --text-bright: #d4d0c8;
+  --text-body: #a8a297;
+  --text-muted: #8a847b;
+  --text-faint: #6b665e;
+  --amber: #c46a06;
+  --amber-light: #d9880a;
+  --amber-dim: #7a3405;
+  --ember: #b82020;
+  --sage: #527d0a;
+  --lavender: #8b73d4;
+  --moon-glow: rgba(253, 244, 220, 0.05);
+  --border: rgba(255, 255, 255, 0.04);
+  --border-strong: rgba(255, 255, 255, 0.07);
 
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Source Sans 3', -apple-system, sans-serif;
@@ -2289,7 +2290,7 @@ body::after {
   }
 }
 
-/* ---- Intro: Waking up in the forest ---- */
+/* ---- Intro: Video-based ---- */
 .intro {
   position: fixed;
   inset: 0;
@@ -2299,330 +2300,19 @@ body::after {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  will-change: opacity;
 }
 .intro--done {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.35s ease;
 }
 body.intro-active { overflow: hidden; }
-
-/* ===== LEAVES — dense nighttime foliage (near-black greens) ===== */
-.intro__leaves {
-  position: absolute;
-  z-index: 3;
-}
-/* Shared pseudo-elements for layered leaf clusters */
-.intro__leaves::before, .intro__leaves::after {
-  content: '';
-  position: absolute;
-  border-radius: 50%;
+.intro__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* --- Corner clusters: large, dense --- */
-.intro__leaves--tl {
-  top: -5vh; left: -5vw;
-  width: 50vw; height: 48vh;
-  background: radial-gradient(ellipse 80% 60% at 65% 55%, #060d05 0%, #040904 50%, transparent 80%);
-  border-radius: 0 0 70% 0;
-}
-.intro__leaves--tl::before { width: 65%; height: 50%; top: 15%; left: 25%; background: radial-gradient(ellipse, #070e06, transparent); transform: rotate(-12deg); }
-.intro__leaves--tl::after  { width: 45%; height: 60%; top: 0; left: 50%; background: radial-gradient(ellipse, #050b04, transparent); transform: rotate(8deg); }
-
-.intro__leaves--tr {
-  top: -5vh; right: -5vw;
-  width: 50vw; height: 48vh;
-  background: radial-gradient(ellipse 80% 60% at 35% 55%, #060d05 0%, #040904 50%, transparent 80%);
-  border-radius: 0 0 0 70%;
-}
-.intro__leaves--tr::before { width: 60%; height: 55%; top: 10%; right: 20%; background: radial-gradient(ellipse, #070e06, transparent); transform: rotate(15deg); }
-.intro__leaves--tr::after  { width: 50%; height: 45%; top: 5%; right: 45%; background: radial-gradient(ellipse, #050b04, transparent); transform: rotate(-10deg); }
-
-.intro__leaves--bl {
-  bottom: -5vh; left: -5vw;
-  width: 50vw; height: 45vh;
-  background: radial-gradient(ellipse 75% 55% at 65% 45%, #050c04 0%, #040804 50%, transparent 80%);
-  border-radius: 0 70% 0 0;
-}
-.intro__leaves--bl::before { width: 55%; height: 50%; bottom: 15%; left: 30%; background: radial-gradient(ellipse, #060d05, transparent); transform: rotate(10deg); }
-.intro__leaves--bl::after  { width: 40%; height: 65%; bottom: 0; left: 55%; background: radial-gradient(ellipse, #040a03, transparent); transform: rotate(-15deg); }
-
-.intro__leaves--br {
-  bottom: -5vh; right: -5vw;
-  width: 50vw; height: 45vh;
-  background: radial-gradient(ellipse 75% 55% at 35% 45%, #050c04 0%, #040804 50%, transparent 80%);
-  border-radius: 70% 0 0 0;
-}
-.intro__leaves--br::before { width: 55%; height: 50%; bottom: 20%; right: 25%; background: radial-gradient(ellipse, #060d05, transparent); transform: rotate(-8deg); }
-.intro__leaves--br::after  { width: 45%; height: 55%; bottom: 5%; right: 45%; background: radial-gradient(ellipse, #040a03, transparent); transform: rotate(12deg); }
-
-/* --- Edge fills: top, bottom, left, right --- */
-.intro__leaves--t {
-  top: -3vh; left: 20vw; right: 20vw;
-  height: 22vh;
-  background: radial-gradient(ellipse 100% 80% at 50% 0%, #050b04 0%, transparent 70%);
-}
-.intro__leaves--t::before { width: 40%; height: 80%; top: 0; left: 10%; background: radial-gradient(ellipse, #060d05, transparent); }
-.intro__leaves--t::after  { width: 35%; height: 70%; top: 0; right: 15%; background: radial-gradient(ellipse, #050c04, transparent); }
-
-.intro__leaves--b {
-  bottom: -3vh; left: 20vw; right: 20vw;
-  height: 20vh;
-  background: radial-gradient(ellipse 100% 80% at 50% 100%, #050b04 0%, transparent 70%);
-}
-.intro__leaves--b::before { width: 45%; height: 75%; bottom: 0; left: 8%; background: radial-gradient(ellipse, #060d05, transparent); }
-.intro__leaves--b::after  { width: 40%; height: 65%; bottom: 0; right: 12%; background: radial-gradient(ellipse, #040a03, transparent); }
-
-.intro__leaves--l {
-  top: 20vh; bottom: 20vh; left: -3vw;
-  width: 18vw;
-  background: radial-gradient(ellipse 80% 100% at 0% 50%, #050b04 0%, transparent 70%);
-}
-.intro__leaves--l::before { width: 80%; height: 40%; top: 10%; left: 0; background: radial-gradient(ellipse, #060d05, transparent); }
-.intro__leaves--l::after  { width: 70%; height: 35%; bottom: 15%; left: 0; background: radial-gradient(ellipse, #040a03, transparent); }
-
-.intro__leaves--r {
-  top: 20vh; bottom: 20vh; right: -3vw;
-  width: 18vw;
-  background: radial-gradient(ellipse 80% 100% at 100% 50%, #050b04 0%, transparent 70%);
-}
-.intro__leaves--r::before { width: 80%; height: 40%; top: 15%; right: 0; background: radial-gradient(ellipse, #060d05, transparent); }
-.intro__leaves--r::after  { width: 70%; height: 35%; bottom: 10%; right: 0; background: radial-gradient(ellipse, #040a03, transparent); }
-
-/* ===== VIGNETTE — heavy darkness at edges like nighttime ===== */
-.intro__vignette {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: radial-gradient(ellipse 55% 55% at 50% 48%, transparent 0%, rgba(4,5,6,0.3) 50%, rgba(4,5,6,0.85) 80%, #040506 100%);
-  pointer-events: none;
-}
-
-/* ===== BRANCHES — dark, thin, organic ===== */
-.intro__branch {
-  position: absolute;
-  z-index: 4;
-  width: 2px;
-  background: linear-gradient(to bottom, #0d150b, transparent);
-  transform-origin: top center;
-}
-.intro__branch--l  { top: 0; left: 16vw; height: 38vh; transform: rotate(12deg); }
-.intro__branch--r  { top: 0; right: 16vw; height: 35vh; transform: rotate(-14deg); }
-.intro__branch--cl { top: 0; left: 35vw; height: 22vh; transform: rotate(5deg); }
-.intro__branch--cr { top: 0; right: 35vw; height: 25vh; transform: rotate(-7deg); }
-.intro__branch::before {
-  content: '';
-  position: absolute;
-  width: 2px;
-  height: 35%;
-  background: linear-gradient(to bottom, #0d150b, transparent);
-  top: 45%;
-}
-.intro__branch--l::before  { left: -12px; transform: rotate(-22deg); }
-.intro__branch--r::before  { right: -12px; transform: rotate(22deg); }
-.intro__branch--cl::before { left: -10px; transform: rotate(-30deg); }
-.intro__branch--cr::before { right: -10px; transform: rotate(28deg); }
-
-/* ===== OWL — centered face silhouette ===== */
-.intro__owl {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  will-change: transform, opacity;
-}
-
-/* Face disc — the round face shape */
-.intro__face {
-  position: absolute;
-  width: clamp(200px, 38vw, 340px);
-  height: clamp(180px, 34vw, 300px);
-  background: radial-gradient(ellipse at 50% 45%,
-    #1a1510 0%,
-    #12100c 40%,
-    #0a0908 70%,
-    transparent 85%
-  );
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -55%);
-  z-index: -1;
-}
-
-/* Ear tufts */
-.intro__ear {
-  position: absolute;
-  width: 0;
-  height: 0;
-  z-index: -1;
-  border-left: 18px solid transparent;
-  border-right: 18px solid transparent;
-  border-bottom: 45px solid #0e0c09;
-}
-.intro__ear--l { top: -30px; left: -60px; transform: rotate(-15deg); }
-.intro__ear--r { top: -30px; right: -60px; transform: rotate(15deg); }
-
-/* Brow ridges — the V-shape above eyes */
-.intro__brow {
-  position: absolute;
-  width: 55px;
-  height: 3px;
-  background: #1c1610;
-  top: -8px;
-  border-radius: 2px;
-}
-.intro__brow--l { left: -30px; transform: rotate(-12deg); }
-.intro__brow--r { right: -30px; transform: rotate(12deg); }
-
-/* Beak */
-.intro__beak {
-  width: 16px;
-  height: 10px;
-  background: #3d3020;
-  border-radius: 0 0 50% 50%;
-  margin-top: 6px;
-}
-
-/* ===== EYES ===== */
-.intro__eyes {
-  display: flex;
-  gap: clamp(1.2rem, 4vw, 3rem);
-  will-change: transform, opacity;
-}
-
-.intro__eye {
-  position: relative;
-  width: clamp(70px, 14vw, 120px);
-  height: clamp(70px, 14vw, 120px);
-  border-radius: 50%;
-  clip-path: ellipse(50% 2% at 50% 50%);
-  will-change: clip-path;
-  /* Dark ring around each eye */
-  box-shadow: 0 0 0 4px #0a0908, 0 0 20px 8px rgba(0,0,0,0.6);
-}
-
-.intro__iris {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle, transparent 22%, #78350f 24%, transparent 26%),
-    radial-gradient(circle, transparent 30%, rgba(217,119,6,0.4) 31%, transparent 33%),
-    radial-gradient(circle,
-      #0a0a0e 20%, #451a03 24%, #92400e 30%, #b45309 38%,
-      #d97706 44%, #f59e0b 50%, #d97706 56%, #b45309 62%,
-      #78350f 68%, #1c1917 72%, #0a0a0e 76%
-    );
-  filter: brightness(0.7);
-  will-change: filter;
-}
-
-.intro__pupil {
-  position: absolute;
-  inset: 28%;
-  border-radius: 50%;
-  background: radial-gradient(circle, #020204 55%, #0a0a12 75%, transparent 100%);
-  z-index: 1;
-  box-shadow: 0 0 12px 4px rgba(0,0,0,0.8);
-}
-
-/* Specular highlight */
-.intro__eye::after {
-  content: '';
-  position: absolute;
-  width: 16%; height: 16%;
-  top: 22%; left: 28%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.65) 0%, transparent 70%);
-  z-index: 2;
-  opacity: 0;
-}
-
-/* ===== ANIMATION: One fluid motion ===== */
-
-/* Foliage drifts out as you zoom through */
-.intro--go .intro__leaves {
-  animation: leavesDrift 1.8s cubic-bezier(0.4, 0, 0.2, 1) 1s forwards;
-}
-.intro--go .intro__vignette {
-  animation: vignetteFade 1.6s ease 1.2s forwards;
-}
-.intro--go .intro__branch {
-  animation: branchFade 1.4s ease 1s forwards;
-}
-
-/* Eyes open */
-.intro--go .intro__eye {
-  animation: eyeOpen 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-.intro--go .intro__eye--right {
-  animation-delay: 0.04s;
-}
-.intro--go .intro__iris {
-  animation: irisFlash 0.5s ease 0.12s forwards;
-}
-.intro--go .intro__eye::after {
-  animation: specIn 0.2s ease 0.25s forwards;
-}
-
-/* Hold for a beat — let the owl stare — then zoom */
-.intro--go .intro__owl {
-  animation: pullIntoOwl 1.2s cubic-bezier(0.5, 0, 0, 1) 1.55s forwards;
-}
-
-/* ===== KEYFRAMES ===== */
-@keyframes eyeOpen {
-  0%   { clip-path: ellipse(50% 1% at 50% 50%); }
-  40%  { clip-path: ellipse(50% 42% at 50% 50%); }
-  100% { clip-path: ellipse(50% 50% at 50% 50%); }
-}
-
-@keyframes irisFlash {
-  0%   { filter: brightness(0.7); }
-  50%  { filter: brightness(1.5) drop-shadow(0 0 15px rgba(245,158,11,0.5)); }
-  100% { filter: brightness(1.15) drop-shadow(0 0 6px rgba(217,119,6,0.2)); }
-}
-
-@keyframes specIn {
-  to { opacity: 1; }
-}
-
-@keyframes pullIntoOwl {
-  0%   { transform: scale(1); opacity: 1; }
-  100% { transform: scale(22); opacity: 0; }
-}
-
-@keyframes leavesDrift {
-  0%   { transform: scale(1); opacity: 1; }
-  100% { transform: scale(1.4); opacity: 0; }
-}
-
-@keyframes vignetteFade {
-  0%   { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-@keyframes branchFade {
-  0%   { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-/* ===== Mobile ===== */
-@media (max-width: 600px) {
-  .intro__eyes { gap: 0.8rem; }
-  .intro__eye { width: 55px; height: 55px; }
-  .intro__face { width: 160px; height: 140px; }
-  .intro__branch--cl, .intro__branch--cr { display: none; }
-  .intro__leaves--l, .intro__leaves--r { width: 25vw; }
-  .intro__ear { border-bottom-width: 28px; border-left-width: 11px; border-right-width: 11px; }
-  .intro__ear--l { left: -35px; top: -20px; }
-  .intro__ear--r { right: -35px; top: -20px; }
-}
-
-/* ---- Reduced Motion ---- */
 /* ---- Mobile: hide cursor effects ---- */
 @media (hover: none) {
   body::after { display: none; }

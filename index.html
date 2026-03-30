@@ -31,43 +31,12 @@
 <body>
   <script>if(window.top!==window.self){window.top.location=window.self.location;}</script>
 
-  <!-- Intro: Waking up in the forest, owl staring at you -->
+  <!-- Intro: Remotion-rendered cinematic video -->
   <div class="intro" id="intro" aria-hidden="true">
-    <!-- Dense nighttime foliage canopy -->
-    <div class="intro__leaves intro__leaves--tl"></div>
-    <div class="intro__leaves intro__leaves--tr"></div>
-    <div class="intro__leaves intro__leaves--bl"></div>
-    <div class="intro__leaves intro__leaves--br"></div>
-    <div class="intro__leaves intro__leaves--t"></div>
-    <div class="intro__leaves intro__leaves--b"></div>
-    <div class="intro__leaves intro__leaves--l"></div>
-    <div class="intro__leaves intro__leaves--r"></div>
-    <div class="intro__branch intro__branch--l"></div>
-    <div class="intro__branch intro__branch--r"></div>
-    <div class="intro__branch intro__branch--cl"></div>
-    <div class="intro__branch intro__branch--cr"></div>
-    <!-- Vignette — darkness closing in at edges like night vision -->
-    <div class="intro__vignette"></div>
-    <!-- Owl face silhouette with eyes -->
-    <div class="intro__owl">
-      <div class="intro__face">
-        <div class="intro__ear intro__ear--l"></div>
-        <div class="intro__ear intro__ear--r"></div>
-        <div class="intro__brow intro__brow--l"></div>
-        <div class="intro__brow intro__brow--r"></div>
-      </div>
-      <div class="intro__eyes">
-        <div class="intro__eye intro__eye--left">
-          <div class="intro__iris"></div>
-          <div class="intro__pupil"></div>
-        </div>
-        <div class="intro__eye intro__eye--right">
-          <div class="intro__iris"></div>
-          <div class="intro__pupil"></div>
-        </div>
-      </div>
-      <div class="intro__beak"></div>
-    </div>
+    <video class="intro__video" id="intro-video" muted playsinline preload="auto">
+      <source src="intro.webm" type="video/webm">
+      <source src="intro.mp4" type="video/mp4">
+    </video>
   </div>
 
   <a href="#production" class="skip-link">Skip to content</a>
@@ -1048,18 +1017,23 @@
       return;
     }
     document.body.classList.add('intro-active');
-    // Eyes open, hold for a beat so you feel the owl staring, then zoom
-    requestAnimationFrame(function() {
-      intro.classList.add('intro--go');
-    });
-    // Fade out after hold + zoom
-    setTimeout(function() {
-      intro.classList.add('intro--done');
-      document.body.classList.remove('intro-active');
-    }, 2800);
-    setTimeout(function() {
-      intro.remove();
-    }, 3300);
+    var video = document.getElementById('intro-video');
+    if (video) {
+      video.play().catch(function() {});
+      video.addEventListener('ended', function() {
+        intro.classList.add('intro--done');
+        document.body.classList.remove('intro-active');
+        setTimeout(function() { intro.remove(); }, 400);
+      });
+      // Fallback if video stalls
+      setTimeout(function() {
+        if (!intro.classList.contains('intro--done')) {
+          intro.classList.add('intro--done');
+          document.body.classList.remove('intro-active');
+          setTimeout(function() { intro.remove(); }, 400);
+        }
+      }, 5000);
+    }
   })();
   </script>
 
