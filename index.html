@@ -1048,18 +1048,18 @@
       return;
     }
     document.body.classList.add('intro-active');
-    // Single trigger — eyes open then zoom is one fluid motion
+    // Eyes open, hold for a beat so you feel the owl staring, then zoom
     requestAnimationFrame(function() {
       intro.classList.add('intro--go');
     });
-    // Fade out after zoom (eyes open 0.5s + zoom 1.4s)
+    // Fade out after hold + zoom
     setTimeout(function() {
       intro.classList.add('intro--done');
       document.body.classList.remove('intro-active');
-    }, 1800);
+    }, 2800);
     setTimeout(function() {
       intro.remove();
-    }, 2300);
+    }, 3300);
   })();
   </script>
 
