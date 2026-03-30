@@ -2308,83 +2308,121 @@ body::after {
 }
 body.intro-active { overflow: hidden; }
 
-/* ===== LEAVES — organic shapes framing the viewport ===== */
+/* ===== LEAVES — dense nighttime foliage (near-black greens) ===== */
 .intro__leaves {
   position: absolute;
-  width: 45vw;
-  height: 45vh;
   z-index: 3;
-  opacity: 0.85;
 }
-/* Each corner gets overlapping leaf-like ellipses via box-shadows */
-.intro__leaves--tl {
-  top: -8vh; left: -8vw;
-  background: radial-gradient(ellipse 70% 50% at 70% 60%, #0a1a08, transparent);
-  border-radius: 0 0 80% 0;
-}
-.intro__leaves--tl::before, .intro__leaves--tl::after,
-.intro__leaves--tr::before, .intro__leaves--tr::after,
-.intro__leaves--bl::before, .intro__leaves--bl::after,
-.intro__leaves--br::before, .intro__leaves--br::after {
+/* Shared pseudo-elements for layered leaf clusters */
+.intro__leaves::before, .intro__leaves::after {
   content: '';
   position: absolute;
   border-radius: 50%;
-  background: #071206;
 }
-.intro__leaves--tl::before { width: 60%; height: 45%; top: 20%; left: 30%; background: #0d1f0a; transform: rotate(-15deg); }
-.intro__leaves--tl::after  { width: 40%; height: 55%; top: 5%; left: 55%; background: #091508; transform: rotate(10deg); }
+
+/* --- Corner clusters: large, dense --- */
+.intro__leaves--tl {
+  top: -5vh; left: -5vw;
+  width: 50vw; height: 48vh;
+  background: radial-gradient(ellipse 80% 60% at 65% 55%, #060d05 0%, #040904 50%, transparent 80%);
+  border-radius: 0 0 70% 0;
+}
+.intro__leaves--tl::before { width: 65%; height: 50%; top: 15%; left: 25%; background: radial-gradient(ellipse, #070e06, transparent); transform: rotate(-12deg); }
+.intro__leaves--tl::after  { width: 45%; height: 60%; top: 0; left: 50%; background: radial-gradient(ellipse, #050b04, transparent); transform: rotate(8deg); }
 
 .intro__leaves--tr {
-  top: -8vh; right: -8vw;
-  background: radial-gradient(ellipse 70% 50% at 30% 60%, #0a1a08, transparent);
-  border-radius: 0 0 0 80%;
+  top: -5vh; right: -5vw;
+  width: 50vw; height: 48vh;
+  background: radial-gradient(ellipse 80% 60% at 35% 55%, #060d05 0%, #040904 50%, transparent 80%);
+  border-radius: 0 0 0 70%;
 }
-.intro__leaves--tr::before { width: 55%; height: 50%; top: 15%; right: 30%; background: #0d1f0a; transform: rotate(20deg); }
-.intro__leaves--tr::after  { width: 45%; height: 40%; top: 10%; right: 55%; background: #091508; transform: rotate(-8deg); }
+.intro__leaves--tr::before { width: 60%; height: 55%; top: 10%; right: 20%; background: radial-gradient(ellipse, #070e06, transparent); transform: rotate(15deg); }
+.intro__leaves--tr::after  { width: 50%; height: 45%; top: 5%; right: 45%; background: radial-gradient(ellipse, #050b04, transparent); transform: rotate(-10deg); }
 
 .intro__leaves--bl {
-  bottom: -8vh; left: -8vw;
-  background: radial-gradient(ellipse 70% 50% at 70% 40%, #081507, transparent);
-  border-radius: 0 80% 0 0;
+  bottom: -5vh; left: -5vw;
+  width: 50vw; height: 45vh;
+  background: radial-gradient(ellipse 75% 55% at 65% 45%, #050c04 0%, #040804 50%, transparent 80%);
+  border-radius: 0 70% 0 0;
 }
-.intro__leaves--bl::before { width: 50%; height: 50%; bottom: 20%; left: 35%; background: #0b1a09; transform: rotate(12deg); }
-.intro__leaves--bl::after  { width: 35%; height: 60%; bottom: 5%; left: 60%; background: #071206; transform: rotate(-18deg); }
+.intro__leaves--bl::before { width: 55%; height: 50%; bottom: 15%; left: 30%; background: radial-gradient(ellipse, #060d05, transparent); transform: rotate(10deg); }
+.intro__leaves--bl::after  { width: 40%; height: 65%; bottom: 0; left: 55%; background: radial-gradient(ellipse, #040a03, transparent); transform: rotate(-15deg); }
 
 .intro__leaves--br {
-  bottom: -8vh; right: -8vw;
-  background: radial-gradient(ellipse 70% 50% at 30% 40%, #081507, transparent);
-  border-radius: 80% 0 0 0;
+  bottom: -5vh; right: -5vw;
+  width: 50vw; height: 45vh;
+  background: radial-gradient(ellipse 75% 55% at 35% 45%, #050c04 0%, #040804 50%, transparent 80%);
+  border-radius: 70% 0 0 0;
 }
-.intro__leaves--br::before { width: 50%; height: 45%; bottom: 25%; right: 30%; background: #0b1a09; transform: rotate(-10deg); }
-.intro__leaves--br::after  { width: 40%; height: 55%; bottom: 10%; right: 50%; background: #071206; transform: rotate(15deg); }
+.intro__leaves--br::before { width: 55%; height: 50%; bottom: 20%; right: 25%; background: radial-gradient(ellipse, #060d05, transparent); transform: rotate(-8deg); }
+.intro__leaves--br::after  { width: 45%; height: 55%; bottom: 5%; right: 45%; background: radial-gradient(ellipse, #040a03, transparent); transform: rotate(12deg); }
 
-/* ===== BRANCHES — diagonal lines from corners ===== */
+/* --- Edge fills: top, bottom, left, right --- */
+.intro__leaves--t {
+  top: -3vh; left: 20vw; right: 20vw;
+  height: 22vh;
+  background: radial-gradient(ellipse 100% 80% at 50% 0%, #050b04 0%, transparent 70%);
+}
+.intro__leaves--t::before { width: 40%; height: 80%; top: 0; left: 10%; background: radial-gradient(ellipse, #060d05, transparent); }
+.intro__leaves--t::after  { width: 35%; height: 70%; top: 0; right: 15%; background: radial-gradient(ellipse, #050c04, transparent); }
+
+.intro__leaves--b {
+  bottom: -3vh; left: 20vw; right: 20vw;
+  height: 20vh;
+  background: radial-gradient(ellipse 100% 80% at 50% 100%, #050b04 0%, transparent 70%);
+}
+.intro__leaves--b::before { width: 45%; height: 75%; bottom: 0; left: 8%; background: radial-gradient(ellipse, #060d05, transparent); }
+.intro__leaves--b::after  { width: 40%; height: 65%; bottom: 0; right: 12%; background: radial-gradient(ellipse, #040a03, transparent); }
+
+.intro__leaves--l {
+  top: 20vh; bottom: 20vh; left: -3vw;
+  width: 18vw;
+  background: radial-gradient(ellipse 80% 100% at 0% 50%, #050b04 0%, transparent 70%);
+}
+.intro__leaves--l::before { width: 80%; height: 40%; top: 10%; left: 0; background: radial-gradient(ellipse, #060d05, transparent); }
+.intro__leaves--l::after  { width: 70%; height: 35%; bottom: 15%; left: 0; background: radial-gradient(ellipse, #040a03, transparent); }
+
+.intro__leaves--r {
+  top: 20vh; bottom: 20vh; right: -3vw;
+  width: 18vw;
+  background: radial-gradient(ellipse 80% 100% at 100% 50%, #050b04 0%, transparent 70%);
+}
+.intro__leaves--r::before { width: 80%; height: 40%; top: 15%; right: 0; background: radial-gradient(ellipse, #060d05, transparent); }
+.intro__leaves--r::after  { width: 70%; height: 35%; bottom: 10%; right: 0; background: radial-gradient(ellipse, #040a03, transparent); }
+
+/* ===== VIGNETTE — heavy darkness at edges like nighttime ===== */
+.intro__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(ellipse 55% 55% at 50% 48%, transparent 0%, rgba(4,5,6,0.3) 50%, rgba(4,5,6,0.85) 80%, #040506 100%);
+  pointer-events: none;
+}
+
+/* ===== BRANCHES — dark, thin, organic ===== */
 .intro__branch {
   position: absolute;
   z-index: 4;
-  width: 3px;
-  height: 35vh;
-  background: linear-gradient(to bottom, #1a2a15, transparent);
+  width: 2px;
+  background: linear-gradient(to bottom, #0d150b, transparent);
   transform-origin: top center;
 }
-.intro__branch--l {
-  top: 0; left: 18vw;
-  transform: rotate(15deg);
-}
-.intro__branch--r {
-  top: 0; right: 18vw;
-  transform: rotate(-15deg);
-}
+.intro__branch--l  { top: 0; left: 16vw; height: 38vh; transform: rotate(12deg); }
+.intro__branch--r  { top: 0; right: 16vw; height: 35vh; transform: rotate(-14deg); }
+.intro__branch--cl { top: 0; left: 35vw; height: 22vh; transform: rotate(5deg); }
+.intro__branch--cr { top: 0; right: 35vw; height: 25vh; transform: rotate(-7deg); }
 .intro__branch::before {
   content: '';
   position: absolute;
   width: 2px;
-  height: 40%;
-  background: linear-gradient(to bottom, #1a2a15, transparent);
-  top: 40%;
+  height: 35%;
+  background: linear-gradient(to bottom, #0d150b, transparent);
+  top: 45%;
 }
-.intro__branch--l::before { left: -15px; transform: rotate(-25deg); }
-.intro__branch--r::before { right: -15px; transform: rotate(25deg); }
+.intro__branch--l::before  { left: -12px; transform: rotate(-22deg); }
+.intro__branch--r::before  { right: -12px; transform: rotate(22deg); }
+.intro__branch--cl::before { left: -10px; transform: rotate(-30deg); }
+.intro__branch--cr::before { right: -10px; transform: rotate(28deg); }
 
 /* ===== OWL — centered face silhouette ===== */
 .intro__owl {
@@ -2505,12 +2543,15 @@ body.intro-active { overflow: hidden; }
 
 /* ===== ANIMATION: One fluid motion ===== */
 
-/* Leaves drift slightly inward then rush outward */
+/* Everything drifts outward together */
 .intro--go .intro__leaves {
-  animation: leavesDrift 1.8s ease forwards;
+  animation: leavesDrift 1.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.intro--go .intro__vignette {
+  animation: vignetteFade 1.4s ease 0.3s forwards;
 }
 .intro--go .intro__branch {
-  animation: branchSway 1.5s ease-in-out forwards;
+  animation: branchFade 1.2s ease forwards;
 }
 
 /* Eyes open */
@@ -2555,27 +2596,30 @@ body.intro-active { overflow: hidden; }
 }
 
 @keyframes leavesDrift {
-  0%   { transform: scale(1); opacity: 0.85; }
-  30%  { transform: scale(1.02); opacity: 0.9; }
-  100% { transform: scale(1.5); opacity: 0; }
+  0%   { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; }
 }
 
-@keyframes branchSway {
+@keyframes vignetteFade {
   0%   { opacity: 1; }
-  50%  { opacity: 0.8; }
+  100% { opacity: 0; }
+}
+
+@keyframes branchFade {
+  0%   { opacity: 1; }
   100% { opacity: 0; }
 }
 
 /* ===== Mobile ===== */
 @media (max-width: 600px) {
   .intro__eyes { gap: 0.8rem; }
-  .intro__eye { width: 60px; height: 60px; }
-  .intro__leaves { width: 55vw; height: 50vh; }
-  .intro__face { width: 180px; height: 160px; }
-  .intro__branch { display: none; }
-  .intro__ear { border-bottom-width: 30px; border-left-width: 12px; border-right-width: 12px; }
-  .intro__ear--l { left: -40px; top: -22px; }
-  .intro__ear--r { right: -40px; top: -22px; }
+  .intro__eye { width: 55px; height: 55px; }
+  .intro__face { width: 160px; height: 140px; }
+  .intro__branch--cl, .intro__branch--cr { display: none; }
+  .intro__leaves--l, .intro__leaves--r { width: 25vw; }
+  .intro__ear { border-bottom-width: 28px; border-left-width: 11px; border-right-width: 11px; }
+  .intro__ear--l { left: -35px; top: -20px; }
+  .intro__ear--r { right: -35px; top: -20px; }
 }
 
 /* ---- Reduced Motion ---- */
