@@ -1407,24 +1407,14 @@ select.spotlight__input {
 }
 
 /* ---- Scroll Reveal Animation ---- */
-.article-item,
+/* Cards use .reveal + IntersectionObserver (no competing animation) */
 .newsletter__inner {
   opacity: 0;
   transform: translateY(20px);
-  animation: fadeUp 0.6s ease forwards;
+  animation: fadeUp 0.6s ease 0.1s forwards;
 }
-.article-item:nth-child(1) { animation-delay: 0.15s; }
-.article-item:nth-child(2) { animation-delay: 0.25s; }
-.article-item:nth-child(3) { animation-delay: 0.35s; }
-.article-item:nth-child(4) { animation-delay: 0.45s; }
-.article-item:nth-child(5) { animation-delay: 0.55s; }
-.newsletter__inner { animation-delay: 0.1s; }
-
 @keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 /* ---- Featured Picks (Typography-driven cards) ---- */
@@ -1607,6 +1597,78 @@ select.spotlight__input {
   .site-title, .hero__title, .articles-section__title, .article-item__title a { color: black; }
 }
 
+/* ---- Marquee Text Divider ---- */
+.marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  color: rgba(232, 228, 220, 0.04);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--space-xl) 0;
+  user-select: none;
+  -webkit-text-stroke: 1px rgba(217, 119, 6, 0.08);
+}
+.marquee__inner {
+  display: inline-block;
+  animation: marqueeScroll 25s linear infinite;
+}
+@keyframes marqueeScroll {
+  to { transform: translateX(-50%); }
+}
+
+/* ---- Ambient Glow Cursor ---- */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    600px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgba(217, 119, 6, 0.04),
+    transparent 60%
+  );
+  pointer-events: none;
+  z-index: 1;
+  transition: background 0.1s ease;
+}
+
+/* ---- Reading Progress Bar ---- */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--amber), var(--amber-light));
+  width: 0%;
+  z-index: 200;
+  transition: width 50ms linear;
+  box-shadow: 0 0 8px rgba(217, 119, 6, 0.4);
+}
+
+/* ---- Editorial Drop Cap ---- */
+.article-content__body > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-size: 4.5em;
+  font-weight: 900;
+  line-height: 0.8;
+  color: var(--amber);
+  padding-right: 0.08em;
+  margin-top: 0.05em;
+  text-shadow: 0 0 40px rgba(217, 119, 6, 0.3), 0 0 80px rgba(217, 119, 6, 0.1);
+}
+
+/* ---- Card Image Parallax ---- */
+.article-item__img-wrap {
+  overflow: hidden;
+}
+.article-item__img-wrap img {
+  transition: transform 0.3s ease-out;
+  will-change: transform;
+}
+
 /* ---- Scroll-triggered reveals ---- */
 .reveal {
   opacity: 0;
@@ -1619,10 +1681,7 @@ select.spotlight__input {
   transform: translateY(0);
 }
 
-.reveal:nth-child(2) { transition-delay: 0.1s; }
-.reveal:nth-child(3) { transition-delay: 0.2s; }
-.reveal:nth-child(4) { transition-delay: 0.15s; }
-.reveal:nth-child(5) { transition-delay: 0.25s; }
+.reveal { transition-delay: var(--reveal-delay, 0s); }
 
 /* ---- Enhanced article hover underline ---- */
 .article-item__title a {
@@ -2231,6 +2290,11 @@ select.spotlight__input {
 }
 
 /* ---- Reduced Motion ---- */
+/* ---- Mobile: hide cursor effects ---- */
+@media (hover: none) {
+  body::after { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; transition-duration: 0.01ms !important; }
@@ -2239,4 +2303,6 @@ select.spotlight__input {
   .reveal { opacity: 1; transform: none; transition: none; }
   .shooting-star { display: none; }
   .nebula { animation: none; opacity: 0.7; }
+  .marquee__inner { animation: none; }
+  body::after { display: none; }
 }

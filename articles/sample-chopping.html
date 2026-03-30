@@ -27,6 +27,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pexels.com data:; connect-src 'self' https://mrmladripmlqierlmgiv.supabase.co https://pagead2.googlesyndication.com; frame-ancestors 'none'; form-action 'self' https://script.google.com https://mrmladripmlqierlmgiv.supabase.co; base-uri 'self'; object-src 'none';">
 </head>
 <body>
+  <div class="reading-progress"></div>
   <script>if(window.top!==window.self){window.top.location=window.self.location;}</script>
   <a href="#article-content" class="skip-link">Skip to article content</a>
   <div class="sky" aria-hidden="true">
@@ -267,5 +268,18 @@
     });
   }, 3000);
   </script>
+<script>
+(function(){
+  var bar=document.querySelector(".reading-progress");
+  var article=document.querySelector(".article-content__body");
+  if(bar&&article){
+    window.addEventListener("scroll",function(){
+      var rect=article.getBoundingClientRect();
+      var progress=Math.min(1,Math.max(0,-rect.top/(rect.height-window.innerHeight)));
+      bar.style.width=(progress*100)+"%";
+    },{passive:true});
+  }
+})();
+</script>
 </body>
 </html>

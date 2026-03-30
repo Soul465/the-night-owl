@@ -157,6 +157,11 @@
     </div>
   </section>
 
+  <!-- Marquee Divider -->
+  <div class="marquee" aria-hidden="true">
+    <span class="marquee__inner">PRODUCTION &middot; CULTURE &middot; BUSINESS &middot; THE SOUTH &middot; LATE NIGHTS &middot; PRODUCTION &middot; CULTURE &middot; BUSINESS &middot; THE SOUTH &middot; LATE NIGHTS &middot; PRODUCTION &middot; CULTURE &middot; BUSINESS &middot; THE SOUTH &middot; LATE NIGHTS &middot; PRODUCTION &middot; CULTURE &middot; BUSINESS &middot; THE SOUTH &middot; LATE NIGHTS &middot; </span>
+  </div>
+
   <!-- Search & Filter Bar -->
   <section class="browse" id="browse">
     <div class="browse__inner">
@@ -653,12 +658,42 @@
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
+            // Stagger cards in each row of 3
+            var siblings = Array.from(entry.target.parentElement.children).filter(c => c.classList.contains('reveal'));
+            var idx = siblings.indexOf(entry.target);
+            entry.target.style.setProperty('--reveal-delay', (idx % 3) * 0.08 + 's');
             entry.target.classList.add('in-view');
             observer.unobserve(entry.target);
           }
         });
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+      // Ambient glow cursor
+      var raf;
+      document.addEventListener('mousemove', function(e) {
+        if (raf) return;
+        raf = requestAnimationFrame(function() {
+          document.body.style.setProperty('--glow-x', e.clientX + 'px');
+          document.body.style.setProperty('--glow-y', e.clientY + 'px');
+          raf = null;
+        });
+      });
+
+      // Card image parallax
+      document.querySelectorAll('.article-item').forEach(function(card) {
+        var img = card.querySelector('.article-item__img-wrap img');
+        if (!img) return;
+        card.addEventListener('mousemove', function(e) {
+          var rect = card.getBoundingClientRect();
+          var x = ((e.clientX - rect.left) / rect.width - 0.5) * 10;
+          var y = ((e.clientY - rect.top) / rect.height - 0.5) * 10;
+          img.style.transform = 'scale(1.05) translate(' + x + 'px, ' + y + 'px)';
+        });
+        card.addEventListener('mouseleave', function() {
+          img.style.transform = '';
+        });
+      });
     } else {
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
     }
