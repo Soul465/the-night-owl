@@ -37,14 +37,10 @@
       <div class="intro__eye intro__eye--left">
         <div class="intro__iris"></div>
         <div class="intro__pupil"></div>
-        <div class="intro__lid intro__lid--top"></div>
-        <div class="intro__lid intro__lid--bottom"></div>
       </div>
       <div class="intro__eye intro__eye--right">
         <div class="intro__iris"></div>
         <div class="intro__pupil"></div>
-        <div class="intro__lid intro__lid--top"></div>
-        <div class="intro__lid intro__lid--bottom"></div>
       </div>
     </div>
   </div>
@@ -1027,22 +1023,23 @@
       return;
     }
     document.body.classList.add('intro-active');
-    // Phase 1: Eyes open (immediate)
+    // Phase 1: Eyes open via clip-path (instant trigger)
     requestAnimationFrame(function() {
       intro.classList.add('intro--opening');
     });
-    // Phase 2: Zoom into pupil after eyes open
+    // Phase 2: Zoom through right eye (after eyes fully open)
     setTimeout(function() {
       intro.classList.add('intro--zooming');
-    }, 1800);
-    // Phase 3: Fade out and cleanup
+    }, 900);
+    // Phase 3: Fade out overlay
     setTimeout(function() {
       intro.classList.add('intro--done');
       document.body.classList.remove('intro-active');
-    }, 2800);
+    }, 1600);
+    // Cleanup: remove from DOM
     setTimeout(function() {
       intro.remove();
-    }, 3500);
+    }, 2100);
   })();
   </script>
 
