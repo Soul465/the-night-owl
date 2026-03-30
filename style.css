@@ -2289,143 +2289,293 @@ body::after {
   }
 }
 
-/* ---- Intro: Owl Eye Opening (v2 — smooth) ---- */
+/* ---- Intro: Waking up in the forest ---- */
 .intro {
   position: fixed;
   inset: 0;
   z-index: 999;
-  background: #050507;
+  background: #040506;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   will-change: opacity;
 }
-
 .intro--done {
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: opacity 0.4s ease;
 }
-
 body.intro-active { overflow: hidden; }
 
-/* Eyes container */
-.intro__eyes {
+/* ===== LEAVES — organic shapes framing the viewport ===== */
+.intro__leaves {
+  position: absolute;
+  width: 45vw;
+  height: 45vh;
+  z-index: 3;
+  opacity: 0.85;
+}
+/* Each corner gets overlapping leaf-like ellipses via box-shadows */
+.intro__leaves--tl {
+  top: -8vh; left: -8vw;
+  background: radial-gradient(ellipse 70% 50% at 70% 60%, #0a1a08, transparent);
+  border-radius: 0 0 80% 0;
+}
+.intro__leaves--tl::before, .intro__leaves--tl::after,
+.intro__leaves--tr::before, .intro__leaves--tr::after,
+.intro__leaves--bl::before, .intro__leaves--bl::after,
+.intro__leaves--br::before, .intro__leaves--br::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: #071206;
+}
+.intro__leaves--tl::before { width: 60%; height: 45%; top: 20%; left: 30%; background: #0d1f0a; transform: rotate(-15deg); }
+.intro__leaves--tl::after  { width: 40%; height: 55%; top: 5%; left: 55%; background: #091508; transform: rotate(10deg); }
+
+.intro__leaves--tr {
+  top: -8vh; right: -8vw;
+  background: radial-gradient(ellipse 70% 50% at 30% 60%, #0a1a08, transparent);
+  border-radius: 0 0 0 80%;
+}
+.intro__leaves--tr::before { width: 55%; height: 50%; top: 15%; right: 30%; background: #0d1f0a; transform: rotate(20deg); }
+.intro__leaves--tr::after  { width: 45%; height: 40%; top: 10%; right: 55%; background: #091508; transform: rotate(-8deg); }
+
+.intro__leaves--bl {
+  bottom: -8vh; left: -8vw;
+  background: radial-gradient(ellipse 70% 50% at 70% 40%, #081507, transparent);
+  border-radius: 0 80% 0 0;
+}
+.intro__leaves--bl::before { width: 50%; height: 50%; bottom: 20%; left: 35%; background: #0b1a09; transform: rotate(12deg); }
+.intro__leaves--bl::after  { width: 35%; height: 60%; bottom: 5%; left: 60%; background: #071206; transform: rotate(-18deg); }
+
+.intro__leaves--br {
+  bottom: -8vh; right: -8vw;
+  background: radial-gradient(ellipse 70% 50% at 30% 40%, #081507, transparent);
+  border-radius: 80% 0 0 0;
+}
+.intro__leaves--br::before { width: 50%; height: 45%; bottom: 25%; right: 30%; background: #0b1a09; transform: rotate(-10deg); }
+.intro__leaves--br::after  { width: 40%; height: 55%; bottom: 10%; right: 50%; background: #071206; transform: rotate(15deg); }
+
+/* ===== BRANCHES — diagonal lines from corners ===== */
+.intro__branch {
+  position: absolute;
+  z-index: 4;
+  width: 3px;
+  height: 35vh;
+  background: linear-gradient(to bottom, #1a2a15, transparent);
+  transform-origin: top center;
+}
+.intro__branch--l {
+  top: 0; left: 18vw;
+  transform: rotate(15deg);
+}
+.intro__branch--r {
+  top: 0; right: 18vw;
+  transform: rotate(-15deg);
+}
+.intro__branch::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 40%;
+  background: linear-gradient(to bottom, #1a2a15, transparent);
+  top: 40%;
+}
+.intro__branch--l::before { left: -15px; transform: rotate(-25deg); }
+.intro__branch--r::before { right: -15px; transform: rotate(25deg); }
+
+/* ===== OWL — centered face silhouette ===== */
+.intro__owl {
+  position: relative;
+  z-index: 2;
   display: flex;
-  gap: clamp(1.5rem, 5vw, 4rem);
+  flex-direction: column;
+  align-items: center;
   will-change: transform, opacity;
 }
 
-/* Each eye — uses clip-path for smooth open/close */
-.intro__eye {
-  position: relative;
-  width: clamp(90px, 18vw, 160px);
-  height: clamp(90px, 18vw, 160px);
+/* Face disc — the round face shape */
+.intro__face {
+  position: absolute;
+  width: clamp(200px, 38vw, 340px);
+  height: clamp(180px, 34vw, 300px);
+  background: radial-gradient(ellipse at 50% 45%,
+    #1a1510 0%,
+    #12100c 40%,
+    #0a0908 70%,
+    transparent 85%
+  );
   border-radius: 50%;
-  /* Start as thin horizontal slit */
-  clip-path: ellipse(50% 2% at 50% 50%);
-  will-change: clip-path;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
+  z-index: -1;
 }
 
-/* Iris — layered amber rings with depth */
+/* Ear tufts */
+.intro__ear {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: -1;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-bottom: 45px solid #0e0c09;
+}
+.intro__ear--l { top: -30px; left: -60px; transform: rotate(-15deg); }
+.intro__ear--r { top: -30px; right: -60px; transform: rotate(15deg); }
+
+/* Brow ridges — the V-shape above eyes */
+.intro__brow {
+  position: absolute;
+  width: 55px;
+  height: 3px;
+  background: #1c1610;
+  top: -8px;
+  border-radius: 2px;
+}
+.intro__brow--l { left: -30px; transform: rotate(-12deg); }
+.intro__brow--r { right: -30px; transform: rotate(12deg); }
+
+/* Beak */
+.intro__beak {
+  width: 16px;
+  height: 10px;
+  background: #3d3020;
+  border-radius: 0 0 50% 50%;
+  margin-top: 6px;
+}
+
+/* ===== EYES ===== */
+.intro__eyes {
+  display: flex;
+  gap: clamp(1.2rem, 4vw, 3rem);
+  will-change: transform, opacity;
+}
+
+.intro__eye {
+  position: relative;
+  width: clamp(70px, 14vw, 120px);
+  height: clamp(70px, 14vw, 120px);
+  border-radius: 50%;
+  clip-path: ellipse(50% 2% at 50% 50%);
+  will-change: clip-path;
+  /* Dark ring around each eye */
+  box-shadow: 0 0 0 4px #0a0908, 0 0 20px 8px rgba(0,0,0,0.6);
+}
+
 .intro__iris {
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background:
-    radial-gradient(circle at 50% 50%, transparent 22%, #78350f 24%, transparent 26%),
-    radial-gradient(circle at 50% 50%, transparent 30%, rgba(217,119,6,0.5) 31%, transparent 33%),
-    radial-gradient(circle at 50% 50%,
-      #0a0a0e 20%,
-      #451a03 24%,
-      #92400e 30%,
-      #b45309 38%,
-      #d97706 44%,
-      #f59e0b 50%,
-      #d97706 56%,
-      #b45309 62%,
-      #78350f 68%,
-      #1c1917 72%,
-      #0a0a0e 76%
+    radial-gradient(circle, transparent 22%, #78350f 24%, transparent 26%),
+    radial-gradient(circle, transparent 30%, rgba(217,119,6,0.4) 31%, transparent 33%),
+    radial-gradient(circle,
+      #0a0a0e 20%, #451a03 24%, #92400e 30%, #b45309 38%,
+      #d97706 44%, #f59e0b 50%, #d97706 56%, #b45309 62%,
+      #78350f 68%, #1c1917 72%, #0a0a0e 76%
     );
-  filter: brightness(0.8);
+  filter: brightness(0.7);
   will-change: filter;
 }
 
-/* Pupil — deep black with subtle star hints */
 .intro__pupil {
   position: absolute;
   inset: 28%;
   border-radius: 50%;
   background: radial-gradient(circle, #020204 55%, #0a0a12 75%, transparent 100%);
   z-index: 1;
-  box-shadow: 0 0 15px 5px rgba(0,0,0,0.8);
+  box-shadow: 0 0 12px 4px rgba(0,0,0,0.8);
 }
 
-/* Specular highlight — gives the eye life */
+/* Specular highlight */
 .intro__eye::after {
   content: '';
   position: absolute;
-  width: 18%;
-  height: 18%;
-  top: 22%;
-  left: 28%;
+  width: 16%; height: 16%;
+  top: 22%; left: 28%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255,255,255,0.65) 0%, transparent 70%);
   z-index: 2;
   opacity: 0;
 }
 
-/* ===== Single fluid motion: open → zoom (no two-phase stutter) ===== */
-.intro--go .intro__eye {
-  animation: eyeOpenAndHold 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+/* ===== ANIMATION: One fluid motion ===== */
+
+/* Leaves drift slightly inward then rush outward */
+.intro--go .intro__leaves {
+  animation: leavesDrift 1.8s ease forwards;
+}
+.intro--go .intro__branch {
+  animation: branchSway 1.5s ease-in-out forwards;
 }
 
+/* Eyes open */
+.intro--go .intro__eye {
+  animation: eyeOpen 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
 .intro--go .intro__eye--right {
   animation-delay: 0.04s;
 }
-
 .intro--go .intro__iris {
-  animation: irisFlash 0.6s ease 0.15s forwards;
+  animation: irisFlash 0.5s ease 0.12s forwards;
 }
-
 .intro--go .intro__eye::after {
-  animation: specReveal 0.2s ease 0.3s forwards;
+  animation: specIn 0.2s ease 0.25s forwards;
 }
 
-/* Zoom starts automatically as part of same trigger — no second class */
-.intro--go .intro__eyes {
-  animation: zoomThrough 1.4s cubic-bezier(0.7, 0, 0, 1) 0.5s forwards;
+/* Zoom INTO the owl's eyes — you're pulled toward it */
+.intro--go .intro__owl {
+  animation: pullIntoOwl 1.2s cubic-bezier(0.5, 0, 0, 1) 0.55s forwards;
 }
 
 /* ===== KEYFRAMES ===== */
-@keyframes eyeOpenAndHold {
+@keyframes eyeOpen {
   0%   { clip-path: ellipse(50% 1% at 50% 50%); }
-  35%  { clip-path: ellipse(50% 45% at 50% 50%); }
-  50%  { clip-path: ellipse(50% 50% at 50% 50%); }
+  40%  { clip-path: ellipse(50% 42% at 50% 50%); }
   100% { clip-path: ellipse(50% 50% at 50% 50%); }
 }
 
 @keyframes irisFlash {
-  0%   { filter: brightness(0.6); }
-  50%  { filter: brightness(1.4) drop-shadow(0 0 15px rgba(245,158,11,0.5)); }
-  100% { filter: brightness(1.1) drop-shadow(0 0 6px rgba(217,119,6,0.25)); }
+  0%   { filter: brightness(0.7); }
+  50%  { filter: brightness(1.5) drop-shadow(0 0 15px rgba(245,158,11,0.5)); }
+  100% { filter: brightness(1.15) drop-shadow(0 0 6px rgba(217,119,6,0.2)); }
 }
 
-@keyframes specReveal {
+@keyframes specIn {
   to { opacity: 1; }
 }
 
-@keyframes zoomThrough {
+@keyframes pullIntoOwl {
   0%   { transform: scale(1); opacity: 1; }
-  100% { transform: scale(18) translateX(-12%); opacity: 0; }
+  100% { transform: scale(22); opacity: 0; }
+}
+
+@keyframes leavesDrift {
+  0%   { transform: scale(1); opacity: 0.85; }
+  30%  { transform: scale(1.02); opacity: 0.9; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+@keyframes branchSway {
+  0%   { opacity: 1; }
+  50%  { opacity: 0.8; }
+  100% { opacity: 0; }
 }
 
 /* ===== Mobile ===== */
 @media (max-width: 600px) {
-  .intro__eyes { gap: 1rem; }
-  .intro__eye { width: 70px; height: 70px; }
+  .intro__eyes { gap: 0.8rem; }
+  .intro__eye { width: 60px; height: 60px; }
+  .intro__leaves { width: 55vw; height: 50vh; }
+  .intro__face { width: 180px; height: 160px; }
+  .intro__branch { display: none; }
+  .intro__ear { border-bottom-width: 30px; border-left-width: 12px; border-right-width: 12px; }
+  .intro__ear--l { left: -40px; top: -22px; }
+  .intro__ear--r { right: -40px; top: -22px; }
 }
 
 /* ---- Reduced Motion ---- */
