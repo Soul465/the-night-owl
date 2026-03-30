@@ -8,15 +8,15 @@
   <meta property="og:title" content="Jack Harlow Said 'I Got Blacker' — And the Problem Isn't the Album — The Night Owl">
   <meta property="og:description" content="Jack Harlow said 'I got Blacker' about his R&B pivot album Monica. The backlash is valid — Blackness isn't a skill you acquire.">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://soul465.github.io/the-night-owl/articles/jack-harlow-i-got-blacker.html">
-  <meta property="og:image" content="https://soul465.github.io/the-night-owl/og-image.png">
+  <meta property="og:url" content="https://thenightowl.blog/articles/jack-harlow-i-got-blacker">
+  <meta property="og:image" content="https://thenightowl.blog/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Jack Harlow Said 'I Got Blacker' — And the Problem Isn't the Album — The Night Owl">
   <meta name="twitter:description" content="Jack Harlow said 'I got Blacker' about his R&B pivot album Monica. The backlash is valid — Blackness isn't a skill you acquire.">
-  <meta name="twitter:image" content="https://soul465.github.io/the-night-owl/og-image.png">
-  <link rel="canonical" href="https://soul465.github.io/the-night-owl/articles/jack-harlow-i-got-blacker.html">
+  <meta name="twitter:image" content="https://thenightowl.blog/og-image.png">
+  <link rel="canonical" href="https://thenightowl.blog/articles/jack-harlow-i-got-blacker">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
@@ -25,7 +25,7 @@
   <link rel="preload" as="image" href="../images/jack-harlow-header.png">
   <meta name="google-adsense-account" content="ca-pub-8468080886390821">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8468080886390821" crossorigin="anonymous"></script>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://pagead2.googlesyndication.com; frame-ancestors 'none';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pexels.com data:; connect-src 'self' https://mrmladripmlqierlmgiv.supabase.co https://pagead2.googlesyndication.com; frame-ancestors 'none';">
 </head>
 <body>
   <script>if(window.top!==window.self){window.top.location=window.self.location;}</script>
@@ -117,14 +117,115 @@
     <div class="article-related" style="border-top:1px solid rgba(255,255,255,0.06);padding-top:1.5rem;margin-top:2rem;">
       <h3 style="font-family:'Playfair Display',Georgia,serif;font-size:0.875rem;text-transform:uppercase;letter-spacing:0.1em;color:#847e73;margin-bottom:0.75rem;">Read Next</h3>
       <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.5rem;">
-        <li><a href="louisiana-trap-history.html">How Louisiana Shaped Modern Trap Music</a></li>
-        <li><a href="50cent-diddy-business-of-beef.html">50 Cent, Diddy, and the Business of Hip-Hop Beef in 2026</a></li>
-        <li><a href="sell-beats-online.html">How to Sell Beats Online (The Real Talk)</a></li>
+        <li><a href="louisiana-trap-history">How Louisiana Shaped Modern Trap Music</a></li>
+        <li><a href="50cent-diddy-business-of-beef">50 Cent, Diddy, and the Business of Hip-Hop Beef in 2026</a></li>
+        <li><a href="sell-beats-online">How to Sell Beats Online (The Real Talk)</a></li>
       </ul>
     </div>
     <div class="article-footer">
       The Night Owl drops weekly — production breakdowns, beat business, and Southern hip-hop culture.
     </div>
+  <!-- Comment Section -->
+  <section class="article-comments" id="comments">
+    <h2 class="article-comments__title">Comments <span class="article-comments__count" id="comment-count"></span></h2>
+    <form class="comment-form" id="comment-form">
+      <div class="comment-form__row">
+        <input type="text" class="comment-form__name" id="comment-name" placeholder="Your name" maxlength="50" autocomplete="off">
+        <label class="comment-form__anon"><input type="checkbox" id="comment-anon"> Anonymous</label>
+      </div>
+      <textarea class="comment-form__text" id="comment-text" placeholder="Share your thoughts..." maxlength="1000" required></textarea>
+      <div class="comment-form__actions">
+        <button type="submit" class="comment-form__submit" id="comment-submit">Post Comment</button>
+      </div>
+      <p class="comment-form__status" id="comment-status"></p>
+    </form>
+    <ul class="comment-list" id="comment-list">
+      <li class="comment-empty" id="comment-empty">No comments yet. Be the first.</li>
+    </ul>
+  </section>
+  <script>
+  (function(){
+    var SUPA_URL='https://mrmladripmlqierlmgiv.supabase.co';
+    var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ybWxhZHJpcG1scWllcmxtZ2l2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4MDIyNDIsImV4cCI6MjA5MDM3ODI0Mn0.Aikuqn7SLtCz2i7dMz9SPUMMHnLimyZTP24IaBFWNKs';
+    var slug=location.pathname.replace(/.*\/articles\//,'').replace(/\.html$/,'').replace(/\/$/,'');
+    var list=document.getElementById('comment-list');
+    var empty=document.getElementById('comment-empty');
+    var count=document.getElementById('comment-count');
+    var form=document.getElementById('comment-form');
+    var nameInput=document.getElementById('comment-name');
+    var textInput=document.getElementById('comment-text');
+    var anonBox=document.getElementById('comment-anon');
+    var status=document.getElementById('comment-status');
+    var submitBtn=document.getElementById('comment-submit');
+
+    anonBox.addEventListener('change',function(){
+      if(anonBox.checked){nameInput.value='';nameInput.disabled=true;nameInput.placeholder='Posting anonymously';}
+      else{nameInput.disabled=false;nameInput.placeholder='Your name';}
+    });
+
+    function timeAgo(d){
+      var s=Math.floor((Date.now()-new Date(d).getTime())/1000);
+      if(s<60)return 'just now';
+      if(s<3600)return Math.floor(s/60)+'m ago';
+      if(s<86400)return Math.floor(s/3600)+'h ago';
+      if(s<2592000)return Math.floor(s/86400)+'d ago';
+      return new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    }
+
+    function renderComment(c){
+      var li=document.createElement('li');
+      li.className='comment-card';
+      li.innerHTML='<div class="comment-card__header"><span class="comment-card__name">'+escHtml(c.name)+'</span><span class="comment-card__time">'+timeAgo(c.created_at)+'</span></div><div class="comment-card__body">'+escHtml(c.comment)+'</div>';
+      return li;
+    }
+
+    function escHtml(t){
+      var d=document.createElement('div');d.textContent=t;return d.innerHTML;
+    }
+
+    function loadComments(){
+      fetch(SUPA_URL+'/rest/v1/comments?article_slug=eq.'+encodeURIComponent(slug)+'&order=created_at.desc',{
+        headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}
+      }).then(function(r){return r.json()}).then(function(data){
+        if(!Array.isArray(data)||data.length===0){empty.style.display='';count.textContent='';return;}
+        empty.style.display='none';
+        count.textContent='('+data.length+')';
+        list.innerHTML='';
+        data.forEach(function(c){list.appendChild(renderComment(c));});
+      }).catch(function(){empty.textContent='Could not load comments.';});
+    }
+
+    form.addEventListener('submit',function(e){
+      e.preventDefault();
+      var name=anonBox.checked?'Anonymous':nameInput.value.trim();
+      var text=textInput.value.trim();
+      if(!name){status.textContent='Please enter your name or check Anonymous.';status.className='comment-form__status comment-form__status--error';return;}
+      if(!text){status.textContent='Please write a comment.';status.className='comment-form__status comment-form__status--error';return;}
+      submitBtn.disabled=true;
+      status.textContent='Posting...';status.className='comment-form__status';
+      fetch(SUPA_URL+'/rest/v1/comments',{
+        method:'POST',
+        headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Content-Type':'application/json','Prefer':'return=representation'},
+        body:JSON.stringify({article_slug:slug,name:name,comment:text})
+      }).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})
+      .then(function(){
+        textInput.value='';
+        if(!anonBox.checked)localStorage.setItem('nightowl_comment_name',name);
+        status.textContent='Comment posted!';status.className='comment-form__status';
+        submitBtn.disabled=false;
+        loadComments();
+      }).catch(function(){
+        status.textContent='Failed to post. Try again.';status.className='comment-form__status comment-form__status--error';
+        submitBtn.disabled=false;
+      });
+    });
+
+    var saved=localStorage.getItem('nightowl_comment_name');
+    if(saved)nameInput.value=saved;
+    loadComments();
+  })();
+  </script>
+
   </article>
   <div class="btc-donate-mini">
     <p class="btc-donate-mini__text">Appreciate you reading. If you want to support the blog, Bitcoin is always welcome.</p>
@@ -158,7 +259,7 @@
   "dateModified": "2026-03-28",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://soul465.github.io/the-night-owl/articles/jack-harlow-i-got-blacker.html"
+    "@id": "https://thenightowl.blog/articles/jack-harlow-i-got-blacker"
   }
 }
 </script>

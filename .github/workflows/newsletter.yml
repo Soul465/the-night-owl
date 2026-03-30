@@ -41,7 +41,7 @@ jobs:
 
             # Build the article URL
             SLUG=$(basename "$ARTICLE_FILE")
-            URL="https://soul465.github.io/the-night-owl/articles/${SLUG}"
+            URL="https://thenightowl.blog/articles/${SLUG}"
 
             echo "Title: $TITLE"
             echo "Excerpt: $EXCERPT"

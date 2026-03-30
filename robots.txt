@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Disallow: /articles/song-spotlight-template.html
-Sitemap: https://soul465.github.io/the-night-owl/sitemap.xml
+Sitemap: https://thenightowl.blog/sitemap.xml

@@ -1870,6 +1870,172 @@ select.spotlight__input {
   }
 }
 
+/* ---- Comment Section ---- */
+.article-comments {
+  max-width: var(--measure);
+  margin: var(--space-2xl) auto 0;
+  padding: 0 var(--space-lg);
+}
+.article-comments__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--text-bright);
+  margin-bottom: var(--space-xl);
+}
+.article-comments__count {
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-left: var(--space-sm);
+}
+.comment-form {
+  margin-bottom: var(--space-2xl);
+}
+.comment-form__row {
+  display: flex;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+.comment-form__name {
+  flex: 0 0 200px;
+  padding: 0.75rem 1rem;
+  background: rgba(16, 18, 28, 0.6);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  color: var(--text-bright);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.comment-form__text {
+  width: 100%;
+  min-height: 100px;
+  padding: 0.75rem 1rem;
+  background: rgba(16, 18, 28, 0.6);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  color: var(--text-bright);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  resize: vertical;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.comment-form__name:focus,
+.comment-form__text:focus {
+  outline: none;
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.12), 0 0 20px rgba(217, 119, 6, 0.06);
+}
+.comment-form__name::placeholder,
+.comment-form__text::placeholder {
+  color: var(--text-faint);
+}
+.comment-form__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+.comment-form__anon {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.comment-form__anon input[type="checkbox"] {
+  accent-color: var(--amber);
+}
+.comment-form__submit {
+  margin-left: auto;
+  padding: 0.6rem 1.5rem;
+  background: linear-gradient(135deg, var(--amber), var(--amber-light));
+  color: var(--night-deep);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.comment-form__submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.4);
+}
+.comment-form__submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.comment-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+.comment-card {
+  background: rgba(31, 35, 55, 0.6);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: var(--space-lg);
+}
+.comment-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+.comment-card__name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  color: var(--amber-light);
+  font-size: 0.95rem;
+}
+.comment-card__time {
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+.comment-card__body {
+  color: var(--text-body);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.comment-empty {
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  padding: var(--space-xl) 0;
+}
+.comment-form__status {
+  color: var(--sage);
+  font-size: 0.85rem;
+  margin-top: var(--space-sm);
+  min-height: 1.2em;
+}
+.comment-form__status--error {
+  color: var(--ember);
+}
+
+@media (max-width: 600px) {
+  .comment-form__row {
+    flex-direction: column;
+  }
+  .comment-form__name {
+    flex: none;
+    width: 100%;
+  }
+}
+
 /* ---- Reduced Motion ---- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

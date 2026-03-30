@@ -21,7 +21,7 @@ jobs:
       - name: Generate sitemap
         uses: cicirello/generate-sitemap@v1
         with:
-          base-url-path: https://soul465.github.io/the-night-owl/
+          base-url-path: https://thenightowl.blog/
 
       - name: Commit and push sitemap
         run: |
