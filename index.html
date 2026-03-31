@@ -33,10 +33,26 @@
 
   <!-- Intro: Remotion-rendered cinematic video -->
   <div class="intro" id="intro" aria-hidden="true">
-    <video class="intro__video" id="intro-video" muted playsinline preload="auto">
+    <video class="intro__video" id="intro-video" muted playsinline preload="auto" poster="intro-poster.jpg">
       <source src="intro.webm?v=10" type="video/webm">
       <source src="intro.mp4?v=10" type="video/mp4">
     </video>
+    <!-- Text/logo reveal -->
+    <div class="intro__text" id="intro-text">
+      <span>T</span><span>H</span><span>E</span><span class="intro__space">&nbsp;</span><span>N</span><span>I</span><span>G</span><span>H</span><span>T</span><span class="intro__space">&nbsp;</span><span>O</span><span>W</span><span>L</span>
+    </div>
+    <div class="intro__tagline" id="intro-tagline">Hip-Hop Music, Culture &amp; Business</div>
+    <!-- Color bridge flash -->
+    <div class="intro__flash" id="intro-flash"></div>
+    <!-- Controls -->
+    <button class="intro__skip" id="intro-skip" aria-label="Skip intro">Skip</button>
+    <button class="intro__sound" id="intro-sound" aria-label="Enable sound">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M11 5L6 9H2v6h4l5 4V5z"/>
+        <line x1="23" y1="9" x2="17" y2="15" class="intro__sound-x"/>
+        <line x1="17" y1="9" x2="23" y2="15" class="intro__sound-x"/>
+      </svg>
+    </button>
   </div>
 
   <a href="#production" class="skip-link">Skip to content</a>
@@ -75,6 +91,12 @@
         <span class="site-title__owl" aria-hidden="true">&#x1F989;</span>
         The Night Owl
       </a>
+      <button class="intro-replay" id="intro-replay" aria-label="Replay intro" title="Replay intro">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="12" cy="12" r="5" fill="currentColor" stroke="none" opacity="0.7"/>
+          <circle cx="12" cy="12" r="10"/>
+        </svg>
+      </button>
       <nav class="site-nav" aria-label="Main">
         <a href="#browse" data-filter="production">Production</a>
         <a href="#browse" data-filter="business">Business</a>
@@ -1012,27 +1034,210 @@
   <script>
   (function() {
     var intro = document.getElementById('intro');
-    if (!intro || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      if (intro) intro.remove();
+    if (!intro) return;
+
+    var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var seen = localStorage.getItem('nightowl_intro_seen');
+    var isReplay = window.__nightowlReplay;
+
+    // Session memory — skip on return visits (unless replaying)
+    if (seen && !isReplay) {
+      intro.remove();
       return;
     }
+
+    // Reduced motion fallback — static poster, gentle fade
+    if (reducedMotion && !isReplay) {
+      intro.classList.add('intro--static');
+      setTimeout(function() {
+        intro.classList.add('intro--done');
+        localStorage.setItem('nightowl_intro_seen', 'true');
+        setTimeout(function() { intro.remove(); }, 500);
+      }, 1200);
+      return;
+    }
+
     document.body.classList.add('intro-active');
     var video = document.getElementById('intro-video');
-    if (video) {
-      video.play().catch(function() {});
-      video.addEventListener('ended', function() {
+    var introText = document.getElementById('intro-text');
+    var tagline = document.getElementById('intro-tagline');
+    var flash = document.getElementById('intro-flash');
+    var skipBtn = document.getElementById('intro-skip');
+    var soundBtn = document.getElementById('intro-sound');
+    var animDone = false;
+    var contentReady = false;
+    var audioCtx = null;
+    var soundOn = false;
+
+    // Loader integration — track when page content is ready
+    if (document.readyState === 'complete') { contentReady = true; }
+    else { window.addEventListener('load', function() { contentReady = true; tryFinish(); }); }
+    setTimeout(function() { contentReady = true; tryFinish(); }, 6000);
+
+    // ===== IRIS REVEAL TRANSITION =====
+    function irisReveal(callback) {
+      if (flash) flash.classList.add('intro__flash--active');
+      var start = performance.now();
+      var duration = 850;
+      var maxR = Math.max(window.innerWidth, window.innerHeight) * 1.5;
+      (function tick(now) {
+        var t = Math.min((now - start) / duration, 1);
+        t = 1 - Math.pow(1 - t, 3); // ease-out cubic
+        var r = t * maxR;
+        var mask = 'radial-gradient(circle ' + r + 'px at 50% 47%, transparent 100%, #000 100%)';
+        intro.style.webkitMaskImage = mask;
+        intro.style.maskImage = mask;
+        if (t < 1) requestAnimationFrame(tick);
+        else if (callback) callback();
+      })(performance.now());
+    }
+
+    function tryFinish() {
+      if (!animDone || !contentReady) return;
+      irisReveal(function() {
         intro.classList.add('intro--done');
         document.body.classList.remove('intro-active');
-        setTimeout(function() { intro.remove(); }, 400);
+        localStorage.setItem('nightowl_intro_seen', 'true');
+        if (audioCtx) { try { audioCtx.close(); } catch(e) {} }
+        setTimeout(function() { intro.remove(); }, 100);
       });
-      // Fallback if video stalls
-      setTimeout(function() {
-        if (!intro.classList.contains('intro--done')) {
-          intro.classList.add('intro--done');
-          document.body.classList.remove('intro-active');
-          setTimeout(function() { intro.remove(); }, 400);
-        }
-      }, 5000);
+    }
+
+    // ===== VIDEO PLAYBACK + TEXT REVEAL =====
+    if (video) {
+      video.play().catch(function() {});
+      video.addEventListener('timeupdate', function() {
+        // Text appears after eye fully opens (~0.8s)
+        if (video.currentTime >= 0.8 && introText) introText.classList.add('intro__text--visible');
+        if (video.currentTime >= 1.1 && tagline) tagline.classList.add('intro__tagline--visible');
+        // Owl hoot synced to eye open
+        if (video.currentTime >= 0.4 && soundOn && audioCtx) playHoot();
+      });
+      video.addEventListener('ended', function() {
+        animDone = true;
+        tryFinish();
+      });
+      // Fallback
+      setTimeout(function() { if (!animDone) { animDone = true; tryFinish(); } }, 5500);
+    }
+
+    // ===== SKIP =====
+    if (skipBtn) {
+      skipBtn.addEventListener('click', function() {
+        animDone = true;
+        contentReady = true;
+        tryFinish();
+      });
+    }
+
+    // ===== SOUND DESIGN (Web Audio API) =====
+    var hootPlayed = false;
+    function initAudio() {
+      try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        // Wind ambient — low-pass filtered noise
+        var bufLen = 2 * audioCtx.sampleRate;
+        var buf = audioCtx.createBuffer(1, bufLen, audioCtx.sampleRate);
+        var data = buf.getChannelData(0);
+        for (var i = 0; i < bufLen; i++) data[i] = Math.random() * 2 - 1;
+        var wind = audioCtx.createBufferSource();
+        wind.buffer = buf;
+        wind.loop = true;
+        var lp = audioCtx.createBiquadFilter();
+        lp.type = 'lowpass';
+        lp.frequency.value = 180;
+        var wGain = audioCtx.createGain();
+        wGain.gain.setValueAtTime(0, audioCtx.currentTime);
+        wGain.gain.linearRampToValueAtTime(0.06, audioCtx.currentTime + 1.2);
+        wind.connect(lp); lp.connect(wGain); wGain.connect(audioCtx.destination);
+        wind.start();
+        // Fade out wind when intro ends
+        setTimeout(function() {
+          if (wGain && audioCtx.state === 'running') {
+            wGain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.8);
+          }
+        }, 4000);
+      } catch(e) {}
+    }
+
+    function playHoot() {
+      if (hootPlayed || !audioCtx) return;
+      hootPlayed = true;
+      var now = audioCtx.currentTime;
+      // First hoot tone — descending
+      var o1 = audioCtx.createOscillator(); o1.type = 'sine';
+      o1.frequency.setValueAtTime(340, now);
+      o1.frequency.exponentialRampToValueAtTime(290, now + 0.35);
+      var g1 = audioCtx.createGain();
+      g1.gain.setValueAtTime(0, now);
+      g1.gain.linearRampToValueAtTime(0.12, now + 0.04);
+      g1.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+      o1.connect(g1); g1.connect(audioCtx.destination);
+      o1.start(now); o1.stop(now + 0.45);
+      // Second lower tone
+      var o2 = audioCtx.createOscillator(); o2.type = 'sine';
+      o2.frequency.setValueAtTime(275, now + 0.55);
+      o2.frequency.exponentialRampToValueAtTime(230, now + 1.1);
+      var g2 = audioCtx.createGain();
+      g2.gain.setValueAtTime(0, now + 0.55);
+      g2.gain.linearRampToValueAtTime(0.1, now + 0.59);
+      g2.gain.exponentialRampToValueAtTime(0.001, now + 1.15);
+      o2.connect(g2); g2.connect(audioCtx.destination);
+      o2.start(now + 0.55); o2.stop(now + 1.2);
+    }
+
+    // Sound toggle button
+    if (soundBtn) {
+      soundBtn.addEventListener('click', function() {
+        soundOn = !soundOn;
+        soundBtn.classList.toggle('intro__sound--on', soundOn);
+        soundBtn.setAttribute('aria-label', soundOn ? 'Mute sound' : 'Enable sound');
+        if (soundOn && !audioCtx) initAudio();
+        if (!soundOn && audioCtx) { try { audioCtx.close(); audioCtx = null; } catch(e) {} }
+      });
+    }
+  })();
+
+  // ===== REPLAY INTRO =====
+  (function() {
+    var replayBtn = document.getElementById('intro-replay');
+    if (!replayBtn) return;
+    replayBtn.addEventListener('click', function() {
+      localStorage.removeItem('nightowl_intro_seen');
+      window.__nightowlReplay = true;
+      location.reload();
+    });
+  })();
+
+  // ===== PARALLAX DEPTH on sky layers =====
+  (function() {
+    var sky = document.querySelector('.sky');
+    if (!sky || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var layers = sky.children;
+    var depths = [1, 1, 1.5, 0.5, 3, 2, 2, 4, 4, 4, 5, 3.5, 3.5, 3.5];
+
+    function applyParallax(nx, ny) {
+      for (var i = 0; i < layers.length; i++) {
+        var d = depths[i] || 2;
+        layers[i].style.transform = 'translate(' + (nx * d) + 'px,' + (ny * d) + 'px)';
+      }
+    }
+
+    // Desktop: mouse tracking
+    if (window.matchMedia('(hover: hover)').matches) {
+      document.addEventListener('mousemove', function(e) {
+        var nx = (e.clientX / window.innerWidth - 0.5) * 2;
+        var ny = (e.clientY / window.innerHeight - 0.5) * 2;
+        applyParallax(nx * 4, ny * 3);
+      });
+    }
+    // Mobile: gyroscope
+    if ('DeviceOrientationEvent' in window && 'ontouchstart' in window) {
+      window.addEventListener('deviceorientation', function(e) {
+        var nx = Math.max(-1, Math.min(1, (e.gamma || 0) / 30));
+        var ny = Math.max(-1, Math.min(1, ((e.beta || 0) - 45) / 30));
+        applyParallax(nx * 5, ny * 4);
+      });
     }
   })();
   </script>
