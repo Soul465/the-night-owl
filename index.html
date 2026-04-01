@@ -19,21 +19,23 @@
   <link rel="canonical" href="https://thenightowl.blog/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=15">
   <link rel="preload" as="image" href="images/jack-harlow-header.webp" type="image/webp">
-  <link rel="preload" as="image" href="images/jack-harlow-header.png">
   <meta name="google-adsense-account" content="ca-pub-8468080886390821">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8468080886390821" crossorigin="anonymous"></script>
+  <script>
+  // Defer AdSense until first user interaction to avoid blocking initial load
+  (function(){var loaded=false;function loadAds(){if(loaded)return;loaded=true;var s=document.createElement('script');s.src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8468080886390821';s.async=true;s.crossOrigin='anonymous';document.head.appendChild(s);};['scroll','click','touchstart'].forEach(function(e){window.addEventListener(e,loadAds,{once:true,passive:true});});})();
+  </script>
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' https://images.pexels.com data:; connect-src 'self' https://mrmladripmlqierlmgiv.supabase.co https://script.google.com https://script.googleusercontent.com https://pagead2.googlesyndication.com; frame-ancestors 'none'; form-action 'self' https://script.google.com https://mrmladripmlqierlmgiv.supabase.co; base-uri 'self'; object-src 'none';">
 </head>
 <body>
-  <script>if(window.top!==window.self){window.top.location=window.self.location;}</script>
+  <!-- frame-ancestors 'none' in CSP handles clickjacking protection -->
 
   <!-- Intro: Remotion-rendered cinematic video -->
   <div class="intro" id="intro" aria-hidden="true">
-    <video class="intro__video" id="intro-video" muted playsinline preload="auto" poster="intro-poster.jpg">
+    <video class="intro__video" id="intro-video" muted playsinline preload="none" poster="intro-poster.jpg">
       <source src="intro.webm?v=10" type="video/webm">
       <source src="intro.mp4?v=10" type="video/mp4">
     </video>
@@ -224,7 +226,7 @@
 
       <article class="article-item reveal" data-category="business" data-date="2026-04-01" data-slug="e15-gas-dilution-illusion">
         <div class="article-item__img-wrap">
-          <a href="articles/e15-gas-dilution-illusion"><img src="images/e15-gas-header.jpg" alt="Gas station fuel pumps at sunset" loading="lazy" width="600" height="340" decoding="async"></a>
+          <a href="articles/e15-gas-dilution-illusion"><picture><source srcset="images/e15-gas-header.webp" type="image/webp"><img src="images/e15-gas-header.jpg" alt="Gas station fuel pumps at sunset" loading="lazy" width="600" height="340" decoding="async"></picture></a>
         </div>
         <div class="article-item__body">
           <p class="article-item__label article-item__label--business">Economy</p>
@@ -262,7 +264,7 @@
 
       <article class="article-item reveal" data-category="culture" data-date="2026-03-29" data-slug="zeus-network-lemuel-plummer">
         <div class="article-item__img-wrap">
-          <a href="articles/zeus-network-lemuel-plummer"><img src="images/zeus-plummer-diddy.jpg" alt="Lemuel Plummer and Diddy" loading="lazy" width="600" height="340" decoding="async"></a>
+          <a href="articles/zeus-network-lemuel-plummer"><picture><source srcset="images/zeus-plummer-diddy.webp" type="image/webp"><img src="images/zeus-plummer-diddy.jpg" alt="Lemuel Plummer and Diddy" loading="lazy" width="600" height="340" decoding="async"></picture></a>
         </div>
         <div class="article-item__body">
           <p class="article-item__label article-item__label--culture">Industry</p>
@@ -357,7 +359,7 @@
 
       <article class="article-item reveal" data-category="business" data-date="2026-03-23" data-slug="50cent-diddy-business-of-beef">
         <div class="article-item__img-wrap">
-          <a href="articles/50cent-diddy-business-of-beef"><img src="images/50cent-diddy-header.png" alt="50 Cent and Diddy article header" loading="lazy" width="600" height="340" decoding="async"></a>
+          <a href="articles/50cent-diddy-business-of-beef"><picture><source srcset="images/50cent-diddy-header.webp" type="image/webp"><img src="images/50cent-diddy-header.png" alt="50 Cent and Diddy article header" loading="lazy" width="600" height="340" decoding="async"></picture></a>
         </div>
         <div class="article-item__body">
           <p class="article-item__label article-item__label--business">Industry</p>
@@ -1258,6 +1260,20 @@
         applyParallax(nx * 5, ny * 4);
       });
     }
+  })();
+  </script>
+  <script>
+  // Pause sky animations when scrolled out of view to save GPU
+  (function(){
+    var sky=document.querySelector('.sky');
+    if(!sky||!('IntersectionObserver' in window))return;
+    new IntersectionObserver(function(entries){
+      sky.style.animationPlayState=entries[0].isIntersecting?'running':'paused';
+      var children=sky.querySelectorAll('*');
+      for(var i=0;i<children.length;i++){
+        children[i].style.animationPlayState=entries[0].isIntersecting?'running':'paused';
+      }
+    },{threshold:0}).observe(sky);
   })();
   </script>
 
