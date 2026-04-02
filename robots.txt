@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /articles/song-spotlight-template.html
+Disallow: /og-template.html
+Disallow: /google8019603c80e8bcd5.html
 Sitemap: https://thenightowl.blog/sitemap.xml
