@@ -35,9 +35,9 @@
 
   <!-- Intro: Remotion-rendered cinematic video -->
   <div class="intro" id="intro" aria-hidden="true">
-    <video class="intro__video" id="intro-video" muted playsinline preload="none" poster="intro-poster.jpg">
-      <source src="intro.webm?v=10" type="video/webm">
-      <source src="intro.mp4?v=10" type="video/mp4">
+    <video class="intro__video" id="intro-video" muted playsinline preload="auto" poster="intro-poster.jpg">
+      <source src="intro.webm?v=11" type="video/webm">
+      <source src="intro.mp4?v=11" type="video/mp4">
     </video>
     <!-- Text/logo reveal -->
     <div class="intro__text" id="intro-text">
@@ -1124,7 +1124,15 @@
 
     // ===== VIDEO PLAYBACK + TEXT REVEAL =====
     if (video) {
-      video.play().catch(function() {});
+      var playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function() {
+          // Safari/iOS blocked autoplay — skip to static fallback
+          animDone = true;
+          contentReady = true;
+          tryFinish();
+        });
+      }
       video.addEventListener('timeupdate', function() {
         // Text appears after eye fully opens (~0.8s)
         if (video.currentTime >= 0.8 && introText) introText.classList.add('intro__text--visible');
