@@ -784,6 +784,7 @@ button:focus-visible {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-sm);
   padding-top: var(--space-md);
   border-top: 1px solid rgba(255, 255, 255, 0.04);
 }
@@ -1284,8 +1285,21 @@ select.spotlight__input {
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-wrap: wrap;
   gap: var(--space-md);
+}
+.site-footer__links {
+  display: flex;
+  gap: var(--space-md);
+}
+.site-footer__links a {
+  color: var(--text-faint);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.site-footer__links a:hover {
+  color: var(--amber);
 }
 
 /* ---- Article Page ---- */
