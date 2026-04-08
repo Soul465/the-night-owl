@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forest Density Samples — The Night Owl</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #0b0d15; color: #d4d0c8; font-family: 'Source Sans Pro', sans-serif; }
+
+.sample { position: relative; width: 100%; height: 100vh; overflow: hidden; border-bottom: 2px solid rgba(255,255,255,0.1); }
+.sample__label {
+  position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+  z-index: 10; background: rgba(0,0,0,0.7); padding: 12px 24px; border-radius: 8px;
+  font-size: 18px; font-weight: 600; letter-spacing: 0.05em; text-align: center;
+}
+.sample__label small { display: block; font-weight: 400; opacity: 0.7; font-size: 13px; margin-top: 4px; }
+
+.sky {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 20%, #1a1535 0%, #10121c 40%, #060810 80%);
+}
+
+.stars {
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1px 1px at 25% 45%, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1.5px 1.5px at 40% 15%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(1px 1px at 55% 35%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1px 1px at 70% 10%, rgba(255,255,255,0.6), transparent),
+    radial-gradient(1.5px 1.5px at 85% 25%, rgba(255,255,255,0.45), transparent),
+    radial-gradient(1px 1px at 15% 60%, rgba(255,255,255,0.35), transparent),
+    radial-gradient(1px 1px at 60% 55%, rgba(255,255,255,0.5), transparent),
+    radial-gradient(1.5px 1.5px at 90% 50%, rgba(255,255,255,0.6), transparent);
+}
+
+.moon {
+  position: absolute;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #fdf6e3 0%, #e8d5a0 60%, #c4a35a 100%);
+  box-shadow: 0 0 40px 15px rgba(253,246,227,0.15), 0 0 80px 30px rgba(253,246,227,0.08);
+  top: 12%; left: 50%; transform: translateX(-50%);
+}
+
+.forest-svg { position: absolute; bottom: 0; left: 0; width: 100%; pointer-events: none; }
+
+.vignette {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to right, rgba(2,3,8,0.95) 0%, rgba(2,3,8,0.65) 18%, rgba(2,3,8,0.25) 32%, transparent 48%),
+    linear-gradient(to left, rgba(2,3,8,0.95) 0%, rgba(2,3,8,0.65) 18%, rgba(2,3,8,0.25) 32%, transparent 48%),
+    linear-gradient(to bottom, rgba(2,3,8,0.4) 0%, rgba(2,3,8,0.15) 10%, transparent 22%);
+}
+.sample-b .vignette {
+  background:
+    linear-gradient(to right, rgba(2,3,8,0.98) 0%, rgba(2,3,8,0.8) 22%, rgba(2,3,8,0.4) 38%, transparent 52%),
+    linear-gradient(to left, rgba(2,3,8,0.98) 0%, rgba(2,3,8,0.8) 22%, rgba(2,3,8,0.4) 38%, transparent 52%),
+    linear-gradient(to bottom, rgba(2,3,8,0.5) 0%, rgba(2,3,8,0.2) 12%, transparent 28%);
+}
+
+.content-demo {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  z-index: 5; text-align: center; max-width: 600px; padding: 0 20px;
+}
+.content-demo h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.2rem; font-weight: 900; color: #d4d0c8; margin-bottom: 12px;
+}
+.content-demo p { font-size: 1rem; color: #a8a297; line-height: 1.6; }
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- SAMPLE A: Organic Dense Forest -->
+<div class="sample sample-a">
+  <div class="sky"><div class="stars"></div><div class="moon"></div></div>
+
+  <!-- Far background trees (faint, depth) -->
+  <svg class="forest-svg" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMax slice" style="height:100%;opacity:0.3;">
+    <!-- Distant pine silhouettes across full width -->
+    <g fill="#080a14">
+      <path d="M60,500 L40,520 L20,500 L30,510 L10,490 L25,505 L5,480 L32,500 L55,460 L58,470 L80,440 L65,465 L90,430 L70,458 L95,420 L68,450 L60,500 M57,500 L63,500 L63,900 L57,900Z"/>
+      <path d="M180,480 L160,500 L140,480 L155,495 L130,470 L150,490 L120,455 L152,485 L175,440 L170,455 L200,420 L178,448 L210,400 L175,440 L180,480 M177,480 L183,480 L183,900 L177,900Z"/>
+      <path d="M310,490 L290,510 L270,490 L285,505 L260,480 L280,498 L250,465 L282,495 L305,450 L300,462 L330,430 L308,455 L340,410 L305,448 L310,490 M307,490 L313,490 L313,900 L307,900Z"/>
+      <path d="M450,470 L430,490 L410,470 L425,485 L400,460 L420,478 L390,445 L422,475 L445,430 L440,442 L470,410 L448,435 L480,395 L445,428 L450,470 M447,470 L453,470 L453,900 L447,900Z"/>
+      <path d="M580,485 L560,505 L540,485 L555,500 L530,475 L550,493 L520,460 L552,490 L575,445 L570,457 L600,425 L578,450 L610,410 L575,443 L580,485 M577,485 L583,485 L583,900 L577,900Z"/>
+      <path d="M720,475 L700,495 L680,475 L695,490 L670,465 L690,483 L660,450 L692,480 L715,435 L710,447 L740,415 L718,440 L750,400 L715,433 L720,475 M717,475 L723,475 L723,900 L717,900Z"/>
+      <path d="M860,490 L840,510 L820,490 L835,505 L810,480 L830,498 L800,465 L832,495 L855,450 L850,462 L880,430 L858,455 L890,410 L855,448 L860,490 M857,490 L863,490 L863,900 L857,900Z"/>
+      <path d="M1000,480 L980,500 L960,480 L975,495 L950,470 L970,488 L940,455 L972,485 L995,440 L990,452 L1020,420 L998,445 L1030,400 L995,438 L1000,480 M997,480 L1003,480 L1003,900 L997,900Z"/>
+      <path d="M1140,470 L1120,490 L1100,470 L1115,485 L1090,460 L1110,478 L1080,445 L1112,475 L1135,430 L1130,442 L1160,410 L1138,435 L1170,395 L1135,428 L1140,470 M1137,470 L1143,470 L1143,900 L1137,900Z"/>
+      <path d="M1280,485 L1260,505 L1240,485 L1255,500 L1230,475 L1250,493 L1220,460 L1252,490 L1275,445 L1270,457 L1300,425 L1278,450 L1310,410 L1275,443 L1280,485 M1277,485 L1283,485 L1283,900 L1277,900Z"/>
+    </g>
+  </svg>
+
+  <!-- Left forest — organic pines with branches -->
+  <svg class="forest-svg" viewBox="0 0 600 900" preserveAspectRatio="xMinYMax meet" style="height:100%;width:45%;">
+    <g fill="#050710">
+      <!-- Tall pine 1 -->
+      <rect x="77" y="60" width="7" height="840" fill="#050710"/>
+      <path d="M80,60 C80,60 55,90 45,100 C55,95 65,92 70,95 C60,110 40,130 30,145 C45,138 60,135 65,140 C50,160 25,185 15,205 C35,195 55,190 62,198 C42,222 18,250 8,275 C30,262 52,255 60,265 C40,290 15,320 5,348 C28,335 50,328 58,338 C40,362 20,390 12,415 C32,402 52,398 58,408 C42,432 25,458 18,480 C35,468 52,465 58,472 C45,495 32,518 28,538 C42,525 55,522 58,528"/>
+      <!-- Tall pine 2 -->
+      <rect x="167" y="30" width="7" height="870" fill="#060810"/>
+      <path d="M170,30 C170,30 142,62 130,75 C145,68 158,66 163,70 C148,90 122,115 108,135 C128,125 150,120 157,128 C138,155 110,185 98,210 C120,198 142,192 150,202 C132,228 105,260 92,288 C115,275 138,268 146,278 C128,305 102,338 90,365 C112,352 135,345 143,355 C125,382 105,412 95,435 C115,422 135,418 142,425 C128,448 112,475 105,498 C120,485 135,482 140,488"/>
+      <path d="M170,30 C170,30 198,62 210,75 C195,68 182,66 177,70 C192,90 218,115 232,135 C212,125 190,120 183,128 C202,155 230,185 242,210 C220,198 198,192 190,202 C208,228 235,260 248,288 C225,275 202,268 194,278 C212,305 238,338 250,365 C228,352 205,345 197,355 C215,382 235,412 245,435 C225,422 205,418 198,425"/>
+      <!-- Deciduous tree -->
+      <rect x="285" y="180" width="8" height="720" fill="#070912"/>
+      <ellipse cx="288" cy="170" rx="55" ry="48" fill="#070912"/>
+      <ellipse cx="270" cy="155" rx="35" ry="30" fill="#060810"/>
+      <ellipse cx="310" cy="160" rx="38" ry="32" fill="#060810"/>
+      <ellipse cx="288" cy="140" rx="28" ry="25" fill="#070912"/>
+      <!-- Branch details -->
+      <line x1="285" y1="220" x2="250" y2="200" stroke="#070912" stroke-width="4"/>
+      <line x1="290" y1="250" x2="325" y2="230" stroke="#070912" stroke-width="3"/>
+      <line x1="287" y1="280" x2="255" y2="268" stroke="#070912" stroke-width="3"/>
+      <!-- More pines deeper -->
+      <rect x="377" y="80" width="6" height="820" fill="#080a14"/>
+      <path d="M380,80 C380,80 358,108 348,120 C360,115 370,112 374,116 C362,135 342,158 332,178 C348,170 365,166 370,172 C355,198 335,225 325,248 C342,238 360,232 366,240 C350,268 332,298 322,322 C340,310 358,305 364,312 C350,338 335,365 328,385 C342,375 358,372 362,378"/>
+      <path d="M380,80 C380,80 402,108 412,120 C400,115 390,112 386,116 C398,135 418,158 428,178 C412,170 395,166 390,172 C405,198 425,225 435,248 C418,238 400,232 394,240 C410,268 428,298 438,322 C420,310 402,305 396,312"/>
+      <!-- Small bushy tree -->
+      <rect x="467" y="220" width="6" height="680" fill="#090b16"/>
+      <ellipse cx="470" cy="210" rx="40" ry="35" fill="#090b16"/>
+      <ellipse cx="455" cy="198" rx="28" ry="24" fill="#080a14"/>
+      <ellipse cx="488" cy="202" rx="30" ry="26" fill="#080a14"/>
+      <!-- Pine reaching toward center -->
+      <rect x="537" y="140" width="5" height="760" fill="#0a0c18" opacity="0.7"/>
+      <path d="M540,140 C540,140 522,165 515,175 C525,170 533,168 536,172 C526,188 510,210 502,228 C515,220 528,216 532,222 C520,245 505,270 498,290 C512,282 525,278 530,284 C518,305 505,328 500,348 C512,340 524,336 528,342" fill="#0a0c18" opacity="0.7"/>
+      <path d="M540,140 C540,140 558,165 565,175 C555,170 547,168 544,172 C554,188 570,210 578,228 C565,220 552,216 548,222 C560,245 575,270 582,290 C568,282 555,278 550,284" fill="#0a0c18" opacity="0.7"/>
+      <!-- Ground bushes -->
+      <ellipse cx="80" cy="880" rx="70" ry="30" fill="#050710"/>
+      <ellipse cx="180" cy="885" rx="55" ry="25" fill="#060810"/>
+      <ellipse cx="300" cy="878" rx="65" ry="28" fill="#070912"/>
+      <ellipse cx="400" cy="885" rx="50" ry="22" fill="#080a14"/>
+      <ellipse cx="500" cy="888" rx="45" ry="18" fill="#090b16"/>
+    </g>
+  </svg>
+
+  <!-- Right forest — mirrored organic pines -->
+  <svg class="forest-svg" viewBox="0 0 600 900" preserveAspectRatio="xMaxYMax meet" style="height:100%;width:45%;left:auto;right:0;">
+    <g fill="#050710" transform="translate(600,0) scale(-1,1)">
+      <rect x="77" y="60" width="7" height="840" fill="#050710"/>
+      <path d="M80,60 C80,60 55,90 45,100 C55,95 65,92 70,95 C60,110 40,130 30,145 C45,138 60,135 65,140 C50,160 25,185 15,205 C35,195 55,190 62,198 C42,222 18,250 8,275 C30,262 52,255 60,265 C40,290 15,320 5,348 C28,335 50,328 58,338 C40,362 20,390 12,415 C32,402 52,398 58,408 C42,432 25,458 18,480 C35,468 52,465 58,472 C45,495 32,518 28,538 C42,525 55,522 58,528"/>
+      <rect x="167" y="30" width="7" height="870" fill="#060810"/>
+      <path d="M170,30 C170,30 142,62 130,75 C145,68 158,66 163,70 C148,90 122,115 108,135 C128,125 150,120 157,128 C138,155 110,185 98,210 C120,198 142,192 150,202 C132,228 105,260 92,288 C115,275 138,268 146,278 C128,305 102,338 90,365 C112,352 135,345 143,355 C125,382 105,412 95,435 C115,422 135,418 142,425"/>
+      <path d="M170,30 C170,30 198,62 210,75 C195,68 182,66 177,70 C192,90 218,115 232,135 C212,125 190,120 183,128 C202,155 230,185 242,210 C220,198 198,192 190,202 C208,228 235,260 248,288 C225,275 202,268 194,278"/>
+      <rect x="285" y="180" width="8" height="720" fill="#070912"/>
+      <ellipse cx="288" cy="170" rx="55" ry="48" fill="#070912"/>
+      <ellipse cx="270" cy="155" rx="35" ry="30" fill="#060810"/>
+      <ellipse cx="310" cy="160" rx="38" ry="32" fill="#060810"/>
+      <ellipse cx="288" cy="140" rx="28" ry="25" fill="#070912"/>
+      <line x1="285" y1="220" x2="250" y2="200" stroke="#070912" stroke-width="4"/>
+      <line x1="290" y1="250" x2="325" y2="230" stroke="#070912" stroke-width="3"/>
+      <rect x="377" y="80" width="6" height="820" fill="#080a14"/>
+      <path d="M380,80 C380,80 358,108 348,120 C360,115 370,112 374,116 C362,135 342,158 332,178 C348,170 365,166 370,172 C355,198 335,225 325,248 C342,238 360,232 366,240 C350,268 332,298 322,322 C340,310 358,305 364,312"/>
+      <path d="M380,80 C380,80 402,108 412,120 C400,115 390,112 386,116 C398,135 418,158 428,178 C412,170 395,166 390,172 C405,198 425,225 435,248 C418,238 400,232 394,240"/>
+      <rect x="467" y="220" width="6" height="680" fill="#090b16"/>
+      <ellipse cx="470" cy="210" rx="40" ry="35" fill="#090b16"/>
+      <ellipse cx="455" cy="198" rx="28" ry="24" fill="#080a14"/>
+      <ellipse cx="488" cy="202" rx="30" ry="26" fill="#080a14"/>
+      <rect x="537" y="140" width="5" height="760" fill="#0a0c18" opacity="0.7"/>
+      <path d="M540,140 C540,140 522,165 515,175 C525,170 533,168 536,172 C526,188 510,210 502,228 C515,220 528,216 532,222 C520,245 505,270 498,290 C512,282 525,278 530,284" fill="#0a0c18" opacity="0.7"/>
+      <path d="M540,140 C540,140 558,165 565,175 C555,170 547,168 544,172 C554,188 570,210 578,228 C565,220 552,216 548,222" fill="#0a0c18" opacity="0.7"/>
+      <ellipse cx="80" cy="880" rx="70" ry="30" fill="#050710"/>
+      <ellipse cx="180" cy="885" rx="55" ry="25" fill="#060810"/>
+      <ellipse cx="300" cy="878" rx="65" ry="28" fill="#070912"/>
+      <ellipse cx="400" cy="885" rx="50" ry="22" fill="#080a14"/>
+      <ellipse cx="500" cy="888" rx="45" ry="18" fill="#090b16"/>
+    </g>
+  </svg>
+
+  <div class="vignette"></div>
+  <div class="sample__label">A: Organic Dense Forest<small>Real pine silhouettes with branches, deciduous trees, ground brush. Dense but readable.</small></div>
+  <div class="content-demo">
+    <h2>The Illusion of Cheaper</h2>
+    <p>Pines with layered branches, deciduous trees with canopy clusters, visible trunks and limbs. Trees frame content from both sides with natural depth.</p>
+  </div>
+</div>
+
+<!-- SAMPLE B: Massive Organic Forest -->
+<div class="sample sample-b">
+  <div class="sky"><div class="stars"></div><div class="moon"></div></div>
+
+  <!-- Far background pines (full width) -->
+  <svg class="forest-svg" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMax slice" style="height:100%;opacity:0.25;">
+    <g fill="#070912">
+      <path d="M50,420 L30,440 C38,435 45,438 42,445 L20,465 C32,458 42,462 38,470 L15,490 C28,482 38,488 35,495 L10,520 C25,510 35,515 32,522 M47,420 L53,420 L53,900 L47,900Z"/>
+      <path d="M150,400 L128,422 C138,416 146,420 142,428 L118,450 C130,442 140,448 136,456 L112,478 C126,468 136,475 132,482 M147,400 L153,400 L153,900 L147,900Z"/>
+      <path d="M260,410 L238,432 C248,426 256,430 252,438 L228,460 C240,452 250,458 246,466 L222,488 C236,478 246,485 242,492 M257,410 L263,410 L263,900 L257,900Z"/>
+      <path d="M370,395 L348,417 C358,411 366,415 362,423 L338,445 C350,437 360,443 356,451 L332,473 C346,463 356,470 352,477 M367,395 L373,395 L373,900 L367,900Z"/>
+      <path d="M480,415 L458,437 C468,431 476,435 472,443 L448,465 C460,457 470,463 466,471 L442,493 C456,483 466,490 462,497 M477,415 L483,415 L483,900 L477,900Z"/>
+      <path d="M590,405 L568,427 C578,421 586,425 582,433 L558,455 C570,447 580,453 576,461 L552,483 C566,473 576,480 572,487 M587,405 L593,405 L593,900 L587,900Z"/>
+      <path d="M700,398 L678,420 C688,414 696,418 692,426 L668,448 C680,440 690,446 686,454 L662,476 C676,466 686,473 682,480 M697,398 L703,398 L703,900 L697,900Z"/>
+      <path d="M810,412 L788,434 C798,428 806,432 802,440 L778,462 C790,454 800,460 796,468 L772,490 C786,480 796,487 792,494 M807,412 L813,412 L813,900 L807,900Z"/>
+      <path d="M920,402 L898,424 C908,418 916,422 912,430 L888,452 C900,444 910,450 906,458 L882,480 C896,470 906,477 902,484 M917,402 L923,402 L923,900 L917,900Z"/>
+      <path d="M1030,418 L1008,440 C1018,434 1026,438 1022,446 L998,468 C1010,460 1020,466 1016,474 L992,496 C1006,486 1016,493 1012,500 M1027,418 L1033,418 L1033,900 L1027,900Z"/>
+      <path d="M1140,395 L1118,417 C1128,411 1136,415 1132,423 L1108,445 C1120,437 1130,443 1126,451 L1102,473 C1116,463 1126,470 1122,477 M1137,395 L1143,395 L1143,900 L1137,900Z"/>
+      <path d="M1250,408 L1228,430 C1238,424 1246,428 1242,436 L1218,458 C1230,450 1240,456 1236,464 L1212,486 C1226,476 1236,483 1232,490 M1247,408 L1253,408 L1253,900 L1247,900Z"/>
+      <path d="M1360,400 L1338,422 C1348,416 1356,420 1352,428 L1328,450 C1340,442 1350,448 1346,456 L1322,478 C1336,468 1346,475 1342,482 M1357,400 L1363,400 L1363,900 L1357,900Z"/>
+    </g>
+  </svg>
+
+  <!-- Left massive forest -->
+  <svg class="forest-svg" viewBox="0 0 700 900" preserveAspectRatio="xMinYMax meet" style="height:100%;width:52%;">
+    <g fill="#040608">
+      <!-- Foreground massive pine -->
+      <rect x="57" y="10" width="8" height="890" fill="#040608"/>
+      <path d="M60,10 C60,10 30,48 18,62 C32,55 45,52 50,58 C35,78 10,108 -5,128 C15,118 35,112 42,120 C22,148 -5,182 -18,208 C5,195 28,188 36,198 C16,228 -10,265 -22,295 C2,280 25,272 34,282 C15,312 -8,348 -18,378 C4,365 24,358 32,368 C15,398 -5,432 -12,458 C8,445 25,440 32,448 C18,475 5,505 -2,528 C12,518 25,515 30,520"/>
+      <path d="M60,10 C60,10 90,48 102,62 C88,55 75,52 70,58 C85,78 110,108 125,128 C105,118 85,112 78,120 C98,148 125,182 138,208 C115,195 92,188 84,198 C104,228 130,265 142,295 C118,280 95,272 86,282 C105,312 128,348 138,378 C116,365 96,358 88,368 C105,398 125,432 132,458 C112,445 95,440 88,448"/>
+      <!-- Second tall pine -->
+      <rect x="157" y="0" width="7" height="900" fill="#050710"/>
+      <path d="M160,0 C160,0 132,35 120,50 C135,42 148,40 153,45 C138,68 112,98 98,120 C118,108 140,102 147,112 C128,142 102,178 88,205 C110,192 132,185 140,195 C122,225 98,262 85,292 C108,278 130,270 138,280 C120,310 98,345 88,372 C108,360 128,355 135,362 C120,390 102,420 95,445 C112,432 128,428 134,435 C120,460 105,488 100,508 C112,498 125,495 130,500"/>
+      <path d="M160,0 C160,0 188,35 200,50 C185,42 172,40 167,45 C182,68 208,98 222,120 C202,108 180,102 173,112 C192,142 218,178 232,205 C210,192 188,185 180,195 C198,225 222,262 235,292 C212,278 190,270 182,280 C200,310 222,345 232,372 C212,360 192,355 185,362"/>
+      <!-- Deciduous with branches -->
+      <rect x="267" y="120" width="8" height="780" fill="#060810"/>
+      <ellipse cx="270" cy="105" rx="62" ry="52" fill="#060810"/>
+      <ellipse cx="248" cy="88" rx="40" ry="34" fill="#050710"/>
+      <ellipse cx="295" cy="92" rx="42" ry="36" fill="#050710"/>
+      <ellipse cx="270" cy="72" rx="32" ry="28" fill="#060810"/>
+      <ellipse cx="235" cy="100" rx="22" ry="18" fill="#050710"/>
+      <ellipse cx="305" cy="98" rx="24" ry="20" fill="#050710"/>
+      <line x1="268" y1="160" x2="230" y2="138" stroke="#060810" stroke-width="5"/>
+      <line x1="272" y1="180" x2="310" y2="158" stroke="#060810" stroke-width="4"/>
+      <line x1="265" y1="210" x2="235" y2="195" stroke="#060810" stroke-width="4"/>
+      <line x1="275" y1="240" x2="305" y2="225" stroke="#060810" stroke-width="3"/>
+      <!-- More pines filling in -->
+      <rect x="367" y="40" width="6" height="860" fill="#070912"/>
+      <path d="M370,40 C370,40 348,68 338,82 C350,75 360,72 365,77 C352,98 332,125 322,148 C338,138 355,132 360,140 C345,168 325,198 315,222 C332,212 350,205 356,215 C340,242 322,275 312,300 C328,288 346,282 352,292 C338,318 322,348 315,372 C330,360 345,355 350,362"/>
+      <path d="M370,40 C370,40 392,68 402,82 C390,75 380,72 375,77 C388,98 408,125 418,148 C402,138 385,132 380,140 C395,168 415,198 425,222 C408,212 390,205 384,215 C400,242 418,275 428,300 C412,288 394,282 388,292"/>
+      <!-- Another deciduous -->
+      <rect x="457" y="160" width="7" height="740" fill="#080a14"/>
+      <ellipse cx="460" cy="148" rx="48" ry="42" fill="#080a14"/>
+      <ellipse cx="442" cy="132" rx="32" ry="28" fill="#070912"/>
+      <ellipse cx="480" cy="136" rx="34" ry="30" fill="#070912"/>
+      <ellipse cx="460" cy="118" rx="25" ry="22" fill="#080a14"/>
+      <line x1="458" y1="198" x2="430" y2="180" stroke="#080a14" stroke-width="4"/>
+      <line x1="462" y1="218" x2="490" y2="200" stroke="#080a14" stroke-width="3"/>
+      <!-- Thin pines near center -->
+      <rect x="537" y="90" width="5" height="810" fill="#090b16"/>
+      <path d="M540,90 C540,90 522,115 515,128 C525,122 533,120 536,124 C526,142 510,168 502,188 C515,178 528,174 532,182 C520,205 505,232 498,255 C512,245 525,240 530,248 C518,272 505,298 500,318 C512,308 522,305 526,312" fill="#090b16"/>
+      <path d="M540,90 C540,90 558,115 565,128 C555,122 547,120 544,124 C554,142 570,168 578,188 C565,178 552,174 548,182 C560,205 575,232 582,255 C568,245 555,240 550,248" fill="#090b16"/>
+      <!-- Wispy pine at edge -->
+      <rect x="607" y="130" width="5" height="770" fill="#0a0c18" opacity="0.6"/>
+      <path d="M610,130 C610,130 595,152 588,162 C598,158 605,156 607,160 C598,175 585,195 580,210 C590,202 600,200 604,205 C596,222 585,242 580,258 C590,250 598,248 602,252" fill="#0a0c18" opacity="0.6"/>
+      <path d="M610,130 C610,130 625,152 632,162 C622,158 615,156 613,160 C622,175 635,195 640,210 C630,202 620,200 616,205" fill="#0a0c18" opacity="0.6"/>
+      <!-- Faint reaching tree -->
+      <rect x="660" y="180" width="4" height="720" fill="#0b0d1a" opacity="0.4"/>
+      <path d="M662,180 C662,180 648,200 642,210 C650,206 656,205 658,208 C650,222 640,240 636,252 C645,246 652,244 655,248" fill="#0b0d1a" opacity="0.4"/>
+      <path d="M662,180 C662,180 676,200 682,210 C674,206 668,205 666,208 C674,222 684,240 688,252 C680,246 672,244 669,248" fill="#0b0d1a" opacity="0.4"/>
+      <!-- Ground cover -->
+      <ellipse cx="60" cy="875" rx="80" ry="35" fill="#040608"/>
+      <ellipse cx="170" cy="880" rx="65" ry="28" fill="#050710"/>
+      <ellipse cx="290" cy="872" rx="70" ry="32" fill="#060810"/>
+      <ellipse cx="400" cy="878" rx="55" ry="25" fill="#070912"/>
+      <ellipse cx="500" cy="882" rx="48" ry="22" fill="#080a14"/>
+      <ellipse cx="590" cy="886" rx="42" ry="18" fill="#090b16"/>
+      <ellipse cx="660" cy="890" rx="35" ry="14" fill="#0a0c18" opacity="0.6"/>
+    </g>
+  </svg>
+
+  <!-- Right massive forest (mirrored) -->
+  <svg class="forest-svg" viewBox="0 0 700 900" preserveAspectRatio="xMaxYMax meet" style="height:100%;width:52%;left:auto;right:0;">
+    <g fill="#040608" transform="translate(700,0) scale(-1,1)">
+      <rect x="57" y="10" width="8" height="890" fill="#040608"/>
+      <path d="M60,10 C60,10 30,48 18,62 C32,55 45,52 50,58 C35,78 10,108 -5,128 C15,118 35,112 42,120 C22,148 -5,182 -18,208 C5,195 28,188 36,198 C16,228 -10,265 -22,295 C2,280 25,272 34,282 C15,312 -8,348 -18,378 C4,365 24,358 32,368 C15,398 -5,432 -12,458 C8,445 25,440 32,448"/>
+      <path d="M60,10 C60,10 90,48 102,62 C88,55 75,52 70,58 C85,78 110,108 125,128 C105,118 85,112 78,120 C98,148 125,182 138,208 C115,195 92,188 84,198 C104,228 130,265 142,295 C118,280 95,272 86,282"/>
+      <rect x="157" y="0" width="7" height="900" fill="#050710"/>
+      <path d="M160,0 C160,0 132,35 120,50 C135,42 148,40 153,45 C138,68 112,98 98,120 C118,108 140,102 147,112 C128,142 102,178 88,205 C110,192 132,185 140,195 C122,225 98,262 85,292 C108,278 130,270 138,280 C120,310 98,345 88,372 C108,360 128,355 135,362"/>
+      <path d="M160,0 C160,0 188,35 200,50 C185,42 172,40 167,45 C182,68 208,98 222,120 C202,108 180,102 173,112 C192,142 218,178 232,205 C210,192 188,185 180,195"/>
+      <rect x="267" y="120" width="8" height="780" fill="#060810"/>
+      <ellipse cx="270" cy="105" rx="62" ry="52" fill="#060810"/>
+      <ellipse cx="248" cy="88" rx="40" ry="34" fill="#050710"/>
+      <ellipse cx="295" cy="92" rx="42" ry="36" fill="#050710"/>
+      <ellipse cx="270" cy="72" rx="32" ry="28" fill="#060810"/>
+      <line x1="268" y1="160" x2="230" y2="138" stroke="#060810" stroke-width="5"/>
+      <line x1="272" y1="180" x2="310" y2="158" stroke="#060810" stroke-width="4"/>
+      <rect x="367" y="40" width="6" height="860" fill="#070912"/>
+      <path d="M370,40 C370,40 348,68 338,82 C350,75 360,72 365,77 C352,98 332,125 322,148 C338,138 355,132 360,140 C345,168 325,198 315,222 C332,212 350,205 356,215 C340,242 322,275 312,300 C328,288 346,282 352,292"/>
+      <path d="M370,40 C370,40 392,68 402,82 C390,75 380,72 375,77 C388,98 408,125 418,148 C402,138 385,132 380,140"/>
+      <rect x="457" y="160" width="7" height="740" fill="#080a14"/>
+      <ellipse cx="460" cy="148" rx="48" ry="42" fill="#080a14"/>
+      <ellipse cx="442" cy="132" rx="32" ry="28" fill="#070912"/>
+      <ellipse cx="480" cy="136" rx="34" ry="30" fill="#070912"/>
+      <line x1="458" y1="198" x2="430" y2="180" stroke="#080a14" stroke-width="4"/>
+      <rect x="537" y="90" width="5" height="810" fill="#090b16"/>
+      <path d="M540,90 C540,90 522,115 515,128 C525,122 533,120 536,124 C526,142 510,168 502,188 C515,178 528,174 532,182 C520,205 505,232 498,255 C512,245 525,240 530,248" fill="#090b16"/>
+      <path d="M540,90 C540,90 558,115 565,128 C555,122 547,120 544,124 C554,142 570,168 578,188 C565,178 552,174 548,182" fill="#090b16"/>
+      <rect x="607" y="130" width="5" height="770" fill="#0a0c18" opacity="0.6"/>
+      <path d="M610,130 C610,130 595,152 588,162 C598,158 605,156 607,160 C598,175 585,195 580,210 C590,202 600,200 604,205" fill="#0a0c18" opacity="0.6"/>
+      <path d="M610,130 C610,130 625,152 632,162 C622,158 615,156 613,160" fill="#0a0c18" opacity="0.6"/>
+      <rect x="660" y="180" width="4" height="720" fill="#0b0d1a" opacity="0.4"/>
+      <path d="M662,180 C662,180 648,200 642,210 C650,206 656,205 658,208" fill="#0b0d1a" opacity="0.4"/>
+      <path d="M662,180 C662,180 676,200 682,210 C674,206 668,205 666,208" fill="#0b0d1a" opacity="0.4"/>
+      <ellipse cx="60" cy="875" rx="80" ry="35" fill="#040608"/>
+      <ellipse cx="170" cy="880" rx="65" ry="28" fill="#050710"/>
+      <ellipse cx="290" cy="872" rx="70" ry="32" fill="#060810"/>
+      <ellipse cx="400" cy="878" rx="55" ry="25" fill="#070912"/>
+      <ellipse cx="500" cy="882" rx="48" ry="22" fill="#080a14"/>
+      <ellipse cx="590" cy="886" rx="42" ry="18" fill="#090b16"/>
+      <ellipse cx="660" cy="890" rx="35" ry="14" fill="#0a0c18" opacity="0.6"/>
+    </g>
+  </svg>
+
+  <div class="vignette"></div>
+  <div class="sample__label">B: Massive Organic Forest<small>Taller trees, more branches, deciduous + pine mix, trees nearly close the gap. Deep in the woods.</small></div>
+  <div class="content-demo">
+    <h2>The Illusion of Cheaper</h2>
+    <p>Maximum immersion. Branching pines tower from the edges, deciduous canopies cluster at mid-height, faint background pines fill the depth. You're reading from a clearing in a midnight forest.</p>
+  </div>
+</div>
+
+</body>
+</html>
